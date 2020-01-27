@@ -1,0 +1,63 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="materialButtonStyle">@style/primaryButtonStyle</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="textInputStyle">@style/primaryTextInputStyle</item>
+    </style>
+
+    <style name="primaryTextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="errorTextAppearance">@style/error_text_style</item>
+    </style>
+
+    <style name="error_text_style">
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+    </style>
+
+
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="colorAccent">@android:color/darker_gray</item>
+    </style>
+
+    <style name="primaryButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">@dimen/large_text</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:paddingTop">@dimen/space_15</item>
+        <item name="android:paddingBottom">@dimen/space_15</item>
+        <item name="cornerRadius">@dimen/space_5</item>
+        <item name="backgroundTint">@color/colorAccent</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+    </style>
+
+
+    <style name="secondaryButtonStyle" parent="primaryButtonStyle">
+        <item name="backgroundTint">@android:color/white</item>
+        <item name="rippleColor">@android:color/darker_gray</item>
+    </style>
+
+
+    <style name="toolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="clickable_view">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="clickable_view_border" parent="clickable_view">
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
+
+</resources>

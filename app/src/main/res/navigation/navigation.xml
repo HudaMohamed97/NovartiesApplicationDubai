@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.myapplication.LoginFragment.LoginFragment"
+        tools:layout="@layout/login_fragment">
+
+        <action
+            android:id="@+id/action_LoginFragment_to_ScannerFragment"
+            app:destination="@id/ScannerFragment" />
+        <action
+            android:id="@+id/action_LoginFragment_to_Home"
+            app:destination="@id/HomeFragment" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/ScannerFragment"
+        android:name="com.example.myapplication.ScannerFragment.BarcodeFragment"
+        tools:layout="@layout/fragment_barcode">
+
+        <action
+            android:id="@+id/action_HomeFragment_to_AddFragment"
+            app:destination="@id/Fragment"
+            app:popUpTo="@id/ScannerFragment"
+            app:popUpToInclusive="true"
+
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.example.myapplication.HomeFragment.HomeFragment"
+        tools:layout="@layout/home_fragment">
+
+        <action
+            android:id="@+id/action_HomeFragment_to_event"
+            app:destination="@id/Fragment" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/Fragment"
+        android:name="com.example.myapplication.RegisterFragment.RegisterFragment"
+        tools:layout="@layout/register_fragment">
+
+        <!-- <action
+             android:id="@+id/action_loginFragment_to_updateFragment"
+             app:destination="@id/HomeFragment" />-->
+
+    </fragment>
+    <!--<fragment
+        android:id="@+id/PatientFragment"
+        android:name="com.example.catapplication.fragments.PatientsFragment.PatientsFragment"
+        tools:layout="@layout/patient_fragment">
+
+
+        <action
+            android:id="@+id/action_PatientFragment_to_SwitchFragment"
+            app:destination="@id/AddFragment">
+
+        </action>
+        <action
+            android:id="@+id/action_PatientFragment_to_DropFragment"
+            app:destination="@id/AddFragment">
+
+        </action>
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.example.catapplication.fragments.HomeFragment.HomeFragment"
+        tools:layout="@layout/update_fragment">
+
+        <action
+            android:id="@+id/action_HomeFragment_to_AddFragment"
+            app:destination="@id/AddFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_DropFragment"
+            app:destination="@id/AddFragment">
+
+        </action>
+        <action
+            android:id="@+id/action_HomeFragment_to_SwitchFragment"
+            app:destination="@id/AddFragment">
+
+        </action>
+        <action
+            android:id="@+id/action_HomeFragment_to_PatientFragment"
+            app:destination="@id/PatientFragment">
+
+        </action>
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/AddFragment"
+        android:name="com.example.catapplication.fragments.addFragment.AddUserFragment"
+        tools:layout="@layout/add_user_fragment">
+
+    </fragment>-->
+
+
+</navigation>

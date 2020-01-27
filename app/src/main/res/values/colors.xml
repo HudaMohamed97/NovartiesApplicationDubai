@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+
+    <color name="mtrl_textinput_default_box_stroke_color">#000000</color>
+
+
+    <color name="transparent">#00ffffff</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#008000</color>
+    <color name="not_blue">#0077ff</color>
+    <color name="black">#000000</color>
+
+
+    <color name="semi_white">#90ffffff</color>
+    <color name="not_white">#dcffffff</color>
+    <color name="semi_black">#b90b0606</color>
+    <color name="not_black">#bf8f8e8e</color>
+    <color name="yellow">#fdb812</color>
+    <color name="myAccount_background">#8DFC88</color>
+    <color name="concor_background">#ffe857</color>
+    <color name="heartPress_background">#f19ae0</color>
+    <color name="medicalStatics_background">#4d9e49</color>
+    <color name="advisory_background">#2d76f2</color>
+    <color name="drug_background">#d063ff</color>
+    <color name="pull_background">#61daff</color>
+    <color name="subMenu_background">#c0cf6666</color>
+</resources>
