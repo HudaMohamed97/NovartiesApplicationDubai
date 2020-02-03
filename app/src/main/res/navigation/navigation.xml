@@ -2,8 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation"
-    app:startDestination="@id/loginFragment">
+    android:id="@+id/loginNav"
+    app:startDestination="@id/loginFragment"
+    tools:ignore="UnusedNavigation">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -13,12 +14,12 @@
         <action
             android:id="@+id/action_LoginFragment_to_ScannerFragment"
             app:destination="@id/ScannerFragment" />
+
         <action
             android:id="@+id/action_LoginFragment_to_Home"
-            app:destination="@id/HomeFragment" />
+            app:destination="@id/navigation" />
 
     </fragment>
-
 
     <fragment
         android:id="@+id/ScannerFragment"
@@ -29,87 +30,33 @@
             android:id="@+id/action_HomeFragment_to_AddFragment"
             app:destination="@id/Fragment"
             app:popUpTo="@id/ScannerFragment"
-            app:popUpToInclusive="true"
-
-            />
+            app:popUpToInclusive="true" />
 
     </fragment>
-
-    <fragment
-        android:id="@+id/HomeFragment"
-        android:name="com.example.myapplication.HomeFragment.HomeFragment"
-        tools:layout="@layout/home_fragment">
-
-        <action
-            android:id="@+id/action_HomeFragment_to_event"
-            app:destination="@id/Fragment" />
-
-    </fragment>
-
 
     <fragment
         android:id="@+id/Fragment"
         android:name="com.example.myapplication.RegisterFragment.RegisterFragment"
         tools:layout="@layout/register_fragment">
 
-        <!-- <action
-             android:id="@+id/action_loginFragment_to_updateFragment"
-             app:destination="@id/HomeFragment" />-->
-
-    </fragment>
-    <!--<fragment
-        android:id="@+id/PatientFragment"
-        android:name="com.example.catapplication.fragments.PatientsFragment.PatientsFragment"
-        tools:layout="@layout/patient_fragment">
-
-
         <action
-            android:id="@+id/action_PatientFragment_to_SwitchFragment"
-            app:destination="@id/AddFragment">
-
-        </action>
-        <action
-            android:id="@+id/action_PatientFragment_to_DropFragment"
-            app:destination="@id/AddFragment">
-
-        </action>
-
-
+            android:id="@+id/action_Fragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/HomeFragment"
-        android:name="com.example.catapplication.fragments.HomeFragment.HomeFragment"
-        tools:layout="@layout/update_fragment">
 
-        <action
-            android:id="@+id/action_HomeFragment_to_AddFragment"
-            app:destination="@id/AddFragment" />
-        <action
-            android:id="@+id/action_HomeFragment_to_DropFragment"
-            app:destination="@id/AddFragment">
+    <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/navigation"
+        app:startDestination="@id/HomeFragment">
 
-        </action>
-        <action
-            android:id="@+id/action_HomeFragment_to_SwitchFragment"
-            app:destination="@id/AddFragment">
+        <fragment
+            android:id="@+id/HomeFragment"
+            android:name="com.example.myapplication.HomeFragment.HomeFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"
+            tools:layout="@layout/home_fragment">
+        </fragment>
 
-        </action>
-        <action
-            android:id="@+id/action_HomeFragment_to_PatientFragment"
-            app:destination="@id/PatientFragment">
-
-        </action>
-
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/AddFragment"
-        android:name="com.example.catapplication.fragments.addFragment.AddUserFragment"
-        tools:layout="@layout/add_user_fragment">
-
-    </fragment>-->
-
+    </navigation>
 
 </navigation>

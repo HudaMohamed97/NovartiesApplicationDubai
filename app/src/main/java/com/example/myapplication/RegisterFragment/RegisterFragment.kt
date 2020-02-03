@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.register_fragment.*
@@ -32,6 +33,9 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         FromFragment = arguments?.getString("fromFragment").toString()
         textView.text = FromFragment
+        imageView.setOnClickListener{
+            findNavController().navigate(R.id.action_Fragment_to_loginFragment)
+        }
     }
 
 

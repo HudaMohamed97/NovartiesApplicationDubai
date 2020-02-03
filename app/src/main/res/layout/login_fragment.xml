@@ -4,8 +4,8 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
     android:background="@color/white"
+    android:clickable="true"
     android:focusable="true">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -22,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="email"
@@ -43,6 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/email">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="password"
@@ -52,66 +54,48 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <ImageView
-        android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:clickable="true"
-        android:src="@drawable/loginbutton"
-        android:text="Login"
-        android:textColor="@color/cardview_light_background"
+    <CheckBox
+        android:id="@+id/chckRemember"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:buttonTint="@color/not_blue"
+        android:text="remember me"
+        android:textColor="@android:color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:id="@+id/container_or"
-        android:layout_marginStart="@dimen/space_36"
-        android:layout_marginEnd="@dimen/space_36"
-        android:layout_marginTop="@dimen/space_36"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_login"
-        >
 
-        <View android:layout_width="0dp"
-            android:layout_height="@dimen/space_1"
-            android:layout_weight="1"
-            android:background="@color/black"
-            />
-
-
-        <TextView android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Or"
-            android:textColor="@color/black"
-            android:layout_marginStart="@dimen/space_10"
-            android:layout_marginEnd="@dimen/space_10"
-            />
-
-        <View android:layout_width="0dp"
-            android:layout_height="@dimen/space_1"
-            android:layout_weight="1"
-            android:background="@color/black"
-            />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/register_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:clickable="true"
-        android:text="Register"
-        android:textColor="@color/cardview_light_background"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="30dp"
+        android:background="@color/white"
+        android:text="Login"
+        android:textColor="@color/not_blue"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/container_or" />
+        app:layout_constraintTop_toBottomOf="@+id/chckRemember"
+        app:strokeColor="@color/not_blue"
+        app:strokeWidth="1.5dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/register_login"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="30dp"
+        android:backgroundTint="@color/not_blue"
+        android:text="Register"
+        android:textColor="@color/white"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

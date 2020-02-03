@@ -2,6 +2,9 @@ package com.example.myapplication.HomeFragment
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
+import android.content.Intent.ACTION_VIEW
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,17 +12,14 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
-import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.home_fragment.*
+import java.util.*
 
 
 class HomeFragment : Fragment() {
     private lateinit var root: View
     private lateinit var loginViewModel: HomeViewModel
-    private lateinit var email: TextInputLayout
-    private lateinit var passwordEt: TextInputLayout
     private var dialog: ProgressDialog? = null
 
 
@@ -53,22 +53,35 @@ class HomeFragment : Fragment() {
     }
 
 
-    fun setClickListeners() {
+    private fun setClickListeners() {
         val mainLayout = root.findViewById(R.id.mainLayout) as View
         val gridLayout = root.findViewById(R.id.mainGrid) as View
         card1.setOnClickListener {
-            findNavController().navigate(R.id.action_HomeFragment_to_event)
+            val uri = String.format(
+                Locale.ENGLISH,
+                "http://maps.google.com/maps?q=loc:%f,%f",
+                28.43242324,
+                77.8977673
+            )
+            val intent = Intent(ACTION_VIEW, Uri.parse(uri))
+            startActivity(intent)
+            //  findNavController().navigate(R.id.action_HomeFragment_to_event)
 
         }
 
-
+        logOutButton.setOnClickListener {
+            val preferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+            val editor = preferences.edit()
+            editor.clear()
+            editor.apply()
+            activity!!.finish()
+        }
 
 
 
         mainLayout.setOnClickListener {
             hideKeyboard()
         }
-
 
 
     }

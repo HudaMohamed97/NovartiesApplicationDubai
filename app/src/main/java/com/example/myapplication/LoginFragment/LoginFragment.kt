@@ -2,13 +2,15 @@ package com.example.myapplication.LoginFragment
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -24,6 +26,8 @@ class LoginFragment : Fragment(), LoginInterface {
     private lateinit var email: TextInputLayout
     private lateinit var passwordEt: TextInputLayout
     private var dialog: ProgressDialog? = null
+    private lateinit var loginPreferences: SharedPreferences
+    private lateinit var loginPrefsEditor: SharedPreferences.Editor
 
 
     override fun onCreateView(
@@ -69,15 +73,41 @@ class LoginFragment : Fragment(), LoginInterface {
 
     override fun setClickListeners() {
         val mainLayout = root.findViewById(R.id.mainLayout) as View
-        val button = root.findViewById(R.id.btn_login) as ImageView
+        val button = root.findViewById(R.id.btn_login) as Button
         email = root.findViewById(R.id.email) as TextInputLayout
         passwordEt = root.findViewById(R.id.password) as TextInputLayout
 
         mainLayout.setOnClickListener {
             hideKeyboard()
         }
+
+        loginPreferences = activity!!.getSharedPreferences("loginPrefs", MODE_PRIVATE)
+        loginPrefsEditor = loginPreferences.edit()
+        val saveLogin = loginPreferences.getBoolean("saveLogin", false)
+
+        if (saveLogin) {
+            emailText.setText(loginPreferences.getString("username", ""))
+            passText.setText(loginPreferences.getString("password", ""))
+            chckRemember.isChecked = true
+        }
+
+
+
+
         button.setOnClickListener {
+            /*checkErrorEnabled()
+            hideKeyboard()
+            if (loginViewModel.validateLoginInfo(
+                    email.editText?.text.toString(),
+                    passwordEt.editText?.text.toString()
+                )
+            ) {
+                email.isErrorEnabled = false
+                passwordEt.isErrorEnabled = false
+                callLoginRequest()
+            }*/
             findNavController().navigate(R.id.action_LoginFragment_to_ScannerFragment)
+            saveUserData()
         }
         register_login.setOnClickListener {
             findNavController().navigate(R.id.action_LoginFragment_to_Home)
@@ -120,6 +150,18 @@ class LoginFragment : Fragment(), LoginInterface {
             val imm =
                 context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
             imm!!.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
+
+    private fun saveUserData() {
+        if (chckRemember.isChecked) {
+            loginPrefsEditor.putBoolean("saveLogin", true)
+            loginPrefsEditor.putString("username", "test")
+            loginPrefsEditor.putString("password", "12345")
+            loginPrefsEditor.commit()
+        } else {
+            loginPrefsEditor.clear()
+            loginPrefsEditor.commit()
         }
     }
 

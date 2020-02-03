@@ -9,6 +9,10 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    // to receive notification
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
 
 
     <application
@@ -26,15 +30,21 @@
             </intent-filter>
         </activity>
 
-      <!--  <service
-            android:name=".NotificationExtenderExample"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.onesignal.NotificationExtender" />
+        <service android:name=".NotificationsMessagingService">
+            <intent-filter android:priority="1">
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>-->
+        </service>
 
+
+        <!--  <service
+              android:name=".NotificationExtenderExample"
+              android:permission="android.permission.BIND_JOB_SERVICE"
+              android:exported="false">
+              <intent-filter>
+                  <action android:name="com.onesignal.NotificationExtender" />
+              </intent-filter>
+          </service>-->
 
 
     </application>
