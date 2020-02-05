@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/loginNav"
-    app:startDestination="@id/loginFragment"
+    app:startDestination="@id/PostsFragment"
     tools:ignore="UnusedNavigation">
 
     <fragment
@@ -18,6 +18,16 @@
         <action
             android:id="@+id/action_LoginFragment_to_Home"
             app:destination="@id/navigation" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/PostsFragment"
+        android:name="com.example.myapplication.Adapters.PostsFragment"
+        tools:layout="@layout/posts_fragment">
+
+        <action
+            android:id="@+id/action_LoginFragment_to_ScannerFragment"
+            app:destination="@id/ScannerFragment" />
 
     </fragment>
 
@@ -55,6 +65,7 @@
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true"
             tools:layout="@layout/home_fragment">
+
         </fragment>
 
     </navigation>

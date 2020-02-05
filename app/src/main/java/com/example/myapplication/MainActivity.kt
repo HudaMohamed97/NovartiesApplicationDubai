@@ -39,10 +39,10 @@ class MainActivity : AppCompatActivity() {
         var navController = navHostFragment.navController
 
         if (!saveLogin) {
-            navGraph.startDestination = R.id.loginFragment
+            navGraph.startDestination = R.id.PostsFragment
             navController.graph = navGraph
         } else {
-            navGraph.startDestination = R.id.navigation
+            navGraph.startDestination = R.id.PostsFragment
             navController.graph = navGraph
         }
 
