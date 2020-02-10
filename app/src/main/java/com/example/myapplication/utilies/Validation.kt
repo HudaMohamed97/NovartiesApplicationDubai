@@ -18,6 +18,24 @@ object Validation {
         return matcher.matches()
     }
 
+    fun validateEmail(emailEt: String): Boolean {
+        var isValid = false
+        if (emailEt.isNotEmpty()) {
+            isValid = isEmailValid(emailEt)
+
+        }
+        return isValid
+    }
+
+    fun validate(passwordEt: String): Boolean {
+        var isValid = true
+        if (passwordEt.isEmpty()) {
+            isValid = false
+
+        }
+        return isValid
+    }
+
     /**
      * Use this method to validate that confirmPassword matches password.
      *
@@ -41,4 +59,6 @@ object Validation {
      * @return Boolean tru if userName is valid
      */
     fun isValidUserName(userName: String) = userName.matches("[a-zA-Z0-9_]*".toRegex())
+
+
 }

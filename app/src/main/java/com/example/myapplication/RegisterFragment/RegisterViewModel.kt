@@ -4,17 +4,18 @@ import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.catapplication.utilies.Validation
+import com.example.myapplication.Models.RegisterRequestModel
 import com.example.myapplication.Models.ResponseModelData
 
 
-class LoginViewModel : ViewModel() {
-    private var repositoryHelper: LoginRepository = LoginRepository()
+class RegisterViewModel : ViewModel() {
+    private var repositoryHelper: RegisterRepository = RegisterRepository()
     private lateinit var mutableLiveData: MutableLiveData<ResponseModelData>
     private lateinit var shared: SharedPreferences
     val isLoading = MutableLiveData<Boolean>()
 
 
-    fun validateLoginInfo(
+    fun validateDataInfo(
         emailEt: String,
         passwordEt: String
     ): Boolean {
@@ -23,10 +24,8 @@ class LoginViewModel : ViewModel() {
         return !(!isEmailValid || !isPasswordValid)
     }
 
-
-    fun login(emailEt: String, passwordEt: String, type: Int) {
-        // isLoading.value = true
-        mutableLiveData = repositoryHelper.login(emailEt, passwordEt, type)
+    fun register(registerRequestModel: RegisterRequestModel) {
+        mutableLiveData = repositoryHelper.register(registerRequestModel)
 
     }
 
@@ -47,11 +46,7 @@ class LoginViewModel : ViewModel() {
 
     fun getData(): MutableLiveData<ResponseModelData> {
         return mutableLiveData
-
-
     }
-
-
 }
 
 

@@ -31,17 +31,17 @@ class MainActivity : AppCompatActivity() {
 
         PushNotifications.start(applicationContext, "e3261a40-f1c1-4a9d-b568-4da52ee960ec")
         PushNotifications.addDeviceInterest("hello")
-        
+
         val navHostFragment = nav_host_fragment as NavHostFragment
         val graphInflater = navHostFragment.navController.navInflater
         var navGraph = graphInflater.inflate(R.navigation.navigation)
         var navController = navHostFragment.navController
 
         if (!saveLogin) {
-            navGraph.startDestination = R.id.PostsFragment
+            navGraph.startDestination = R.id.loginFragment
             navController.graph = navGraph
         } else {
-            navGraph.startDestination = R.id.PostsFragment
+            navGraph.startDestination = R.id.navigation
             navController.graph = navGraph
         }
 

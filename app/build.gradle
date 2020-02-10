@@ -88,8 +88,9 @@ dependencies {
 
 
     //networking
-    implementation "com.squareup.retrofit2:retrofit:2.6.1"
-    implementation "com.squareup.retrofit2:converter-gson:2.6.1"
+
+    implementation "com.squareup.retrofit2:retrofit:2.6.2"
+    implementation "com.squareup.retrofit2:converter-gson:2.6.2"
     implementation "com.squareup.okhttp3:okhttp:3.12.1"
     implementation "com.squareup.okhttp3:logging-interceptor:3.12.1"
 
@@ -106,7 +107,6 @@ dependencies {
 // google vision gradle
     implementation project(':barcode-reader')
     implementation 'com.google.android.gms:play-services-vision:19.0.0'
-    implementation 'com.android.support:cardview-v7:28.0.0'
 
 }
 apply plugin: 'com.google.gms.google-services'

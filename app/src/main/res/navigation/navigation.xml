@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/loginNav"
-    app:startDestination="@id/PostsFragment"
+    app:startDestination="@id/loginFragment"
     tools:ignore="UnusedNavigation">
 
     <fragment
@@ -14,6 +14,10 @@
         <action
             android:id="@+id/action_LoginFragment_to_ScannerFragment"
             app:destination="@id/ScannerFragment" />
+
+        <action
+            android:id="@+id/action_LoginFragment_to_RegisterFragment"
+            app:destination="@id/Fragment" />
 
         <action
             android:id="@+id/action_LoginFragment_to_Home"

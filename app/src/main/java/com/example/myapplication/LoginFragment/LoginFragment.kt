@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.example.catapplication.utilies.Validation
 import com.example.myapplication.R
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.login_fragment.*
@@ -91,11 +92,14 @@ class LoginFragment : Fragment(), LoginInterface {
             chckRemember.isChecked = true
         }
 
+        register_login.setOnClickListener {
+            findNavController().navigate(R.id.action_LoginFragment_to_RegisterFragment)
+        }
 
 
 
         button.setOnClickListener {
-            /*checkErrorEnabled()
+            checkErrorEnabled()
             hideKeyboard()
             if (loginViewModel.validateLoginInfo(
                     email.editText?.text.toString(),
@@ -105,23 +109,26 @@ class LoginFragment : Fragment(), LoginInterface {
                 email.isErrorEnabled = false
                 passwordEt.isErrorEnabled = false
                 callLoginRequest()
-            }*/
-            findNavController().navigate(R.id.action_LoginFragment_to_ScannerFragment)
-            saveUserData()
+            }
+
+            //saveUserData()
         }
-        register_login.setOnClickListener {
-            findNavController().navigate(R.id.action_LoginFragment_to_Home)
-        }
+
     }
 
     private fun callLoginRequest() {
         showLoader()
         loginViewModel.login(
             email.editText?.text.toString(),
-            passwordEt.editText?.text.toString()
+            passwordEt.editText?.text.toString(), 1
         )
         loginViewModel.getData().observe(this, Observer {
             hideLoader()
+            if (it != null) {
+                register_login.setOnClickListener {
+                    findNavController().navigate(R.id.action_LoginFragment_to_Home)
+                }
+            }
 
 
         })
@@ -129,13 +136,18 @@ class LoginFragment : Fragment(), LoginInterface {
     }
 
     private fun checkErrorEnabled() {
-        if (!loginViewModel.validate(email.editText?.text.toString())) {
+        if (!Validation.validate(email.editText?.text.toString())) {
             email.isErrorEnabled = true
-            email.error = "empty email please fill it"
+            email.error = "empty Email please fill it"
         } else {
-            email.isErrorEnabled = false
+            if (!Validation.validateEmail(email.editText?.text.toString())) {
+                email.isErrorEnabled = true
+                email.error = "Invalid Email Formate Please enter valid mail"
+            } else {
+                email.isErrorEnabled = false
+            }
         }
-        if (!loginViewModel.validate(passwordEt.editText?.text.toString())) {
+        if (!Validation.validate(passwordEt.editText?.text.toString())) {
             passwordEt.isErrorEnabled = true
             passwordEt.error = "empty password please fill it"
         } else {
