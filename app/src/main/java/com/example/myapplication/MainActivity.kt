@@ -31,8 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         PushNotifications.start(applicationContext, "e3261a40-f1c1-4a9d-b568-4da52ee960ec")
         PushNotifications.addDeviceInterest("hello")
-
-
+        
         val navHostFragment = nav_host_fragment as NavHostFragment
         val graphInflater = navHostFragment.navController.navInflater
         var navGraph = graphInflater.inflate(R.navigation.navigation)
@@ -86,7 +85,7 @@ class MainActivity : AppCompatActivity() {
             .setContentTitle("Navigation")
             .setContentText("Deep link to Android")
             .setContentIntent(deeplink)
-            .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+            .setSmallIcon(R.drawable.ic_comment_btn)
             .setAutoCancel(true)
         notificationManager.notify(0, builder.build())
 
