@@ -11,14 +11,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.catapplication.utilies.Validation
+import com.example.myapplication.Models.ResponseModelData
 import com.example.myapplication.R
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.login_fragment.*
+import kotlin.reflect.typeOf
 
 
 class LoginFragment : Fragment(), LoginInterface {
@@ -29,6 +32,7 @@ class LoginFragment : Fragment(), LoginInterface {
     private var dialog: ProgressDialog? = null
     private lateinit var loginPreferences: SharedPreferences
     private lateinit var loginPrefsEditor: SharedPreferences.Editor
+    private var type: Int = 0
 
 
     override fun onCreateView(
@@ -44,20 +48,24 @@ class LoginFragment : Fragment(), LoginInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setClickListeners()
-        //listenToLoading()
+        //subscribeUI()
     }
 
-    private fun listenToLoading() {
-        loginViewModel.isLoading.observe(this, Observer {
-            if (it) {
-                Log.i("hhhh", "showw")
-                showLoader()
-            } else {
-                Log.i("hhhh", "hideee")
-                hideLoader()
+
+    private fun subscribeUI() {
+        loginViewModel.isLoading().observe(this, Observer<Boolean> { isLoading ->
+            isLoading?.let {
+                if (it) {
+                    Log.i("hhhh", "showw")
+                    showLoader()
+                } else {
+                    Log.i("hhhh", "hideee")
+                    hideLoader()
+                }
             }
         })
     }
+
 
     private fun hideLoader() {
         dialog?.dismiss()
@@ -71,13 +79,11 @@ class LoginFragment : Fragment(), LoginInterface {
         dialog?.show()
     }
 
-
     override fun setClickListeners() {
         val mainLayout = root.findViewById(R.id.mainLayout) as View
         val button = root.findViewById(R.id.btn_login) as Button
         email = root.findViewById(R.id.email) as TextInputLayout
         passwordEt = root.findViewById(R.id.password) as TextInputLayout
-
         mainLayout.setOnClickListener {
             hideKeyboard()
         }
@@ -95,8 +101,6 @@ class LoginFragment : Fragment(), LoginInterface {
         register_login.setOnClickListener {
             findNavController().navigate(R.id.action_LoginFragment_to_RegisterFragment)
         }
-
-
 
         button.setOnClickListener {
             checkErrorEnabled()
@@ -118,16 +122,27 @@ class LoginFragment : Fragment(), LoginInterface {
 
     private fun callLoginRequest() {
         showLoader()
+        type = radioType.checkedRadioButtonId
+        if (radioAttende.isChecked) {
+            if (radioSpeaker.isChecked) {
+                radioSpeaker.isChecked = false
+            }
+            type = 1
+        } else {
+            radioAttende.isChecked = false
+            type = 2
+        }
         loginViewModel.login(
             email.editText?.text.toString(),
-            passwordEt.editText?.text.toString(), 1
+            passwordEt.editText?.text.toString(), type
         )
         loginViewModel.getData().observe(this, Observer {
             hideLoader()
             if (it != null) {
-                register_login.setOnClickListener {
-                    findNavController().navigate(R.id.action_LoginFragment_to_Home)
-                }
+                saveData(it)
+                findNavController().navigate(R.id.action_LoginFragment_to_Home)
+            } else {
+                Toast.makeText(activity, "error", Toast.LENGTH_SHORT).show()
             }
 
 
@@ -167,7 +182,7 @@ class LoginFragment : Fragment(), LoginInterface {
 
     private fun saveUserData() {
         if (chckRemember.isChecked) {
-            loginPrefsEditor.putBoolean("saveLogin", true)
+            loginPrefsEditor.putBoolean("saveUserData", true)
             loginPrefsEditor.putString("username", "test")
             loginPrefsEditor.putString("password", "12345")
             loginPrefsEditor.commit()
@@ -177,4 +192,10 @@ class LoginFragment : Fragment(), LoginInterface {
         }
     }
 
+    private fun saveData(responseModelData: ResponseModelData) {
+        val token = "Bearer " + responseModelData.access_token
+        loginPrefsEditor.putString("accessToken", token)
+        loginPrefsEditor.putInt("type", type)
+        loginPrefsEditor.commit()
+    }
 }

@@ -13,13 +13,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.catapplication.utilies.Validation
-import com.example.myapplication.LoginFragment.LoginViewModel
 import com.example.myapplication.LoginFragment.RegisterViewModel
 import com.example.myapplication.Models.RegisterRequestModel
 import com.example.myapplication.R
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.android.synthetic.main.login_fragment.*
-import kotlinx.android.synthetic.main.register_fragment.*
 import kotlinx.android.synthetic.main.register_fragment.register_login
 
 

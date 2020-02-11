@@ -1,6 +1,8 @@
 package com.example.myapplication.LoginFragment
 
+import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.catapplication.utilies.Validation
@@ -11,7 +13,16 @@ class LoginViewModel : ViewModel() {
     private var repositoryHelper: LoginRepository = LoginRepository()
     private lateinit var mutableLiveData: MutableLiveData<ResponseModelData>
     private lateinit var shared: SharedPreferences
-    val isLoading = MutableLiveData<Boolean>()
+
+    private lateinit var isLoadingLiveData: MutableLiveData<Boolean>
+
+    fun isLoading(): LiveData<Boolean> {
+        if (!::isLoadingLiveData.isInitialized) {
+            isLoadingLiveData = MutableLiveData()
+            isLoadingLiveData.value = true
+        }
+        return isLoadingLiveData
+    }
 
 
     fun validateLoginInfo(
@@ -29,21 +40,6 @@ class LoginViewModel : ViewModel() {
         mutableLiveData = repositoryHelper.login(emailEt, passwordEt, type)
 
     }
-
-    /*fun saveData(userData: Data, context: Context) {
-        shared = context.getSharedPreferences("id", Context.MODE_PRIVATE)
-        val myDataHolder = shared.edit()
-        *//*myDataHolder.putInt("id", userData.id)
-        Log.i("hhhh", "" + userData.id)
-        myDataHolder.putString("name", userData.username)
-        myDataHolder.putString("email", userData.email)
-        myDataHolder.putString("account_type", userData.account_type)
-        myDataHolder.putInt("target", userData.target)
-        myDataHolder.putInt("score", userData.score)
-        myDataHolder.putInt("percentage", userData.percentage)
-        myDataHolder.putString("username", userData.username)*//*
-        myDataHolder.apply()
-    }*/
 
     fun getData(): MutableLiveData<ResponseModelData> {
         return mutableLiveData

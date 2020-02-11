@@ -54,6 +54,46 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
+    <LinearLayout
+        android:id="@+id/typeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_20"
+        android:backgroundTint="@color/not_black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password">
+
+        <RadioGroup
+            android:id="@+id/radioType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <RadioButton
+                android:id="@+id/radioAttende"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space_5"
+                android:buttonTint="@color/not_blue"
+                android:text="Attende"
+                android:textColor="@color/black" />
+
+            <RadioButton
+                android:id="@+id/radioSpeaker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space_5"
+                android:buttonTint="@color/not_blue"
+                android:text="Speaker"
+                android:textColor="@color/black" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+
     <CheckBox
         android:id="@+id/chckRemember"
         android:layout_width="match_parent"
@@ -64,7 +104,7 @@
         android:textColor="@android:color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/typeLayout" />
 
 
     <com.google.android.material.button.MaterialButton

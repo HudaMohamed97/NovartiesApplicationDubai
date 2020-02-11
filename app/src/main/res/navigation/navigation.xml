@@ -70,6 +70,19 @@
             app:popUpToInclusive="true"
             tools:layout="@layout/home_fragment">
 
+            <action
+                android:id="@+id/action_HomeFragment_to_EventFragment"
+                app:destination="@id/EventFragment" />
+
+        </fragment>
+        <fragment
+            android:id="@+id/EventFragment"
+            android:name="com.example.myapplication.EventFragment.EventFragment"
+            tools:layout="@layout/events_fragment">
+
+            <action
+                android:id="@+id/action_Fragment_to_loginFragment"
+                app:destination="@id/loginFragment" />
         </fragment>
 
     </navigation>
