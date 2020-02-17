@@ -1,4 +1,4 @@
-package com.example.myapplication.Adapters
+package com.example.myapplication.PostsFragment
 
 import android.app.ProgressDialog
 import android.content.Context
@@ -8,14 +8,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Adapters.AdapterFeed
 import com.example.myapplication.Adapters.AdapterFeed.OnCommentClickListener
+import com.example.myapplication.Adapters.CustomBottomSheet
 import com.example.myapplication.Adapters.CustomBottomSheet.OnCommentAddedListener
 import com.example.myapplication.Models.ModelFeed
 import com.example.myapplication.R
+import com.github.nkzawa.emitter.Emitter
+import com.github.nkzawa.socketio.client.IO
+import com.github.nkzawa.socketio.client.Socket
+import java.net.URISyntaxException
 
 
 class PostsFragment : Fragment() {
@@ -41,7 +48,36 @@ class PostsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setClickListeners()
+        initSocket()
         initRecyclerView()
+
+    }
+
+    private fun initSocket() {
+        // SocketInstance(context)
+        //val mSocket = SocketInstance.getSocketInstance()
+
+        var mSocket: Socket?
+
+        try {
+            mSocket = IO.socket("http://cat-events.cat-sw.com/")
+        } catch (e: URISyntaxException) {
+            throw  e
+        }
+
+
+
+        if (mSocket != null) {
+            mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError)
+            mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError)
+            mSocket.connect()
+            if (mSocket.connected()) {
+                Toast.makeText(activity, "Socket Connected!!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(activity, "Socket Not Connected!!", Toast.LENGTH_SHORT).show()
+
+            }
+        }
 
     }
 
@@ -65,7 +101,8 @@ class PostsFragment : Fragment() {
 
             override fun onCommentClicked(userModel: ModelFeed, position: Int) {
                 Log.i("hhhhh", "ana hena" + userModel.comments)
-                customBottomSheet = CustomBottomSheet(userModel, position)
+                customBottomSheet =
+                    CustomBottomSheet(userModel, position)
                 customBottomSheet.setOnCommentAddedListener(object : OnCommentAddedListener {
                     override fun onCommentAdded(userModel: ModelFeed, position: Int) {
                         val comments = userModel.comments
@@ -91,6 +128,15 @@ class PostsFragment : Fragment() {
 
     }
 
+    private val onConnectError = Emitter.Listener {
+        activity?.runOnUiThread {
+            Log.i("hhh", "Error connecting")
+            Toast.makeText(
+                activity!!.applicationContext,
+                "error", Toast.LENGTH_LONG
+            ).show()
+        }
+    }
 
     private fun showLoader() {
         dialog = ProgressDialog(activity)

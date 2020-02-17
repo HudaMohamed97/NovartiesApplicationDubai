@@ -29,21 +29,6 @@ class RegisterViewModel : ViewModel() {
 
     }
 
-    /*fun saveData(userData: Data, context: Context) {
-        shared = context.getSharedPreferences("id", Context.MODE_PRIVATE)
-        val myDataHolder = shared.edit()
-        *//*myDataHolder.putInt("id", userData.id)
-        Log.i("hhhh", "" + userData.id)
-        myDataHolder.putString("name", userData.username)
-        myDataHolder.putString("email", userData.email)
-        myDataHolder.putString("account_type", userData.account_type)
-        myDataHolder.putInt("target", userData.target)
-        myDataHolder.putInt("score", userData.score)
-        myDataHolder.putInt("percentage", userData.percentage)
-        myDataHolder.putString("username", userData.username)*//*
-        myDataHolder.apply()
-    }*/
-
     fun getData(): MutableLiveData<ResponseModelData> {
         return mutableLiveData
     }

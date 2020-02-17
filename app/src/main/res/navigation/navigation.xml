@@ -24,16 +24,7 @@
             app:destination="@id/navigation" />
 
     </fragment>
-    <fragment
-        android:id="@+id/PostsFragment"
-        android:name="com.example.myapplication.Adapters.PostsFragment"
-        tools:layout="@layout/posts_fragment">
 
-        <action
-            android:id="@+id/action_LoginFragment_to_ScannerFragment"
-            app:destination="@id/ScannerFragment" />
-
-    </fragment>
 
     <fragment
         android:id="@+id/ScannerFragment"
@@ -59,7 +50,7 @@
     </fragment>
 
 
-    <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    <navigation
         android:id="@+id/navigation"
         app:startDestination="@id/HomeFragment">
 
@@ -73,6 +64,15 @@
             <action
                 android:id="@+id/action_HomeFragment_to_EventFragment"
                 app:destination="@id/EventFragment" />
+            <action
+                android:id="@+id/action_HomeFragment_to_AgendaFragment"
+                app:destination="@id/AgendaFragment" />
+            <action
+                android:id="@+id/action_HomeFragment_to_PostsFragment"
+                app:destination="@id/PostsFragment" />
+            <action
+                android:id="@+id/action_HomeFragment_to_ArticlesFragment"
+                app:destination="@id/ArticlesFragment" />
 
         </fragment>
         <fragment
@@ -84,6 +84,47 @@
                 android:id="@+id/action_Fragment_to_loginFragment"
                 app:destination="@id/loginFragment" />
         </fragment>
+
+        <fragment
+            android:id="@+id/AgendaFragment"
+            android:name="com.example.myapplication.AgendaFargment.AgendaFragment"
+            tools:layout="@layout/agenda_fragment">
+
+            <action
+                android:id="@+id/action_clickSpeaker_toSpeakerProfile"
+                app:destination="@id/SpeakerProfileFragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/SpeakerProfileFragment"
+            android:name="com.example.myapplication.SpeakerProfile.SpeakerProfileFragment"
+            tools:layout="@layout/speaker_profile">
+
+            <action
+                android:id="@+id/action_clickAsk_toAskFragment"
+                app:destination="@id/SpeakerProfileFragment" />
+        </fragment>
+
+
+        <fragment
+            android:id="@+id/PostsFragment"
+            android:name="com.example.myapplication.PostsFragment.PostsFragment"
+            tools:layout="@layout/posts_fragment">
+
+            <action
+                android:id="@+id/action_LoginFragment_to_ScannerFragment"
+                app:destination="@id/ScannerFragment" />
+
+        </fragment>
+
+        <fragment
+            android:id="@+id/ArticlesFragment"
+            android:name="com.example.myapplication.ArticlesFragment.ArticleFragment"
+            tools:layout="@layout/article_fragment">
+
+
+        </fragment>
+
 
     </navigation>
 

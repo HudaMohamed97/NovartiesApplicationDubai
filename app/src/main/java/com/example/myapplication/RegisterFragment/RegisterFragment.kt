@@ -17,7 +17,7 @@ import com.example.myapplication.LoginFragment.RegisterViewModel
 import com.example.myapplication.Models.RegisterRequestModel
 import com.example.myapplication.R
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.android.synthetic.main.register_fragment.register_login
+import kotlinx.android.synthetic.main.register_fragment.*
 
 
 class RegisterFragment : Fragment() {
@@ -31,7 +31,6 @@ class RegisterFragment : Fragment() {
     private lateinit var passwordText: String
     private lateinit var phoneText: String
     private lateinit var nameText: String
-    private var dialog: ProgressDialog? = null
     private lateinit var FromFragment: String
     private var validName = false
     private var validPhone = false
@@ -76,29 +75,17 @@ class RegisterFragment : Fragment() {
     }
 
     private fun callRegisterRequest() {
-        showLoader()
+        progressBar.visibility = View.VISIBLE
         val requestModel = RegisterRequestModel(emailText, passwordText, nameText, phoneText)
         registerViewModel.register(requestModel)
         registerViewModel.getData().observe(this, Observer {
-            hideLoader()
+            progressBar.visibility = View.GONE
             if (it != null) {
                 Toast.makeText(activity, "Register Successfully", Toast.LENGTH_SHORT).show()
                 findNavController().navigateUp()
             }
         })
 
-    }
-
-    private fun hideLoader() {
-        dialog?.dismiss()
-
-    }
-
-    private fun showLoader() {
-        dialog = ProgressDialog(activity)
-        dialog?.setMessage("Please, Wait")
-        dialog?.setCancelable(false)
-        dialog?.show()
     }
 
 

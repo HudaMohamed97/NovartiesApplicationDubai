@@ -38,7 +38,6 @@ public class Webservice {
         api = retrofit.create(ApiServices.class);
         Log.i("hhhh", "" + api.toString());
 
-
     }
 
     public static Webservice getInstance() {

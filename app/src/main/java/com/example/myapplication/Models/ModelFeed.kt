@@ -1,7 +1,7 @@
 package com.example.myapplication.Models
 
 /**
- * this for Post Data
+ * this for Post com.example.myapplication.Models.EventModels.Data
  */
 
 data class ModelFeed(

@@ -11,10 +11,10 @@
         android:id="@+id/logOutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="LogOut"
         android:textColor="@color/black"
-        android:text="LogOut" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <GridLayout
         android:id="@+id/mainGrid"
@@ -34,7 +34,7 @@
 
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/myEventCard"
+            android:id="@+id/myPostsCard"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -42,8 +42,8 @@
             android:clickable="true"
             android:focusable="true"
             app:cardBackgroundColor="@color/white"
-            app:strokeColor="@color/not_black"
             app:cardCornerRadius="@dimen/space_5"
+            app:strokeColor="@color/not_black"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -63,8 +63,84 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_36"
-                    android:text="My Events"
                     android:gravity="center"
+                    android:text="Posts"
+                    android:textColor="@color/not_blue"
+
+                    />
+
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- COLUMN 2  -->
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="@dimen/space_5"
+            app:strokeColor="@color/not_black"
+            app:strokeWidth="@dimen/space_1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_36"
+                    android:gravity="center"
+                    android:text="Speakers"
+                    android:textColor="@color/not_blue"
+
+                    />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <!-- ROW 2  -->
+        <!-- COLUMN 1  -->
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:id="@+id/agendaCard"
+            android:backgroundTint="@color/white"
+            app:strokeColor="@color/not_black"
+            app:strokeWidth="@dimen/space_1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_36"
+                    android:gravity="center"
+                    android:text="Agenda"
                     android:textColor="@color/not_blue"
 
                     />
@@ -83,74 +159,28 @@
             android:layout_columnWeight="1"
             android:backgroundTint="@color/white"
             app:strokeColor="@color/not_black"
-            app:cardCornerRadius="@dimen/space_5"
             app:strokeWidth="@dimen/space_1">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-
-        <!-- ROW 2  -->
-        <!-- COLUMN 1  -->
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:backgroundTint="@color/white"
-            app:strokeColor="@color/not_black"
-            app:strokeWidth="@dimen/space_1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
-
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- COLUMN 2  -->
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:backgroundTint="@color/white"
-            app:strokeColor="@color/not_black"
-            app:strokeWidth="@dimen/space_1">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
                 android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_36"
+                    android:gravity="center"
+                    android:text="Sponsers"
+                    android:textColor="@color/not_blue"
+
+                    />
 
 
             </LinearLayout>
@@ -162,25 +192,35 @@
         <!-- COLUMN 1  -->
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/locationCard"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/white"
-            app:strokeColor="@color/not_black"
             app:cardCornerRadius="@dimen/space_5"
+            app:strokeColor="@color/not_black"
             app:strokeWidth="@dimen/space_1">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
                 android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_36"
+                    android:gravity="center"
+                    android:text="Event Location"
+                    android:textColor="@color/not_blue"
+
+                    />
 
             </LinearLayout>
 
@@ -192,22 +232,32 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
+            android:id="@+id/articles_card"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/white"
-            app:strokeColor="@color/not_black"
             app:cardCornerRadius="@dimen/space_5"
+            app:strokeColor="@color/not_black"
             app:strokeWidth="@dimen/space_1">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
                 android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_36"
+                    android:gravity="center"
+                    android:text="Articles"
+                    android:textColor="@color/not_blue"
+
+                    />
 
             </LinearLayout>
 

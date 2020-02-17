@@ -21,7 +21,6 @@ import com.example.myapplication.Models.ResponseModelData
 import com.example.myapplication.R
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.login_fragment.*
-import kotlin.reflect.typeOf
 
 
 class LoginFragment : Fragment(), LoginInterface {
@@ -29,7 +28,6 @@ class LoginFragment : Fragment(), LoginInterface {
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var email: TextInputLayout
     private lateinit var passwordEt: TextInputLayout
-    private var dialog: ProgressDialog? = null
     private lateinit var loginPreferences: SharedPreferences
     private lateinit var loginPrefsEditor: SharedPreferences.Editor
     private var type: Int = 0
@@ -48,35 +46,6 @@ class LoginFragment : Fragment(), LoginInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setClickListeners()
-        //subscribeUI()
-    }
-
-
-    private fun subscribeUI() {
-        loginViewModel.isLoading().observe(this, Observer<Boolean> { isLoading ->
-            isLoading?.let {
-                if (it) {
-                    Log.i("hhhh", "showw")
-                    showLoader()
-                } else {
-                    Log.i("hhhh", "hideee")
-                    hideLoader()
-                }
-            }
-        })
-    }
-
-
-    private fun hideLoader() {
-        dialog?.dismiss()
-
-    }
-
-    private fun showLoader() {
-        dialog = ProgressDialog(activity)
-        dialog?.setMessage("Please, Wait")
-        dialog?.setCancelable(false)
-        dialog?.show()
     }
 
     override fun setClickListeners() {
@@ -87,7 +56,6 @@ class LoginFragment : Fragment(), LoginInterface {
         mainLayout.setOnClickListener {
             hideKeyboard()
         }
-
         loginPreferences = activity!!.getSharedPreferences("loginPrefs", MODE_PRIVATE)
         loginPrefsEditor = loginPreferences.edit()
         val saveLogin = loginPreferences.getBoolean("saveLogin", false)
@@ -114,14 +82,12 @@ class LoginFragment : Fragment(), LoginInterface {
                 passwordEt.isErrorEnabled = false
                 callLoginRequest()
             }
-
-            //saveUserData()
         }
 
     }
 
     private fun callLoginRequest() {
-        showLoader()
+        progressBar.visibility = View.VISIBLE
         type = radioType.checkedRadioButtonId
         if (radioAttende.isChecked) {
             if (radioSpeaker.isChecked) {
@@ -137,12 +103,18 @@ class LoginFragment : Fragment(), LoginInterface {
             passwordEt.editText?.text.toString(), type
         )
         loginViewModel.getData().observe(this, Observer {
-            hideLoader()
+            progressBar.visibility = View.GONE
             if (it != null) {
-                saveData(it)
-                findNavController().navigate(R.id.action_LoginFragment_to_Home)
+                if (it.access_token != "") {
+                    saveData(it)
+                    findNavController().navigate(R.id.action_LoginFragment_to_Home)
+                } else {
+                    var error = it.error.replace("[", "")
+                    error = error.replace("]", "")
+                    Toast.makeText(activity, error, Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(activity, "error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
             }
 
 

@@ -1,15 +1,15 @@
-package com.example.myapplication.HomeFragment
+package com.example.myapplication.LoginFragment
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myapplication.LoginFragment.HomeRepository
 import com.example.myapplication.Models.EventModels.EventsResponse
 import com.example.myapplication.Models.EventModels.SingleEventResponse
 
-class HomeViewModel : ViewModel() {
+
+class AgendaViewModel : ViewModel() {
     private var repositoryHelper: HomeRepository = HomeRepository()
     private lateinit var mutableLiveData: MutableLiveData<EventsResponse>
-    private lateinit var singleEventLiveData: MutableLiveData<SingleEventResponse>
+    private lateinit var SingleEventLiveData: MutableLiveData<SingleEventResponse>
 
 
     fun getEvents(type: Int, accessToken: String) {
@@ -18,7 +18,7 @@ class HomeViewModel : ViewModel() {
     }
 
     fun getSingleEvent(eventId: Int, type: Int, accessToken: String) {
-        singleEventLiveData = repositoryHelper.getSingleEvent(eventId, 1, accessToken)
+        SingleEventLiveData = repositoryHelper.getSingleEvent(eventId, 1, accessToken)
 
     }
 
@@ -28,7 +28,15 @@ class HomeViewModel : ViewModel() {
     }
 
     fun getSingleEventData(): MutableLiveData<SingleEventResponse> {
-        return singleEventLiveData
+        return SingleEventLiveData
     }
 
+
 }
+
+
+
+
+
+
+

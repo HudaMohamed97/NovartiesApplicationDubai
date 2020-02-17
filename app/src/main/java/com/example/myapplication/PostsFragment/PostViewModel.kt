@@ -1,4 +1,4 @@
-package com.example.myapplication.Adapters
+package com.example.myapplication.PostsFragment
 
 import android.util.Log
 import androidx.lifecycle.LiveData

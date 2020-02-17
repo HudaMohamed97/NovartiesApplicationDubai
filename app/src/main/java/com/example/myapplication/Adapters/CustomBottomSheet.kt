@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Models.CommentModel
 import com.example.myapplication.Models.ModelFeed
+import com.example.myapplication.PostsFragment.PostViewModel
 import com.example.myapplication.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.comment_fragment.*
