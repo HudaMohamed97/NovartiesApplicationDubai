@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.Observer
@@ -97,8 +96,13 @@ class HomeFragment : Fragment() {
         myPostsCard.setOnClickListener {
             findNavController().navigate(R.id.action_HomeFragment_to_PostsFragment)
         }
-        articles_card.setOnClickListener {
-            findNavController().navigate(R.id.action_HomeFragment_to_ArticlesFragment)
+        votingCard.setOnClickListener {
+            findNavController().navigate(R.id.action_HomeFragment_to_VotingFragment)
+        }
+        speakers_card.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putParcelableArrayList("Speakers", speakers)
+            findNavController().navigate(R.id.action_HomeFragment_to_SpeakersFragment, bundle)
         }
 
         logOutButton.setOnClickListener {

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/semi_black"
+    android:layout_height="match_parent">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/credentials_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.281">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space_20"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="Description ncjcndbvvmsdnsndmnmnbdsmnsdgmvmc,v,v,mmv,mcx,vmv,mxvmxbsdmgbdsnnndgmngmngmdgmngdn nd nsd h dvn vbdsdmsdnvsdbvndsvd"
+                android:textColor="@color/white" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="150dp"
+                android:layout_marginTop="20dp">
+
+                <!-- In RadioGroup create the 1 Radio Button-->
+                <!-- like this we will add some more Radio Button-->
+                <RadioButton
+                    android:id="@+id/radia_id1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_background"
+                    android:layout_marginTop="@dimen/space_10"
+                    android:text="BAD"
+                    android:textSize="20dp" />
+
+                <RadioButton
+                    android:id="@+id/radia_id2"
+                    android:layout_marginTop="@dimen/space_10"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_background"
+                    android:text="GOOD"
+                    android:textSize="20dp" />
+
+                <RadioButton
+                    android:id="@+id/radia_id3"
+                    android:layout_marginTop="@dimen/space_10"
+                    android:layout_width="fill_parent"
+                    android:background="@drawable/rounded_background"
+                    android:layout_height="wrap_content"
+                    android:text="VERY GOOD"
+                    android:textSize="20dp" />
+
+                <RadioButton
+                    android:id="@+id/radia_id4"
+                    android:layout_marginTop="@dimen/space_10"
+                    android:background="@drawable/rounded_background"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="EXCELLENT"
+                    android:textSize="20dp"
+
+                    />
+            </RadioGroup>
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/white"
+                android:indeterminateTintMode="src_atop"
+                android:visibility="gone"
+                android:layout_marginBottom="30dp"/>
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_button"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/black"
+        android:text="VOTE NOW"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:cornerRadius="@dimen/space_20"
+        app:layout_constraintBottom_toBottomOf="@+id/credentials_card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/credentials_card" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

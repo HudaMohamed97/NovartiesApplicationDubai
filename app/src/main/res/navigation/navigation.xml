@@ -65,8 +65,14 @@
                 android:id="@+id/action_HomeFragment_to_EventFragment"
                 app:destination="@id/EventFragment" />
             <action
+                android:id="@+id/action_HomeFragment_to_VotingFragment"
+                app:destination="@id/VotingFragment" />
+            <action
                 android:id="@+id/action_HomeFragment_to_AgendaFragment"
                 app:destination="@id/AgendaFragment" />
+            <action
+                android:id="@+id/action_HomeFragment_to_SpeakersFragment"
+                app:destination="@id/SpeakersFragment" />
             <action
                 android:id="@+id/action_HomeFragment_to_PostsFragment"
                 app:destination="@id/PostsFragment" />
@@ -83,6 +89,22 @@
             <action
                 android:id="@+id/action_Fragment_to_loginFragment"
                 app:destination="@id/loginFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/SpeakersFragment"
+            android:name="com.example.myapplication.Speakers.SpeakersFragment"
+            tools:layout="@layout/speakers_fragment">
+
+            <action
+                android:id="@+id/action_clickSpeaker_toSpeakerProfile"
+                app:destination="@id/SpeakerProfileFragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/VotingFragment"
+            android:name="com.example.myapplication.VotingFragment.VotingFragment"
+            tools:layout="@layout/voting_fragment">
+
         </fragment>
 
         <fragment

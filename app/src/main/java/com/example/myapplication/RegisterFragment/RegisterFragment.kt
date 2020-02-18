@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -23,12 +24,14 @@ import kotlinx.android.synthetic.main.register_fragment.*
 class RegisterFragment : Fragment() {
     private lateinit var root: View
     private lateinit var registerViewModel: RegisterViewModel
-    private lateinit var email: TextInputLayout
-    private lateinit var passwordEt: TextInputLayout
-    private lateinit var phone: TextInputLayout
-    private lateinit var name: TextInputLayout
+    private lateinit var email: EditText
+    private lateinit var passwordEt: EditText
+    private lateinit var rePasswordEt: EditText
+    private lateinit var phone: EditText
+    private lateinit var name: EditText
     private lateinit var emailText: String
     private lateinit var passwordText: String
+    private lateinit var RePasswordText: String
     private lateinit var phoneText: String
     private lateinit var nameText: String
     private lateinit var FromFragment: String
@@ -49,10 +52,11 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         FromFragment = arguments?.getString("fromFragment").toString()
-        email = root.findViewById(R.id.Email) as TextInputLayout
-        passwordEt = root.findViewById(R.id.Password) as TextInputLayout
-        name = root.findViewById(R.id.Name) as TextInputLayout
-        phone = root.findViewById(R.id.phone) as TextInputLayout
+        email = root.findViewById(R.id.input_email)
+        passwordEt = root.findViewById(R.id.input_password)
+        rePasswordEt = root.findViewById(R.id.input_RePassword)
+        name = root.findViewById(R.id.input_Name)
+        phone = root.findViewById(R.id.input_Phone)
         setListeners()
     }
 
@@ -83,6 +87,8 @@ class RegisterFragment : Fragment() {
             if (it != null) {
                 Toast.makeText(activity, "Register Successfully", Toast.LENGTH_SHORT).show()
                 findNavController().navigateUp()
+            } else {
+                Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -99,66 +105,53 @@ class RegisterFragment : Fragment() {
 
     private fun checkPassInput() {
         if (!Validation.validate(passwordText)) {
-            passwordEt.isErrorEnabled = true
-            passwordEt.error = "empty password please fill it"
-        } else {
-            passwordEt.isErrorEnabled = false
+            Toast.makeText(activity, "empty password please fill it", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun checkEmailInput() {
         if (!Validation.validate(emailText)) {
-            email.isErrorEnabled = true
-            email.error = "empty Email please fill it"
+            Toast.makeText(activity, "empty Email please fill it", Toast.LENGTH_SHORT).show()
         } else {
             if (!Validation.validateEmail(emailText)) {
-                email.isErrorEnabled = true
-                email.error = "Invalid Email Format Please enter valid mail"
-            } else {
-                email.isErrorEnabled = false
+                Toast.makeText(
+                    activity,
+                    "Invalid Email Format Please enter valid mail",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
 
     private fun checkPhoneInput() {
         if (!Validation.validate(phoneText)) {
-            phone.isErrorEnabled = true
-            phone.error = "empty phone please fill it"
+            Toast.makeText(activity, "empty phone please fill it", Toast.LENGTH_SHORT).show()
             validPhone = false
         } else {
-            if (!Validation.isValidPhone(phoneText)) {
-                phone.isErrorEnabled = true
-                phone.error = "wrong phone format"
-                validPhone = false
+            validPhone = if (!Validation.isValidPhone(phoneText)) {
+                Toast.makeText(activity, "wrong phone format", Toast.LENGTH_SHORT).show()
+                false
             } else {
-                phone.isErrorEnabled = false
-                validPhone = true
+                true
             }
         }
     }
 
     private fun checkNameInput() {
-        if (!Validation.validate(nameText)) {
-            name.isErrorEnabled = true
-            name.error = "empty name please fill it"
-            validName = false
+        validName = if (!Validation.validate(nameText)) {
+            Toast.makeText(activity, "empty name please fill it", Toast.LENGTH_SHORT).show()
+            false
         } else {
-            if (!Validation.isValidUserName(nameText)) {
-                name.isErrorEnabled = true
-                name.error = "wrong name format"
-                validName = false
-            } else {
-                name.isErrorEnabled = false
-                validName = true
-            }
+            true
         }
     }
 
     private fun getUserInputData() {
-        emailText = email.editText?.text.toString()
-        phoneText = phone.editText?.text.toString()
-        passwordText = passwordEt.editText?.text.toString()
-        nameText = name.editText?.text.toString()
+        emailText = email.text.toString()
+        phoneText = phone.text.toString()
+        passwordText = passwordEt.text.toString()
+        RePasswordText = rePasswordEt.text.toString()
+        nameText = name.text.toString()
     }
 
     private fun hideKeyboard() {

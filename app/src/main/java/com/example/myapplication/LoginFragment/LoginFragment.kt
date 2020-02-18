@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -26,8 +27,8 @@ import kotlinx.android.synthetic.main.login_fragment.*
 class LoginFragment : Fragment(), LoginInterface {
     private lateinit var root: View
     private lateinit var loginViewModel: LoginViewModel
-    private lateinit var email: TextInputLayout
-    private lateinit var passwordEt: TextInputLayout
+    private lateinit var email: EditText
+    private lateinit var passwordEt: EditText
     private lateinit var loginPreferences: SharedPreferences
     private lateinit var loginPrefsEditor: SharedPreferences.Editor
     private var type: Int = 0
@@ -51,8 +52,8 @@ class LoginFragment : Fragment(), LoginInterface {
     override fun setClickListeners() {
         val mainLayout = root.findViewById(R.id.mainLayout) as View
         val button = root.findViewById(R.id.btn_login) as Button
-        email = root.findViewById(R.id.email) as TextInputLayout
-        passwordEt = root.findViewById(R.id.password) as TextInputLayout
+        email = root.findViewById(R.id.input_email)
+        passwordEt = root.findViewById(R.id.input_password)
         mainLayout.setOnClickListener {
             hideKeyboard()
         }
@@ -61,8 +62,8 @@ class LoginFragment : Fragment(), LoginInterface {
         val saveLogin = loginPreferences.getBoolean("saveLogin", false)
 
         if (saveLogin) {
-            emailText.setText(loginPreferences.getString("username", ""))
-            passText.setText(loginPreferences.getString("password", ""))
+            email.setText(loginPreferences.getString("username", ""))
+            passwordEt.setText(loginPreferences.getString("password", ""))
             chckRemember.isChecked = true
         }
 
@@ -74,12 +75,10 @@ class LoginFragment : Fragment(), LoginInterface {
             checkErrorEnabled()
             hideKeyboard()
             if (loginViewModel.validateLoginInfo(
-                    email.editText?.text.toString(),
-                    passwordEt.editText?.text.toString()
+                    email.text.toString(),
+                    passwordEt.text.toString()
                 )
             ) {
-                email.isErrorEnabled = false
-                passwordEt.isErrorEnabled = false
                 callLoginRequest()
             }
         }
@@ -88,19 +87,9 @@ class LoginFragment : Fragment(), LoginInterface {
 
     private fun callLoginRequest() {
         progressBar.visibility = View.VISIBLE
-        type = radioType.checkedRadioButtonId
-        if (radioAttende.isChecked) {
-            if (radioSpeaker.isChecked) {
-                radioSpeaker.isChecked = false
-            }
-            type = 1
-        } else {
-            radioAttende.isChecked = false
-            type = 2
-        }
         loginViewModel.login(
-            email.editText?.text.toString(),
-            passwordEt.editText?.text.toString(), type
+            email.text.toString(),
+            passwordEt.text.toString(), type
         )
         loginViewModel.getData().observe(this, Observer {
             progressBar.visibility = View.GONE
@@ -123,22 +112,20 @@ class LoginFragment : Fragment(), LoginInterface {
     }
 
     private fun checkErrorEnabled() {
-        if (!Validation.validate(email.editText?.text.toString())) {
-            email.isErrorEnabled = true
-            email.error = "empty Email please fill it"
+        if (!Validation.validate(email.text.toString())) {
+            Toast.makeText(activity, "empty Email please fill it", Toast.LENGTH_SHORT).show()
         } else {
-            if (!Validation.validateEmail(email.editText?.text.toString())) {
-                email.isErrorEnabled = true
-                email.error = "Invalid Email Formate Please enter valid mail"
-            } else {
-                email.isErrorEnabled = false
+            if (!Validation.validateEmail(email.text.toString())) {
+                Toast.makeText(
+                    activity,
+                    "Invalid Email Format Please enter valid mail",
+                    Toast.LENGTH_SHORT
+                ).show()
+
             }
         }
-        if (!Validation.validate(passwordEt.editText?.text.toString())) {
-            passwordEt.isErrorEnabled = true
-            passwordEt.error = "empty password please fill it"
-        } else {
-            passwordEt.isErrorEnabled = false
+        if (!Validation.validate(passwordEt.text.toString())) {
+            Toast.makeText(activity, "empty password please fill it", Toast.LENGTH_SHORT).show()
         }
     }
 

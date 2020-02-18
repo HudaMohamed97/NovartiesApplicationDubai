@@ -19,8 +19,6 @@ import kotlinx.android.synthetic.main.speaker_profile.*
 class SpeakerProfileFragment : Fragment() {
     private lateinit var root: View
     private lateinit var eventViewModel: EventViewModel
-    private var dialog: ProgressDialog? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,22 +34,13 @@ class SpeakerProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setClickListeners()
         val speaker = arguments?.getParcelable<Speakers>("Speaker")!!
-        SpeakerName.text = speaker.name
-        SpeakerBio.text = speaker.bio
-        SpeakerPhone.text = speaker.phone.toString()
-        speakerMail.text = speaker.email
+        speaker_name.text = speaker.name
+        speaker_Bio.text = speaker.bio
 
 
     }
 
     private fun setClickListeners() {
-        poll_button.setOnClickListener {
-
-        }
-
-        ask_button.setOnClickListener {
-
-        }
 
 
     }

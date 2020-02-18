@@ -14,6 +14,7 @@
     <color name="green">#008000</color>
     <color name="not_blue">#0077ff</color>
     <color name="black">#000000</color>
+    <color name="black_background">#212121</color>
 
 
     <color name="semi_white">#90ffffff</color>

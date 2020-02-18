@@ -37,7 +37,6 @@ class AgendaAdapter(modelFeedArrayList: ArrayList<AdendaModel>) :
         val agendaModel = agendaArrayList[position]
 
         holder.speakerName.text = agendaModel.speakerName
-        holder.description.text = agendaModel.description
 
         holder.itemView.setOnClickListener {
             if (onItemClickListener != null && position != RecyclerView.NO_POSITION) {
@@ -50,7 +49,6 @@ class AgendaAdapter(modelFeedArrayList: ArrayList<AdendaModel>) :
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var speakerName: TextView = itemView.findViewById<View>(R.id.speaker_name) as TextView
-        var description: TextView = itemView.findViewById<View>(R.id.description) as TextView
 
 
     }

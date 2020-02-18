@@ -17,7 +17,7 @@ class LoginRepository {
 
     fun login(email: String, password: String, type: Int): MutableLiveData<ResponseModelData> {
         val userData = MutableLiveData<ResponseModelData>()
-        val body = LoginRequestModel(email.trim(), password, type.toString())
+        val body = LoginRequestModel(email.trim(), password, "1")
         Webservice.getInstance().api.login(body).enqueue(object : Callback<ResponseModelData> {
             override fun onResponse(
                 call: Call<ResponseModelData>,
