@@ -1,10 +1,8 @@
 package com.example.myapplication.NetworkLayer
 
+import com.example.myapplication.Models.*
 import com.example.myapplication.Models.EventModels.EventsResponse
 import com.example.myapplication.Models.EventModels.SingleEventResponse
-import com.example.myapplication.Models.ResponseModelData
-import com.example.myapplication.Models.LoginRequestModel
-import com.example.myapplication.Models.RegisterRequestModel
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -20,13 +18,19 @@ interface ApiServices {
     @POST("account/update")
     fun updateAccount(@Body registerRequestModel: RegisterRequestModel): Call<ResponseModelData>
 
+    @POST("events/{event}/attendance")
+    fun submitAttendance(@Body body: Map<String, String>, @Path("event") eventId: Int, @Header("Authorization") authHeader: String): Call<submitModel>
+
     //this to get All Events
 
     @GET("events")
-    fun getEvents(@Header("type") type: Int, @Header("Authorization") authHeader: String): Call<EventsResponse>
+    fun getSessions(@Header("Authorization") authHeader: String): Call<SessionsResponse>
 
     @GET("articles")
     fun getArticles(): Call<ResponseBody>
+
+    @GET("speakers")
+    fun getSpeakers(@Header("Authorization") authHeader: String): Call<SpeakersResponseModel>
 
     @GET("articles/{article}")
     fun getSingleArticle(@Path("article") eventId: Int): Call<ResponseBody>

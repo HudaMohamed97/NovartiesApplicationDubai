@@ -3,7 +3,7 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/logo"
     android:orientation="vertical">
 
 
@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_20"
         android:gravity="center"
+        android:textStyle="bold"
         android:text="HOME"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,13 +22,27 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/logOutButton"
-        android:layout_width="@dimen/space_50"
-        android:layout_height="@dimen/space_60"
+        android:layout_width="@dimen/space_28"
+        android:layout_height="@dimen/space_28"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="LogOut"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:srcCompat="@mipmap/logout_icon" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/backButton"
+        android:layout_width="@dimen/space_28"
+        android:layout_height="@dimen/space_28"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:text="LogOut"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/back_icon" />
 
     <GridLayout
         android:id="@+id/mainGrid"
@@ -55,64 +70,62 @@
             app:strokeColor="@color/not_black"
             app:strokeWidth="0.5dp">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/space_36"
-                    android:gravity="center"
-                    android:text="NEWS FEED"
-                    android:textColor="@color/white" />
+                android:layout_height="match_parent"
+                >
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_margin="25sp"
+                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:visibility="visible"
+                    android:src="@mipmap/newsfeed_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
 
                     />
 
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
         <!-- COLUMN 2  -->
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/agendaCard"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:id="@+id/agendaCard"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             app:strokeColor="@color/not_black"
             app:strokeWidth="0.5dp">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                >
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_margin="25sp"
+                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_36"
-                    android:gravity="center"
-                    android:text="AGENDA"
-                    android:textColor="@color/white"
+                    android:visibility="visible"
+                    android:src="@mipmap/agenda_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
 
                     />
 
-            </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -129,28 +142,27 @@
             app:strokeColor="@color/not_black"
             app:strokeWidth="0.5dp">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                >
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_margin="25sp"
+                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_36"
-                    android:gravity="center"
-                    android:text="VOTING"
-                    android:textColor="@color/white"
+                    android:visibility="visible"
+                    android:src="@mipmap/voting_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
 
                     />
 
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -165,29 +177,27 @@
             app:strokeColor="@color/not_black"
             app:strokeWidth="0.5dp">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                >
 
                 <ImageView
                     android:layout_width="wrap_content"
+                    android:layout_margin="25sp"
+                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_36"
-                    android:gravity="center"
-                    android:text="RATING"
-                    android:textColor="@color/white"
+                    android:visibility="visible"
+                    android:src="@mipmap/rating_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
 
                     />
 
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -204,28 +214,27 @@
             app:strokeColor="@color/not_black"
             app:strokeWidth="0.5dp">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                >
 
                 <ImageView
                     android:layout_width="wrap_content"
+                    android:layout_margin="25sp"
+                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_36"
-                    android:gravity="center"
-                    android:text="EVENT LOCATION"
-                    android:textColor="@color/white"
+                    android:visibility="visible"
+                    android:src="@mipmap/eventlocation_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
 
                     />
 
-            </LinearLayout>
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <!-- COLUMN 2  -->
@@ -239,32 +248,32 @@
             app:strokeColor="@color/not_black"
             app:strokeWidth="0.5dp">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                >
 
                 <ImageView
                     android:layout_width="wrap_content"
+                    android:layout_margin="25sp"
+                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_36"
-                    android:gravity="center"
-                    android:text="SPEAKERS"
-                    android:textColor="@color/white"
+                    android:visibility="visible"
+                    android:src="@mipmap/speakersbio_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
 
                     />
 
-            </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/questionCard"
+            android:id="@+id/sessionsCard"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -272,25 +281,27 @@
             app:strokeColor="@color/not_black"
             app:strokeWidth="0.5dp">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                >
 
                 <ImageView
                     android:layout_width="wrap_content"
+                    android:layout_margin="25sp"
+                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:visibility="visible"
+                    android:src="@mipmap/sessions_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_36"
-                    android:gravity="center"
-                    android:text="Q &amp; A"
-                    android:textColor="@color/white" />
+                    />
 
-            </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -305,20 +316,15 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_36"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
                     android:gravity="center"
-                    android:text="Profile"
+                    android:text="Edit Profile"
                     android:textColor="@color/white"
 
                     />

@@ -2,6 +2,7 @@ package com.example.myapplication.LoginFragment
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.myapplication.Models.Account
 import com.example.myapplication.Models.ResponseModelData
 import com.example.myapplication.Models.RegisterRequestModel
 import com.example.myapplication.NetworkLayer.Webservice
@@ -21,19 +22,24 @@ class RegisterRepository {
                     if (response.isSuccessful) {
                         userData.value = response.body()
                     } else {
-                        Log.i(
-                            "hhhhhh",
-                            "on failuer from sucess   " + response.message() + response.body()
-                        )
-                        userData.value = response.body()
+                        if (response.code() == 422) {
+                            val dummyResponse =
+                                ResponseModelData(
+                                    "",
+                                    "this email is already token please enter valid Email",
+                                    "",
+                                    Account()
+                                )
+                            userData.value = dummyResponse
+                        } else {
+                            userData.value = response.body()
+                        }
+
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseModelData>, t: Throwable) {
                     userData.value = null
-                    Log.i("hhhhhh", "on fail in Login")
-                    Log.i("hhhhhh", "on fail" + t.message)
-
                 }
             })
 

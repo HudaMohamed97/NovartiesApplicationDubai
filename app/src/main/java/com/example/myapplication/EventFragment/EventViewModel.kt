@@ -12,15 +12,7 @@ class EventViewModel : ViewModel() {
     private lateinit var SingleEventLiveData: MutableLiveData<SingleEventResponse>
 
 
-    fun getEvents(type: Int, accessToken: String) {
-        mutableLiveData = repositoryHelper.getEvents(1, accessToken)
 
-    }
-
-    fun getSingleEvent(eventId: Int, type: Int, accessToken: String) {
-        SingleEventLiveData = repositoryHelper.getSingleEvent(eventId, 1, accessToken)
-
-    }
 
 
     fun getData(): MutableLiveData<EventsResponse> {

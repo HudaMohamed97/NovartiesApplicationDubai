@@ -12,17 +12,6 @@ class HomeViewModel : ViewModel() {
     private lateinit var singleEventLiveData: MutableLiveData<SingleEventResponse>
 
 
-    fun getEvents(type: Int, accessToken: String) {
-        mutableLiveData = repositoryHelper.getEvents(1, accessToken)
-
-    }
-
-    fun getSingleEvent(eventId: Int, type: Int, accessToken: String) {
-        singleEventLiveData = repositoryHelper.getSingleEvent(eventId, 1, accessToken)
-
-    }
-
-
     fun getData(): MutableLiveData<EventsResponse> {
         return mutableLiveData
     }

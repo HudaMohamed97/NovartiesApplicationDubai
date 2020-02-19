@@ -1,6 +1,5 @@
 package com.example.myapplication.RegisterFragment
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,7 +16,6 @@ import com.example.catapplication.utilies.Validation
 import com.example.myapplication.LoginFragment.RegisterViewModel
 import com.example.myapplication.Models.RegisterRequestModel
 import com.example.myapplication.R
-import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.register_fragment.*
 
 
@@ -27,16 +25,17 @@ class RegisterFragment : Fragment() {
     private lateinit var email: EditText
     private lateinit var passwordEt: EditText
     private lateinit var rePasswordEt: EditText
-    private lateinit var phone: EditText
     private lateinit var name: EditText
     private lateinit var emailText: String
     private lateinit var passwordText: String
-    private lateinit var RePasswordText: String
+    private lateinit var rePasswordText: String
     private lateinit var phoneText: String
     private lateinit var nameText: String
     private lateinit var FromFragment: String
     private var validName = false
     private var validPhone = false
+    private var emailFlag = false
+    private var matched = false
 
 
     override fun onCreateView(
@@ -56,7 +55,6 @@ class RegisterFragment : Fragment() {
         passwordEt = root.findViewById(R.id.input_password)
         rePasswordEt = root.findViewById(R.id.input_RePassword)
         name = root.findViewById(R.id.input_Name)
-        phone = root.findViewById(R.id.input_Phone)
         setListeners()
     }
 
@@ -67,28 +65,32 @@ class RegisterFragment : Fragment() {
             if (registerViewModel.validateDataInfo(
                     emailText
                     , passwordText
-                ) && validName && validPhone
+                ) && (nameText.isNotEmpty()) && (rePasswordText.isNotEmpty() && matched)
             ) {
                 callRegisterRequest()
-            } else {
-                Toast.makeText(activity, "Please fill all Data", Toast.LENGTH_SHORT).show()
-
             }
+
 
         }
     }
 
     private fun callRegisterRequest() {
         progressBar.visibility = View.VISIBLE
-        val requestModel = RegisterRequestModel(emailText, passwordText, nameText, phoneText)
+        val requestModel = RegisterRequestModel(emailText, passwordText, nameText)
         registerViewModel.register(requestModel)
         registerViewModel.getData().observe(this, Observer {
             progressBar.visibility = View.GONE
             if (it != null) {
-                Toast.makeText(activity, "Register Successfully", Toast.LENGTH_SHORT).show()
-                findNavController().navigateUp()
+                if (it.access_token != "") {
+                    Toast.makeText(activity, "Register Successfully", Toast.LENGTH_SHORT).show()
+                    findNavController().navigateUp()
+                } else {
+                    var error = it.token_type.replace("[", "")
+                    error = error.replace("]", "")
+                    Toast.makeText(activity, error, Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -97,60 +99,50 @@ class RegisterFragment : Fragment() {
 
     private fun checkErrorEnabled() {
         getUserInputData()
-        checkNameInput()
-        checkPhoneInput()
-        checkEmailInput()
-        checkPassInput()
+        isPasswordMatched()
+        validate()
     }
 
-    private fun checkPassInput() {
-        if (!Validation.validate(passwordText)) {
-            Toast.makeText(activity, "empty password please fill it", Toast.LENGTH_SHORT).show()
-        }
+    private fun isPasswordMatched() {
+        matched = passwordText == rePasswordText
     }
 
-    private fun checkEmailInput() {
+
+    private fun validate() {
         if (!Validation.validate(emailText)) {
             Toast.makeText(activity, "empty Email please fill it", Toast.LENGTH_SHORT).show()
-        } else {
-            if (!Validation.validateEmail(emailText)) {
-                Toast.makeText(
-                    activity,
-                    "Invalid Email Format Please enter valid mail",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-    }
+        } else if (!Validation.validateEmail(emailText)) {
+            Toast.makeText(
+                activity,
+                "Invalid Email Format Please enter valid mail",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else if (!Validation.validate(passwordText)) {
+            Toast.makeText(activity, "empty password please fill it", Toast.LENGTH_SHORT).show()
 
-    private fun checkPhoneInput() {
-        if (!Validation.validate(phoneText)) {
-            Toast.makeText(activity, "empty phone please fill it", Toast.LENGTH_SHORT).show()
-            validPhone = false
-        } else {
-            validPhone = if (!Validation.isValidPhone(phoneText)) {
-                Toast.makeText(activity, "wrong phone format", Toast.LENGTH_SHORT).show()
-                false
-            } else {
-                true
-            }
-        }
-    }
+        } else if (!Validation.validate(rePasswordText)) {
+            Toast.makeText(activity, "please reconfirm your Password", Toast.LENGTH_SHORT).show()
 
-    private fun checkNameInput() {
-        validName = if (!Validation.validate(nameText)) {
+        } else if (!Validation.validate(nameText)) {
             Toast.makeText(activity, "empty name please fill it", Toast.LENGTH_SHORT).show()
-            false
-        } else {
-            true
+
+        } else if (passwordEt.length() < 6 || rePasswordText.length < 6) {
+            Toast.makeText(activity, "password must be at least 6 characters", Toast.LENGTH_SHORT)
+                .show()
+        } else if (!matched) {
+            Toast.makeText(
+                activity,
+                "password and confirmed Password not matched",
+                Toast.LENGTH_SHORT
+            )
+                .show()
         }
     }
 
     private fun getUserInputData() {
         emailText = email.text.toString()
-        phoneText = phone.text.toString()
         passwordText = passwordEt.text.toString()
-        RePasswordText = rePasswordEt.text.toString()
+        rePasswordText = rePasswordEt.text.toString()
         nameText = name.text.toString()
     }
 

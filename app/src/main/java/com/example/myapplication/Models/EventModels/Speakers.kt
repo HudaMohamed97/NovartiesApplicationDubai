@@ -12,12 +12,14 @@ data class Speakers(
     @SerializedName("email") val email: String,
     @SerializedName("bio") val bio: String,
     @SerializedName("photo") val photo: String,
-    @SerializedName("enable_questions") val enable_questions: Boolean
+    @SerializedName("type") val type: String,
+    @SerializedName("active") val active: Boolean
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString().toString(),
         parcel.readInt(),
+        parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readString().toString(),
@@ -31,7 +33,8 @@ data class Speakers(
         parcel.writeString(email)
         parcel.writeString(bio)
         parcel.writeString(photo)
-        parcel.writeByte(if (enable_questions) 1 else 0)
+        parcel.writeString(type)
+        parcel.writeByte(if (active) 1 else 0)
     }
 
     override fun describeContents(): Int {
@@ -47,4 +50,5 @@ data class Speakers(
             return arrayOfNulls(size)
         }
     }
+
 }

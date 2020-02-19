@@ -11,7 +11,7 @@ object Validation {
      * @param email the String that you want to validate.
      * @return true if its correct email, false otherwise.
      */
-    fun isEmailValid(email: String): Boolean {
+    private fun isEmailValid(email: String): Boolean {
         val expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
         val pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
         val matcher = pattern.matcher(email)
@@ -21,7 +21,7 @@ object Validation {
     fun validateEmail(emailEt: String): Boolean {
         var isValid = false
         if (emailEt.isNotEmpty()) {
-            isValid = isEmailValid(emailEt)
+            isValid = isEmailValid(emailEt.trim())
 
         }
         return isValid
@@ -29,7 +29,7 @@ object Validation {
 
     fun validate(passwordEt: String): Boolean {
         var isValid = true
-        if (passwordEt.isEmpty()) {
+        if (passwordEt.isEmpty() && passwordEt.length < 6) {
             isValid = false
 
         }

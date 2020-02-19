@@ -5,12 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Models.AdendaModel
+import com.example.myapplication.Models.EventModels.Speakers
 import com.example.myapplication.R
-import java.util.*
 
 
-class AgendaAdapter(modelFeedArrayList: ArrayList<AdendaModel>) :
+class AgendaAdapter(modelFeedArrayList: List<Speakers>) :
 
     RecyclerView.Adapter<AgendaAdapter.MyViewHolder>() {
 
@@ -20,12 +19,8 @@ class AgendaAdapter(modelFeedArrayList: ArrayList<AdendaModel>) :
         return agendaArrayList.size
     }
 
-    var agendaArrayList = ArrayList<AdendaModel>()
+    var agendaArrayList = modelFeedArrayList
 
-
-    init {
-        this.agendaArrayList = modelFeedArrayList
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
@@ -36,7 +31,7 @@ class AgendaAdapter(modelFeedArrayList: ArrayList<AdendaModel>) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val agendaModel = agendaArrayList[position]
 
-        holder.speakerName.text = agendaModel.speakerName
+        holder.speakerName.text = agendaModel.name
 
         holder.itemView.setOnClickListener {
             if (onItemClickListener != null && position != RecyclerView.NO_POSITION) {

@@ -13,7 +13,7 @@ class AgendaViewModel : ViewModel() {
 
 
     fun getEvents(type: Int, accessToken: String) {
-        mutableLiveData = repositoryHelper.getEvents(1, accessToken)
+       // mutableLiveData = repositoryHelper.getEvents(1, accessToken)
 
     }
 

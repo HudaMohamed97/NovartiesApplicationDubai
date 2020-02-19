@@ -1,27 +1,32 @@
 package com.example.myapplication.Speakers
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Adapters.AgendaAdapter
-import com.example.myapplication.LoginFragment.AgendaViewModel
-import com.example.myapplication.Models.AdendaModel
+import com.example.myapplication.Adapters.SpeakerAdapter
 import com.example.myapplication.Models.EventModels.Speakers
 import com.example.myapplication.R
+import kotlinx.android.synthetic.main.speakers_fragment.*
 
 
 class SpeakersFragment : Fragment() {
     private var root: View? = null
-    private lateinit var agendaViewModel: AgendaViewModel
-    private lateinit var list: ArrayList<Speakers>
+    private lateinit var speakersViewModel: SpeakersViewModel
+    private val list = arrayListOf<Speakers>()
     private lateinit var recyclerView: RecyclerView
-    private lateinit var agendaAdapter: AgendaAdapter
+    private lateinit var speakerAdapter: SpeakerAdapter
+    private lateinit var loginPreferences: SharedPreferences
 
 
     override fun onCreateView(
@@ -29,7 +34,7 @@ class SpeakersFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        agendaViewModel = ViewModelProviders.of(this).get(AgendaViewModel::class.java)
+        speakersViewModel = ViewModelProviders.of(this).get(SpeakersViewModel::class.java)
         return if (root != null) {
             root
         } else {
@@ -41,28 +46,49 @@ class SpeakersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        list = arguments?.getParcelableArrayList<Speakers>("Speakers")!!
+        loginPreferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
         setClickListeners()
         initRecyclerView()
+        callSpeakersRequest()
+
+    }
+
+    private fun callSpeakersRequest() {
+        speakerProgressBar.visibility = View.VISIBLE
+
+        val accessToken = loginPreferences.getString("accessToken", "")
+        if (accessToken != null) {
+            speakersViewModel.getSpeakers(accessToken)
+        }
+        speakersViewModel.getData().observe(this, Observer {
+            speakerProgressBar.visibility = View.GONE
+            if (it != null) {
+                list.clear()
+                for (data in it.data) {
+                    list.add(data)
+                }
+                speakerAdapter.notifyDataSetChanged()
+
+            } else {
+                Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
+            }
+
+
+        })
+
 
     }
 
     private fun initRecyclerView() {
-        val agendaList = ArrayList<AdendaModel>()
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        for (speaker in list) {
-            agendaList.add(AdendaModel(speaker.name, "time", speaker.bio, "title"))
-        }
-
-        agendaAdapter = AgendaAdapter(agendaList)
+        speakerAdapter = SpeakerAdapter(list)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = agendaAdapter
-        agendaAdapter.setOnItemListener(object : AgendaAdapter.OnItemClickListener {
+        recyclerView.adapter = speakerAdapter
+        speakerAdapter.setOnItemListener(object : SpeakerAdapter.OnItemClickListener {
             override fun onItemClicked(position: Int) {
                 val bundle = Bundle()
                 bundle.putParcelable("Speaker", list[position])
                 findNavController().navigate(R.id.action_clickSpeaker_toSpeakerProfile, bundle)
-
             }
 
         })

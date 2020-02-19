@@ -11,35 +11,7 @@ import retrofit2.Response
 
 class HomeRepository {
 
-    fun getEvents(type: Int, accessToken: String): MutableLiveData<EventsResponse> {
-        val userData = MutableLiveData<EventsResponse>()
-        Webservice.getInstance().api.getEvents(type, accessToken)
-            .enqueue(object : Callback<EventsResponse> {
-                override fun onResponse(
-                    call: Call<EventsResponse>,
-                    response: Response<EventsResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        response.raw()
-                        userData.value = response.body()
-                    } else {
-                        Log.i(
-                            "hhhhhh",
-                            "on failuer from sucess" + response.message() + response.body()
-                        )
-                        userData.value = response.body()
-                    }
-                }
 
-                override fun onFailure(call: Call<EventsResponse>, t: Throwable) {
-                    userData.value = null
-                    Log.i("hhhhhh", "on fail to get events")
-                    Log.i("hhhhhh", "on fail" + t.message)
-
-                }
-            })
-        return userData
-    }
 
     fun getSingleEvent(
         eventId: Int,

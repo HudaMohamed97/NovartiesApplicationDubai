@@ -61,5 +61,10 @@
         <item name="android:foreground">?attr/selectableItemBackground</item>
     </style>
 
+    <style name="AppThemeRatingBar" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/yellow</item>
+        <item name="android:colorControlNormal">@color/white</item>
+    </style>
+
 
 </resources>

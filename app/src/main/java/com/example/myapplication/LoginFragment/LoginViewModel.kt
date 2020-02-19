@@ -23,8 +23,8 @@ class LoginViewModel : ViewModel() {
     }
 
 
-    fun login(emailEt: String, passwordEt: String, type: Int) {
-        mutableLiveData = repositoryHelper.login(emailEt, passwordEt, type)
+    fun login(emailEt: String, passwordEt: String) {
+        mutableLiveData = repositoryHelper.login(emailEt, passwordEt)
 
     }
 

@@ -13,7 +13,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Webservice {
-    private static final String MAIN_URL = "http://cat-events.cat-sw.com/api/";
+    private static final String MAIN_URL = "http://imaging-atelier.cat-sw.com/api/";
     private static Webservice instance;
     private ApiServices api;
 

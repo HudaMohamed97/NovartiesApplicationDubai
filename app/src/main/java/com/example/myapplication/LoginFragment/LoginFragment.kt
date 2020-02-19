@@ -1,11 +1,9 @@
 package com.example.myapplication.LoginFragment
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +18,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.catapplication.utilies.Validation
 import com.example.myapplication.Models.ResponseModelData
 import com.example.myapplication.R
-import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.login_fragment.*
 
 
@@ -31,7 +28,6 @@ class LoginFragment : Fragment(), LoginInterface {
     private lateinit var passwordEt: EditText
     private lateinit var loginPreferences: SharedPreferences
     private lateinit var loginPrefsEditor: SharedPreferences.Editor
-    private var type: Int = 0
 
 
     override fun onCreateView(
@@ -89,7 +85,7 @@ class LoginFragment : Fragment(), LoginInterface {
         progressBar.visibility = View.VISIBLE
         loginViewModel.login(
             email.text.toString(),
-            passwordEt.text.toString(), type
+            passwordEt.text.toString()
         )
         loginViewModel.getData().observe(this, Observer {
             progressBar.visibility = View.GONE
@@ -98,7 +94,7 @@ class LoginFragment : Fragment(), LoginInterface {
                     saveData(it)
                     findNavController().navigate(R.id.action_LoginFragment_to_Home)
                 } else {
-                    var error = it.error.replace("[", "")
+                    var error = it.token_type.replace("[", "")
                     error = error.replace("]", "")
                     Toast.makeText(activity, error, Toast.LENGTH_SHORT).show()
                 }
@@ -114,19 +110,21 @@ class LoginFragment : Fragment(), LoginInterface {
     private fun checkErrorEnabled() {
         if (!Validation.validate(email.text.toString())) {
             Toast.makeText(activity, "empty Email please fill it", Toast.LENGTH_SHORT).show()
-        } else {
-            if (!Validation.validateEmail(email.text.toString())) {
-                Toast.makeText(
-                    activity,
-                    "Invalid Email Format Please enter valid mail",
-                    Toast.LENGTH_SHORT
-                ).show()
+        } else if (!Validation.validateEmail(email.text.toString())) {
+            Toast.makeText(
+                activity,
+                "Invalid Email Format Please enter valid mail",
+                Toast.LENGTH_SHORT
+            ).show()
 
+        } else {
+            if (!Validation.validate(passwordEt.text.toString())) {
+                Toast.makeText(activity, "empty password please fill it", Toast.LENGTH_SHORT).show()
             }
+            
         }
-        if (!Validation.validate(passwordEt.text.toString())) {
-            Toast.makeText(activity, "empty password please fill it", Toast.LENGTH_SHORT).show()
-        }
+
+
     }
 
 
@@ -154,7 +152,6 @@ class LoginFragment : Fragment(), LoginInterface {
     private fun saveData(responseModelData: ResponseModelData) {
         val token = "Bearer " + responseModelData.access_token
         loginPrefsEditor.putString("accessToken", token)
-        loginPrefsEditor.putInt("type", type)
         loginPrefsEditor.commit()
     }
 }

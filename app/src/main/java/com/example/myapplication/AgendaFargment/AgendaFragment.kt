@@ -43,11 +43,11 @@ class AgendaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         list = arguments?.getParcelableArrayList<Speakers>("Speakers")!!
         setClickListeners()
-        initRecyclerView()
+      //  initRecyclerView()
 
     }
 
-    private fun initRecyclerView() {
+   /* private fun initRecyclerView() {
         val agendaList = ArrayList<AdendaModel>()
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         for (speaker in list) {
@@ -66,7 +66,7 @@ class AgendaFragment : Fragment() {
             }
 
         })
-    }
+    }*/
 
 
     private fun setClickListeners() {

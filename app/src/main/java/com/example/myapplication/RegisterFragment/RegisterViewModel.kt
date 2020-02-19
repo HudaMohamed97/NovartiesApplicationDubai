@@ -12,7 +12,6 @@ class RegisterViewModel : ViewModel() {
     private var repositoryHelper: RegisterRepository = RegisterRepository()
     private lateinit var mutableLiveData: MutableLiveData<ResponseModelData>
     private lateinit var shared: SharedPreferences
-    val isLoading = MutableLiveData<Boolean>()
 
 
     fun validateDataInfo(

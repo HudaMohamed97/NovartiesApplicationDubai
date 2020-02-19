@@ -4,7 +4,7 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/semi_black"
+    android:background="@drawable/logo"
     android:clickable="true"
     android:focusable="true">
 
@@ -42,7 +42,7 @@
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@drawable/username"
+            android:background="@drawable/login2"
             android:gravity="center_vertical"
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent">
@@ -55,10 +55,9 @@
                 android:layout_marginStart="55dp"
                 android:layout_marginEnd="45dp"
                 android:layout_marginBottom="5dp"
-                android:backgroundTint="@color/black"
                 android:gravity="center_vertical"
                 android:hint="Name"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textColorHint="@color/not_black"
                 android:textCursorDrawable="@color/black" />
 
@@ -68,8 +67,8 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/password"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/password2"
             app:layout_constraintTop_toTopOf="@id/email">
 
             <EditText
@@ -79,15 +78,14 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="50dp"
                 android:layout_marginLeft="50dp"
-                android:layout_marginEnd="55dp"
+                android:layout_marginEnd="45dp"
                 android:layout_marginRight="20dp"
-                android:backgroundTint="@color/black"
                 android:gravity="center_vertical"
                 android:hint="Psssword"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textColorHint="@color/not_black" />
 
         </LinearLayout>
