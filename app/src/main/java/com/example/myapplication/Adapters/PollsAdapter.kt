@@ -5,39 +5,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Models.AgendaData
-import com.example.myapplication.Models.Sessions
+import com.example.myapplication.Models.PollData
 import com.example.myapplication.R
 
-
-class AgendaAdapter(modelFeedArrayList: List<Sessions>) :
-
-    RecyclerView.Adapter<AgendaAdapter.MyViewHolder>() {
+class PollsAdapter(modelFeedArrayList: List<PollData>) :
+    RecyclerView.Adapter<PollsAdapter.MyViewHolder>() {
 
     lateinit var onItemClickListener: OnItemClickListener
 
     override fun getItemCount(): Int {
-        return agendaArrayList.size
+        return pollArrayList.size
     }
 
-    var agendaArrayList = modelFeedArrayList
+    var pollArrayList = modelFeedArrayList
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.agenda_row, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.poll_row, parent, false)
         return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val agendaModel = agendaArrayList[position]
-        holder.agendaTitle.text = agendaModel.title
-        holder.agendaDescription.text = agendaModel.title
-        if (agendaModel.speakers.isNotEmpty()) {
-            holder.speakersPerSession.visibility = View.VISIBLE
-        } else {
-            holder.speakersPerSession.visibility = View.GONE
-        }
+        val pollModel = pollArrayList[position]
+
+        holder.pollTitle.text = pollModel.title
+        holder.pollTime.text = pollModel.created_at
 
         holder.itemView.setOnClickListener {
             if (onItemClickListener != null && position != RecyclerView.NO_POSITION) {
@@ -49,10 +42,8 @@ class AgendaAdapter(modelFeedArrayList: List<Sessions>) :
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var agendaTitle: TextView = itemView.findViewById<View>(R.id.agendaTitle) as TextView
-        var agendaDescription: TextView =
-            itemView.findViewById<View>(R.id.agendaDescription) as TextView
-        var speakersPerSession = itemView.findViewById<View>(R.id.speakersPerSession)
+        var pollTitle: TextView = itemView.findViewById<View>(R.id.poll_title) as TextView
+        var pollTime: TextView = itemView.findViewById<View>(R.id.poll_date) as TextView
 
 
     }
@@ -67,3 +58,4 @@ class AgendaAdapter(modelFeedArrayList: List<Sessions>) :
     }
 
 }
+

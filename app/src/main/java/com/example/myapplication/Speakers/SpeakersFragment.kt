@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Adapters.AgendaAdapter
 import com.example.myapplication.Adapters.SpeakerAdapter
 import com.example.myapplication.Models.EventModels.Speakers
 import com.example.myapplication.R
@@ -55,7 +54,6 @@ class SpeakersFragment : Fragment() {
 
     private fun callSpeakersRequest() {
         speakerProgressBar.visibility = View.VISIBLE
-
         val accessToken = loginPreferences.getString("accessToken", "")
         if (accessToken != null) {
             speakersViewModel.getSpeakers(accessToken)
@@ -72,8 +70,6 @@ class SpeakersFragment : Fragment() {
             } else {
                 Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
             }
-
-
         })
 
 
@@ -96,7 +92,7 @@ class SpeakersFragment : Fragment() {
 
 
     private fun setClickListeners() {
-        recyclerView = root?.findViewById(R.id.agendaRecycler)!!
+        recyclerView = root?.findViewById(R.id.speakerRecycler)!!
     }
 
 

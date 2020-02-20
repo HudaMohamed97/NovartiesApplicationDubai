@@ -3,41 +3,48 @@ package com.example.myapplication.Adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Models.AgendaData
-import com.example.myapplication.Models.Sessions
 import com.example.myapplication.R
 
+class VotingOptionsAdapter(modelFeedArrayList: List<String>) :
+    RecyclerView.Adapter<VotingOptionsAdapter.MyViewHolder>() {
 
-class AgendaAdapter(modelFeedArrayList: List<Sessions>) :
-
-    RecyclerView.Adapter<AgendaAdapter.MyViewHolder>() {
+    private var selectedPosition = -1
 
     lateinit var onItemClickListener: OnItemClickListener
 
     override fun getItemCount(): Int {
-        return agendaArrayList.size
+        return pollArrayList.size
     }
 
-    var agendaArrayList = modelFeedArrayList
+    var pollArrayList = modelFeedArrayList
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.agenda_row, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.vote_row, parent, false)
         return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val agendaModel = agendaArrayList[position]
-        holder.agendaTitle.text = agendaModel.title
-        holder.agendaDescription.text = agendaModel.title
-        if (agendaModel.speakers.isNotEmpty()) {
-            holder.speakersPerSession.visibility = View.VISIBLE
+        val pollModel = pollArrayList[position]
+
+        holder.pollRadioButton.text = pollModel
+        if (selectedPosition == position) {
+            holder.pollRadioButton.isChecked = true
         } else {
-            holder.speakersPerSession.visibility = View.GONE
+            holder.pollRadioButton.isChecked = false
+
         }
+
+        holder.pollRadioButton.setOnClickListener { v ->
+            if (selectedPosition >= 0)
+                notifyItemChanged(selectedPosition)
+            selectedPosition = holder.adapterPosition
+            notifyItemChanged(selectedPosition)
+        }
+
 
         holder.itemView.setOnClickListener {
             if (onItemClickListener != null && position != RecyclerView.NO_POSITION) {
@@ -49,10 +56,7 @@ class AgendaAdapter(modelFeedArrayList: List<Sessions>) :
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var agendaTitle: TextView = itemView.findViewById<View>(R.id.agendaTitle) as TextView
-        var agendaDescription: TextView =
-            itemView.findViewById<View>(R.id.agendaDescription) as TextView
-        var speakersPerSession = itemView.findViewById<View>(R.id.speakersPerSession)
+        var pollRadioButton = itemView.findViewById<View>(R.id.radioButton) as RadioButton
 
 
     }

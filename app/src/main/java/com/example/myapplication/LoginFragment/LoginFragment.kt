@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +30,7 @@ class LoginFragment : Fragment(), LoginInterface {
     private lateinit var passwordEt: EditText
     private lateinit var loginPreferences: SharedPreferences
     private lateinit var loginPrefsEditor: SharedPreferences.Editor
+    private var clicked = true
 
 
     override fun onCreateView(
@@ -46,6 +49,20 @@ class LoginFragment : Fragment(), LoginInterface {
     }
 
     override fun setClickListeners() {
+        showPassword.setOnClickListener {
+            var cursor = passwordEt.selectionStart
+            if (clicked) {
+                clicked = false
+                passwordEt.transformationMethod = PasswordTransformationMethod.getInstance()
+                passwordEt.setSelection(cursor)
+            } else {
+                clicked = true
+                passwordEt.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                passwordEt.setSelection(cursor)
+
+            }
+
+        }
         val mainLayout = root.findViewById(R.id.mainLayout) as View
         val button = root.findViewById(R.id.btn_login) as Button
         email = root.findViewById(R.id.input_email)
@@ -55,7 +72,7 @@ class LoginFragment : Fragment(), LoginInterface {
         }
         loginPreferences = activity!!.getSharedPreferences("loginPrefs", MODE_PRIVATE)
         loginPrefsEditor = loginPreferences.edit()
-        val saveLogin = loginPreferences.getBoolean("saveLogin", false)
+        val saveLogin = loginPreferences.getBoolean("saveUserData", false)
 
         if (saveLogin) {
             email.setText(loginPreferences.getString("username", ""))
@@ -92,6 +109,7 @@ class LoginFragment : Fragment(), LoginInterface {
             if (it != null) {
                 if (it.access_token != "") {
                     saveData(it)
+                    saveUserData()
                     findNavController().navigate(R.id.action_LoginFragment_to_Home)
                 } else {
                     var error = it.token_type.replace("[", "")
@@ -121,10 +139,7 @@ class LoginFragment : Fragment(), LoginInterface {
             if (!Validation.validate(passwordEt.text.toString())) {
                 Toast.makeText(activity, "empty password please fill it", Toast.LENGTH_SHORT).show()
             }
-            
         }
-
-
     }
 
 
@@ -140,11 +155,11 @@ class LoginFragment : Fragment(), LoginInterface {
     private fun saveUserData() {
         if (chckRemember.isChecked) {
             loginPrefsEditor.putBoolean("saveUserData", true)
-            loginPrefsEditor.putString("username", "test")
-            loginPrefsEditor.putString("password", "12345")
+            loginPrefsEditor.putString("username", email.text.toString())
+            loginPrefsEditor.putString("password", passwordEt.text.toString())
             loginPrefsEditor.commit()
         } else {
-            loginPrefsEditor.clear()
+            loginPrefsEditor.putBoolean("saveUserData", false)
             loginPrefsEditor.commit()
         }
     }

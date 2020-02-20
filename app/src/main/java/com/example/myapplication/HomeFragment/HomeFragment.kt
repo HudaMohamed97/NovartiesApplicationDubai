@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_HomeFragment_to_PostsFragment)
         }
         votingCard.setOnClickListener {
-            findNavController().navigate(R.id.action_HomeFragment_to_VotingFragment)
+            findNavController().navigate(R.id.action_HomeFragment_to_PollFragment)
         }
         speakers_card.setOnClickListener {
 

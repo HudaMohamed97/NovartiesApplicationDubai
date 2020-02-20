@@ -10,12 +10,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Adapters.SessionAdapter
 import com.example.myapplication.Models.SessionsData
 import com.example.myapplication.R
+import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.sessions_list.*
+import kotlinx.android.synthetic.main.sessions_list.backButton
 
 
 class SessionFragment : Fragment() {
@@ -103,6 +106,9 @@ class SessionFragment : Fragment() {
             } else {
                 callSubmitAttendance()
             }
+        }
+        backButton.setOnClickListener {
+            findNavController().navigateUp()
         }
 
     }

@@ -29,8 +29,20 @@ interface ApiServices {
     @GET("articles")
     fun getArticles(): Call<ResponseBody>
 
+    @GET("polls")
+    fun getPolls(@Header("Authorization") authHeader: String): Call<PollModel>
+
+    @GET("polls/{poll}")
+    fun getSingelPolls(@Path("poll") pollId: Int, @Header("Authorization") authHeader: String): Call<PollModel>
+
+    @POST("polls")
+    fun submitPolls(@Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<PollModel>
+
     @GET("speakers")
     fun getSpeakers(@Header("Authorization") authHeader: String): Call<SpeakersResponseModel>
+
+    @GET("agenda")
+    fun getAgenda(@Header("Authorization") authHeader: String): Call<AgendaModelResponse>
 
     @GET("articles/{article}")
     fun getSingleArticle(@Path("article") eventId: Int): Call<ResponseBody>

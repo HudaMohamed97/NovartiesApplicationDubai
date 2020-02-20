@@ -30,4 +30,13 @@
     <color name="drug_background">#d063ff</color>
     <color name="pull_background">#61daff</color>
     <color name="subMenu_background">#c0cf6666</color>
+
+
+    <color name="background_color">#2A2A2A</color>
+    <color name="header_color">#242424</color>
+    <color name="base_color">#313131</color>
+    <color name="dark_color1">#313131</color>
+    <color name="dark_color2">#242424</color>
+
+
 </resources>

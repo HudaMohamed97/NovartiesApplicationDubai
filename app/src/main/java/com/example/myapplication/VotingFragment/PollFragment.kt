@@ -1,4 +1,4 @@
-package com.example.myapplication.AgendaFargment
+package com.example.myapplication.VotingFragment
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -13,23 +13,18 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Adapters.AgendaAdapter
-import com.example.myapplication.LoginFragment.AgendaViewModel
-import com.example.myapplication.Models.AdendaModel
-import com.example.myapplication.Models.AgendaData
-import com.example.myapplication.Models.EventModels.Speakers
-import com.example.myapplication.Models.Sessions
+import com.example.myapplication.Adapters.PollsAdapter
+import com.example.myapplication.Models.PollData
 import com.example.myapplication.R
-import kotlinx.android.synthetic.main.agenda_fragment.*
-import kotlinx.android.synthetic.main.speakers_fragment.*
+import kotlinx.android.synthetic.main.polls_fragment.*
 
 
-class AgendaFragment : Fragment() {
+class PollFragment : Fragment() {
     private var root: View? = null
-    private lateinit var agendaViewModel: AgendaViewModel
-    private val list = arrayListOf<Sessions>()
+    private lateinit var pollViewModel: PollViewModel
+    private val list = arrayListOf<PollData>()
     private lateinit var recyclerView: RecyclerView
-    private lateinit var agendaAdapter: AgendaAdapter
+    private lateinit var pollAdapter: PollsAdapter
     private lateinit var loginPreferences: SharedPreferences
 
 
@@ -38,11 +33,11 @@ class AgendaFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        agendaViewModel = ViewModelProviders.of(this).get(AgendaViewModel::class.java)
+        pollViewModel = ViewModelProviders.of(this).get(PollViewModel::class.java)
         return if (root != null) {
             root
         } else {
-            root = inflater.inflate(R.layout.agenda_fragment, container, false)
+            root = inflater.inflate(R.layout.polls_fragment, container, false)
             root
         }
 
@@ -51,44 +46,54 @@ class AgendaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loginPreferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+        setClickListeners()
         initRecyclerView()
-        callGetAgendaData()
+        callSpeakersRequest()
 
     }
 
-    private fun callGetAgendaData() {
-        agendaProgressBar.visibility = View.VISIBLE
+    private fun callSpeakersRequest() {
+        pollsProgressBar.visibility = View.VISIBLE
         val accessToken = loginPreferences.getString("accessToken", "")
         if (accessToken != null) {
-            agendaViewModel.getAgendaData(accessToken)
+            pollViewModel.getPolls(accessToken)
         }
-        agendaViewModel.getData().observe(this, Observer {
-            agendaProgressBar.visibility = View.GONE
+        pollViewModel.getData().observe(this, Observer {
+            pollsProgressBar.visibility = View.GONE
             if (it != null) {
                 list.clear()
                 for (data in it.data) {
-                    for (session in data.sessions) {
-                        list.add(session)
-                    }
+                    list.add(data)
                 }
-                agendaAdapter.notifyDataSetChanged()
+                pollAdapter.notifyDataSetChanged()
+
             } else {
                 Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
             }
         })
+
+
     }
 
     private fun initRecyclerView() {
-        recyclerView = root?.findViewById(R.id.agendaRecycler)!!
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        agendaAdapter = AgendaAdapter(list)
+        pollAdapter = PollsAdapter(list)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = agendaAdapter
-        agendaAdapter.setOnItemListener(object : AgendaAdapter.OnItemClickListener {
+        recyclerView.adapter = pollAdapter
+        pollAdapter.setOnItemListener(object : PollsAdapter.OnItemClickListener {
             override fun onItemClicked(position: Int) {
-
+                val bundle = Bundle()
+                bundle.putInt("POLL_ID", list[position].id)
+                findNavController().navigate(R.id.action_clickPoll_toPollDetails, bundle)
             }
 
         })
     }
+
+
+    private fun setClickListeners() {
+        recyclerView = root?.findViewById(R.id.pollsRescycler)!!
+    }
+
+
 }

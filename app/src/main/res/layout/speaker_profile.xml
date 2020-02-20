@@ -3,83 +3,128 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/semi_black">
+    android:background="@color/dark_color2">
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/credentials_card"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_margin="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_20"
+        android:gravity="center"
+        android:text="HOME"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logOutButton"
+        android:layout_width="@dimen/space_28"
+        android:layout_height="@dimen/space_28"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="LogOut"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/logout_icon" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/backButton"
+        android:layout_width="@dimen/space_28"
+        android:layout_height="@dimen/space_28"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="LogOut"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.281">
+        app:srcCompat="@mipmap/back_icon" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        android:background="@color/background_color">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/credentials_card"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="400dp"
+            android:layout_margin="30dp"
+            android:background="@color/dark_color1"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.281">
 
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgProfile"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/space_20"
-                android:clickable="true"
-                android:focusable="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/profile"
-                android:visibility="visible"
-                app:civ_border_color="@color/black"
-                app:civ_border_width="1dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/speaker_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/space_10"
-                android:layout_marginTop="@dimen/space_10"
-                android:text="DR: Huda Mohaemd"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toRightOf="@+id/imgProfile"
-                app:layout_constraintTop_toTopOf="@+id/imgProfile" />
-
-            <View
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginLeft="70dp"
-                android:layout_marginTop="@dimen/space_10"
-                android:background="@color/browser_actions_bg_grey"
-                app:layout_constraintLeft_toRightOf="@+id/imgProfile"
-                app:layout_constraintTop_toBottomOf="@+id/speaker_name" />
+                android:layout_height="match_parent">
 
 
-            <TextView
-                android:id="@+id/speaker_Bio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/space_20"
-                android:text="Huda Mohaemd fjsfmdnfjdmfmnfmdsnfmsndfsdfbsdfbsdfb
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgProfile"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/space_20"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile"
+                    android:visibility="visible"
+                    app:civ_border_color="@color/black"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/speaker_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space_10"
+                    android:layout_marginTop="@dimen/space_10"
+                    android:text="DR: Huda Mohaemd"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@+id/imgProfile"
+                    app:layout_constraintTop_toTopOf="@+id/imgProfile" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginTop="@dimen/space_10"
+                    android:background="@color/browser_actions_bg_grey"
+                    app:layout_constraintLeft_toRightOf="@+id/imgProfile"
+                    app:layout_constraintTop_toBottomOf="@+id/speaker_name" />
+
+
+                <TextView
+                    android:id="@+id/speaker_Bio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_20"
+                    android:text="Huda Mohaemd fjsfmdnfjdmfmnfmdsnfmsndfsdfbsdfbsdfb
                  jfjhfjhdsfhdsjfhsjdhfjsjsfhsdjhhjdshjdsfhdhfjfhsdfjhsjfhjffjdsfdbfbdfjbds
                  jfjhfjdshfjhsfjsd
                  nfkdshfkshfksdhfkshdfkhsdfkmnmcvnmdjm xmsdvsvs sjdv "
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.cardview.widget.CardView>
-
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -2,33 +2,22 @@ package com.example.myapplication.LoginFragment
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myapplication.Models.EventModels.EventsResponse
-import com.example.myapplication.Models.EventModels.SingleEventResponse
+import com.example.myapplication.AgendaFargment.AgendaRepository
+import com.example.myapplication.Models.AgendaModelResponse
 
 
 class AgendaViewModel : ViewModel() {
-    private var repositoryHelper: HomeRepository = HomeRepository()
-    private lateinit var mutableLiveData: MutableLiveData<EventsResponse>
-    private lateinit var SingleEventLiveData: MutableLiveData<SingleEventResponse>
+    private var agendaRepository: AgendaRepository =
+        AgendaRepository()
+    private lateinit var mutableLiveData: MutableLiveData<AgendaModelResponse>
 
 
-    fun getEvents(type: Int, accessToken: String) {
-       // mutableLiveData = repositoryHelper.getEvents(1, accessToken)
-
-    }
-
-    fun getSingleEvent(eventId: Int, type: Int, accessToken: String) {
-        SingleEventLiveData = repositoryHelper.getSingleEvent(eventId, 1, accessToken)
-
-    }
-
-
-    fun getData(): MutableLiveData<EventsResponse> {
+    fun getData(): MutableLiveData<AgendaModelResponse> {
         return mutableLiveData
     }
 
-    fun getSingleEventData(): MutableLiveData<SingleEventResponse> {
-        return SingleEventLiveData
+    fun getAgendaData(accessToken: String) {
+        mutableLiveData = agendaRepository.getAgenda(accessToken)
     }
 
 

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_20"
         android:gravity="center"
-        android:text="HOME"
+        android:text="VOTING Question"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -49,11 +49,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
-        android:background="@color/background_color"
+        android:background="@color/dark_color1"
         android:orientation="vertical">
 
         <ProgressBar
-            android:id="@+id/speakerProgressBar"
+            android:id="@+id/pollsProgressBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -64,11 +64,11 @@
             android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/speakerRecycler"
+            android:id="@+id/pollsRescycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/space_20"
-            tools:listitem="@layout/speaker_row" />
+            tools:listitem="@layout/poll_row" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

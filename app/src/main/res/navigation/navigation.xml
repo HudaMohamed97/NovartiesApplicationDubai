@@ -65,8 +65,8 @@
                 android:id="@+id/action_HomeFragment_to_EventFragment"
                 app:destination="@id/EventFragment" />
             <action
-                android:id="@+id/action_HomeFragment_to_VotingFragment"
-                app:destination="@id/VotingFragment" />
+                android:id="@+id/action_HomeFragment_to_PollFragment"
+                app:destination="@id/PollFragment" />
             <action
                 android:id="@+id/action_HomeFragment_to_AgendaFragment"
                 app:destination="@id/AgendaFragment" />
@@ -110,6 +110,16 @@
             android:id="@+id/VotingFragment"
             android:name="com.example.myapplication.VotingFragment.VotingFragment"
             tools:layout="@layout/voting_fragment">
+
+        </fragment>
+        <fragment
+            android:id="@+id/PollFragment"
+            android:name="com.example.myapplication.VotingFragment.PollFragment"
+            tools:layout="@layout/polls_fragment">
+
+            <action
+                android:id="@+id/action_clickPoll_toPollDetails"
+                app:destination="@id/VotingFragment" />
 
         </fragment>
         <fragment

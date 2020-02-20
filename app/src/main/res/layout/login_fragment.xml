@@ -69,6 +69,8 @@
             android:layout_height="60dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/password2"
+            android:orientation="horizontal"
+            android:weightSum="5"
             app:layout_constraintTop_toTopOf="@id/email">
 
             <EditText
@@ -77,16 +79,28 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="50dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginEnd="45dp"
-                android:layout_marginRight="20dp"
+                android:layout_weight="4"
                 android:gravity="center_vertical"
                 android:hint="Psssword"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/white"
-                android:textColorHint="@color/not_black" />
+                android:textColorHint="@color/not_black"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/showPassword"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="@dimen/space_10"
+                android:layout_marginRight="@dimen/space_10"
+                android:layout_marginBottom="@dimen/space_10"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:singleLine="true"
+                android:src="@mipmap/showpassword" />
 
         </LinearLayout>
     </LinearLayout>
@@ -95,7 +109,7 @@
     <LinearLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -110,19 +124,20 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:buttonTint="@color/white"
+            android:gravity="center"
             android:text="remember me"
-            android:textSize="16dp"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/forgetPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
-            android:textSize="16dp"
             android:clickable="true"
             android:text="Forget Password ?"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="16dp" />
 
 
     </LinearLayout>
@@ -150,8 +165,10 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_margin="30dp"
-        android:layout_marginTop="552dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/black"
         android:text="Register"
         android:textColor="@color/white"
