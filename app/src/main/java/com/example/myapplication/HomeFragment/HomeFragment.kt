@@ -10,11 +10,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
+import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.home_fragment.*
+import kotlinx.android.synthetic.main.home_fragment.backButton
+import kotlinx.android.synthetic.main.home_fragment.logOutButton
+import kotlinx.android.synthetic.main.login_fragment.*
 import java.util.*
 
 
@@ -48,14 +53,7 @@ class HomeFragment : Fragment() {
 
         val gridLayout = root.findViewById(R.id.mainGrid) as View
         locationCard.setOnClickListener {
-            val uri = String.format(
-                Locale.ENGLISH,
-                "http://maps.google.com/maps?q=loc:%f,%f",
-                28.43242324,
-                77.8977673
-            )
-            val intent = Intent(ACTION_VIEW, Uri.parse(uri))
-            startActivity(intent)
+            callLocationData()
         }
         agendaCard.setOnClickListener {
             findNavController().navigate(R.id.action_HomeFragment_to_AgendaFragment)
@@ -89,6 +87,32 @@ class HomeFragment : Fragment() {
         mainLayout.setOnClickListener {
             hideKeyboard()
         }
+    }
+
+    private fun callLocationData() {
+        val accessToken = loginPreferences.getString("accessToken", "")
+        if (accessToken != null) {
+            homeViewModel.getLocation(accessToken)
+        }
+        homeViewModel.getData().observe(this, Observer {
+            if (it != null) {
+                var lat = it.data.lat
+                var long = it.data.lng
+                val uri = String.format(
+                    Locale.ENGLISH,
+                    "http://maps.google.com/maps?q=loc:%f,%f",
+                    lat,
+                    long
+                )
+                val intent = Intent(ACTION_VIEW, Uri.parse(uri))
+                startActivity(intent)
+            } else {
+                Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
+
     }
 
     private fun hideKeyboard() {

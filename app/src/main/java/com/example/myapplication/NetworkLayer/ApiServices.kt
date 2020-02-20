@@ -26,6 +26,9 @@ interface ApiServices {
     @GET("events")
     fun getSessions(@Header("Authorization") authHeader: String): Call<SessionsResponse>
 
+    @GET("setting")
+    fun getLocation(@Header("Authorization") authHeader: String): Call<LocationResponse>
+
     @GET("articles")
     fun getArticles(): Call<ResponseBody>
 
@@ -33,10 +36,10 @@ interface ApiServices {
     fun getPolls(@Header("Authorization") authHeader: String): Call<PollModel>
 
     @GET("polls/{poll}")
-    fun getSingelPolls(@Path("poll") pollId: Int, @Header("Authorization") authHeader: String): Call<PollModel>
+    fun getSingePolls(@Path("poll") pollId: Int, @Header("Authorization") authHeader: String): Call<SingelPollModel>
 
     @POST("polls")
-    fun submitPolls(@Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<PollModel>
+    fun submitPolls(@Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<submitModel>
 
     @GET("speakers")
     fun getSpeakers(@Header("Authorization") authHeader: String): Call<SpeakersResponseModel>

@@ -3,6 +3,8 @@ package com.example.myapplication.VotingFragment
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.Models.PollModel
+import com.example.myapplication.Models.SingelPollModel
+import com.example.myapplication.Models.submitModel
 import com.example.myapplication.NetworkLayer.Webservice
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,48 +22,34 @@ class PollRepository {
                         response.raw()
                         userData.value = response.body()
                     } else {
-                        Log.i(
-                            "hhhhhh",
-                            "on failuer from sucess" + response.message() + response.body()
-                        )
                         userData.value = response.body()
                     }
                 }
 
                 override fun onFailure(call: Call<PollModel>, t: Throwable) {
                     userData.value = null
-                    Log.i("hhhhhh", "on fail to get events")
-                    Log.i("hhhhhh", "on fail" + t.message)
-
                 }
             })
         return userData
     }
 
-    fun getSingelPoll(pollId: Int, accessToken: String): MutableLiveData<PollModel> {
-        val pollData = MutableLiveData<PollModel>()
-        Webservice.getInstance().api.getSingelPolls(pollId, accessToken)
-            .enqueue(object : Callback<PollModel> {
+    fun getSingePoll(pollId: Int, accessToken: String): MutableLiveData<SingelPollModel> {
+        val pollData = MutableLiveData<SingelPollModel>()
+        Webservice.getInstance().api.getSingePolls(pollId, accessToken)
+            .enqueue(object : Callback<SingelPollModel> {
                 override fun onResponse(
-                    call: Call<PollModel>, response: Response<PollModel>
+                    call: Call<SingelPollModel>, response: Response<SingelPollModel>
                 ) {
                     if (response.isSuccessful) {
                         response.raw()
                         pollData.value = response.body()
                     } else {
-                        Log.i(
-                            "hhhhhh",
-                            "on failuer from sucess" + response.message() + response.body()
-                        )
                         pollData.value = response.body()
                     }
                 }
 
-                override fun onFailure(call: Call<PollModel>, t: Throwable) {
+                override fun onFailure(call: Call<SingelPollModel>, t: Throwable) {
                     pollData.value = null
-                    Log.i("hhhhhh", "on fail to get events")
-                    Log.i("hhhhhh", "on fail" + t.message)
-
                 }
             })
         return pollData
@@ -71,33 +59,31 @@ class PollRepository {
         pollId: Int,
         pollOptionId: Int,
         accessToken: String
-    ): MutableLiveData<PollModel> {
+    ): MutableLiveData<submitModel> {
         val body = mapOf(
             "poll_id" to pollId.toString(),
             "poll_options_id" to pollOptionId.toString()
         )
-        val pollData = MutableLiveData<PollModel>()
+        val pollData = MutableLiveData<submitModel>()
         Webservice.getInstance().api.submitPolls(body, accessToken)
-            .enqueue(object : Callback<PollModel> {
+            .enqueue(object : Callback<submitModel> {
                 override fun onResponse(
-                    call: Call<PollModel>, response: Response<PollModel>
+                    call: Call<submitModel>, response: Response<submitModel>
                 ) {
                     if (response.isSuccessful) {
                         response.raw()
                         pollData.value = response.body()
                     } else {
-                        Log.i(
-                            "hhhhhh",
-                            "on failuer from sucess" + response.message() + response.body()
-                        )
-                        pollData.value = response.body()
+                        if (response.code() == 400) {
+                            pollData.value = submitModel("error", "error")
+                        } else {
+                            pollData.value = response.body()
+                        }
                     }
                 }
 
-                override fun onFailure(call: Call<PollModel>, t: Throwable) {
+                override fun onFailure(call: Call<submitModel>, t: Throwable) {
                     pollData.value = null
-                    Log.i("hhhhhh", "on fail to get events")
-                    Log.i("hhhhhh", "on fail" + t.message)
                 }
             })
         return pollData

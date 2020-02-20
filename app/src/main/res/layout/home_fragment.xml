@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_20"
         android:gravity="center"
-        android:textStyle="bold"
         android:text="HOME"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -36,8 +36,8 @@
         android:id="@+id/backButton"
         android:layout_width="@dimen/space_28"
         android:layout_height="@dimen/space_28"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="LogOut"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,19 +72,18 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_margin="25sp"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:layout_margin="25sp"
                     android:src="@mipmap/newsfeed_icon"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
 
                     />
@@ -107,19 +106,18 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_margin="25sp"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:layout_margin="25sp"
                     android:src="@mipmap/agenda_icon"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
 
                     />
@@ -144,19 +142,18 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_margin="25sp"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:layout_margin="25sp"
                     android:src="@mipmap/voting_icon"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
 
                     />
@@ -179,19 +176,18 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_margin="25sp"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:layout_margin="25sp"
                     android:src="@mipmap/rating_icon"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
 
                     />
@@ -216,19 +212,18 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_margin="25sp"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:layout_margin="25sp"
                     android:src="@mipmap/eventlocation_icon"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
 
                     />
@@ -250,19 +245,18 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_margin="25sp"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:layout_margin="25sp"
                     android:src="@mipmap/speakersbio_icon"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
 
                     />
@@ -283,19 +277,18 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_margin="25sp"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:layout_margin="25sp"
                     android:src="@mipmap/sessions_icon"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
 
                     />

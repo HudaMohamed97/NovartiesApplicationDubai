@@ -5,9 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Models.OptionModel
 import com.example.myapplication.R
 
-class VotingOptionsAdapter(modelFeedArrayList: List<String>) :
+class VotingOptionsAdapter(modelFeedArrayList: List<OptionModel>) :
     RecyclerView.Adapter<VotingOptionsAdapter.MyViewHolder>() {
 
     private var selectedPosition = -1
@@ -30,7 +31,7 @@ class VotingOptionsAdapter(modelFeedArrayList: List<String>) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val pollModel = pollArrayList[position]
 
-        holder.pollRadioButton.text = pollModel
+        holder.pollRadioButton.text = pollModel.option
         if (selectedPosition == position) {
             holder.pollRadioButton.isChecked = true
         } else {
@@ -43,15 +44,10 @@ class VotingOptionsAdapter(modelFeedArrayList: List<String>) :
                 notifyItemChanged(selectedPosition)
             selectedPosition = holder.adapterPosition
             notifyItemChanged(selectedPosition)
-        }
-
-
-        holder.itemView.setOnClickListener {
             if (onItemClickListener != null && position != RecyclerView.NO_POSITION) {
                 onItemClickListener.onItemClicked(position)
             }
         }
-
 
     }
 

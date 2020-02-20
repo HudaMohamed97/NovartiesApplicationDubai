@@ -6,6 +6,8 @@
     android:background="@color/semi_black">
 
 
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/credentials_card"
         android:layout_width="match_parent"
