@@ -15,6 +15,13 @@ data class Account(
     @SerializedName("bio") val bio: String = "bio",
     @SerializedName("photo") val photo: String = ""
 ) : Parcelable {
+    override fun writeToParcel(p0: Parcel?, p1: Int) {
+    }
+
+    override fun describeContents(): Int {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString().toString(),
@@ -24,14 +31,6 @@ data class Account(
         parcel.readString().toString(),
         parcel.readString().toString()
     )
-
-    override fun writeToParcel(p0: Parcel?, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun describeContents(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     companion object CREATOR : Parcelable.Creator<Account> {
         override fun createFromParcel(parcel: Parcel): Account {

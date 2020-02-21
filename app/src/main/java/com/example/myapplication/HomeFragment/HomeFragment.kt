@@ -71,7 +71,6 @@ class HomeFragment : Fragment() {
         }
 
         myPostsCard.setOnClickListener {
-            findNavController().navigate(R.id.action_HomeFragment_to_PostsFragment)
         }
         votingCard.setOnClickListener {
             findNavController().navigate(R.id.action_HomeFragment_to_PollFragment)

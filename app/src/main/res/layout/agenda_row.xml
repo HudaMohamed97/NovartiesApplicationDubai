@@ -1,68 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="15dp"
-    android:background="@drawable/rounded_card_dark">
+    android:background="@drawable/rounded_card_dark"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/rounded_card_dark2"
-        android:maxWidth="150dp"
-        android:minHeight="100dp"
         android:orientation="vertical"
         android:visibility="visible">
 
         <TextView
-            android:id="@+id/agendaTitle"
-            android:layout_width="wrap_content"
+            android:id="@+id/agendatimefrom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_20"
+            android:layout_marginTop="@dimen/space_20"
+            android:layout_marginEnd="@dimen/space_20"
+            android:gravity="center"
+            android:text="DR: SpakerName"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/agendatimeto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_20"
+            android:layout_marginEnd="@dimen/space_20"
+            android:gravity="center"
+            android:text="DR: SpakerName"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/agendalocation"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/space_20"
-            android:layout_marginTop="@dimen/space_20"
-            android:layout_marginRight="@dimen/space_20"
-            android:layout_marginBottom="@dimen/space_10"
-            android:gravity="center"
+            android:layout_marginStart="@dimen/space_20"
+            android:layout_marginTop="@dimen/space_10"
+            android:layout_marginEnd="@dimen/space_20"
+            android:layout_marginBottom="@dimen/space_20"
             android:text="DR: SpakerName"
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="from 9 to 9.30"
-            android:textColor="@color/not_black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/descriptoion"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/header"
-        android:minHeight="100dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:visibility="visible">
 
         <TextView
-            android:id="@+id/agendaDescription"
+            android:id="@+id/agendaName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/space_20"
+            android:layout_marginStart="@dimen/space_20"
+            android:layout_marginTop="@dimen/space_20"
+            android:layout_marginEnd="@dimen/space_20"
             android:text="DR: SpakerName"
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/agendaSpeakers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/space_10"
+            android:text="DR: SpakerName"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,7 +92,7 @@
         android:layout_below="@+id/header"
         android:background="@drawable/rounded_card_dark"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_sub_item"
@@ -84,4 +104,4 @@
             tools:listitem="@layout/speaker_sub_row" />
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

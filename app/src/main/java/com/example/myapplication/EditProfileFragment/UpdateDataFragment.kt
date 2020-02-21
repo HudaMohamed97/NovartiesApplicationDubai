@@ -1,21 +1,30 @@
 package com.example.myapplication.EditProfileFragment
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.Intent.ACTION_PICK
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.catapplication.utilies.Validation
 import com.example.myapplication.Models.Account
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.edit_profile.*
+import java.io.FileNotFoundException
+
 
 class UpdateDataFragment : Fragment() {
     private lateinit var root: View
@@ -54,7 +63,38 @@ class UpdateDataFragment : Fragment() {
         setListeners()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1)
+            if (resultCode == Activity.RESULT_OK) {
+                val selectedImage = data?.data
+                val filePath = selectedImage?.let { getPath(it) }
+                imgProfile.setImageURI(selectedImage)
+            }
+
+    }
+
+    private fun getPath(uri: Uri): String {
+        val projection = arrayOf(MediaStore.MediaColumns.DATA)
+        val cursor = activity!!.contentResolver.query(uri, projection, null, null, null);
+        val column_index = cursor?.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
+        cursor?.moveToFirst()
+        if (column_index != null) {
+            cursor.getString(column_index)
+        }
+
+        return column_index?.let { cursor.getString(it) }!!
+    }
+
     private fun setListeners() {
+        imgProfile.setOnClickListener {
+            val photoPickerIntent = Intent(ACTION_PICK)
+            photoPickerIntent.type = "image/*"
+            this.startActivityForResult(photoPickerIntent, 1)
+        }
+
+
+
         updateData.setOnClickListener {
             checkErrorEnabled()
             hideKeyboard()
@@ -83,6 +123,8 @@ class UpdateDataFragment : Fragment() {
             editDataProgressBar.visibility = View.GONE
             if (it != null) {
                 Toast.makeText(activity, "Updated Successfuly", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_back_to_login)
+
             } else {
                 Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
             }
@@ -100,7 +142,7 @@ class UpdateDataFragment : Fragment() {
             editDataProgressBar.visibility = View.GONE
             if (it != null) {
                 Toast.makeText(activity, "Updated Successfuly", Toast.LENGTH_SHORT).show()
-                // to navigate to login Screen 
+                // to navigate to login Screen
             } else {
                 Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
             }

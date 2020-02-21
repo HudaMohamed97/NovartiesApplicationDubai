@@ -108,6 +108,10 @@
             android:name="com.example.myapplication.EditProfileFragment.UpdateDataFragment"
             tools:layout="@layout/edit_profile">
 
+            <action
+                android:id="@+id/action_back_to_login"
+                app:destination="@id/loginFragment" />
+
         </fragment>
         <fragment
             android:id="@+id/SpeakersFragment"

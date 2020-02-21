@@ -7,9 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Models.EventModels.SpeakerSession
+import com.example.myapplication.Models.EventModels.Speakers
 import com.example.myapplication.Models.Sessions
 import com.example.myapplication.R
-import java.util.ArrayList
 
 
 class AgendaAdapter(modelFeedArrayList: List<Sessions>) :
@@ -35,49 +35,40 @@ class AgendaAdapter(modelFeedArrayList: List<Sessions>) :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val agendaModel = agendaArrayList[position]
-        // holder.agendaTitle.text = agendaModel.title
-        holder.agendaTitle.text = "jdsafnfnfnfndkfkdfk"
-        //holder.agendaDescription.text = agendaModel.title
-        holder.agendaDescription.text = "jfhkjfhfhjhfmdhfjdhfd"
+        holder.agendaName.text = agendaModel.title
+        holder.agendaLoacation.text = agendaModel.location
+        holder.agendaTimeFrom.text = agendaModel.time_from
+        holder.agendaTimeTo.text = agendaModel.time_to
+        if (agendaModel.speakers.isNotEmpty()) {
+            holder.agendaSpeakers.visibility = View.VISIBLE
+            holder.agendaSpeakers.text = ""
+            for (speaker in agendaModel.speakers) {
+                holder.agendaSpeakers.append(speaker.name + ".")
+            }
 
-        val list = ArrayList<SpeakerSession>()
-        list.add(SpeakerSession(0, "name", "name", "", "", "", true))
-        list.add(SpeakerSession(0, "huda", "name", "", "", "", true))
+        } else {
+            holder.agendaSpeakers.visibility = View.GONE
 
-        holder.speakersPerSession.visibility = View.VISIBLE
-        val layoutManager = LinearLayoutManager(
-            holder.rvSubItem.context,
-            LinearLayoutManager.VERTICAL,
-            false
-        )
-        layoutManager.initialPrefetchItemCount = list.size
-        // Create sub item view adapter
-        val subItemAdapter = SubItemAdapter(list)
-
-        holder.rvSubItem.layoutManager = layoutManager
-        holder.rvSubItem.adapter = subItemAdapter
-        holder.rvSubItem.setRecycledViewPool(viewPool)
+        }
 
 
-        /* if (agendaModel.speakers.isNotEmpty()) {
-             holder.speakersPerSession.visibility = View.VISIBLE
-             val layoutManager = LinearLayoutManager(
-                 holder.rvSubItem.context,
-                 LinearLayoutManager.VERTICAL,
-                 false
-             )
-             layoutManager.initialPrefetchItemCount = agendaModel.speakers.size
-             // Create sub item view adapter
-             val subItemAdapter = SubItemAdapter(agendaModel.speakers)
+        /*if (agendaModel.speakers.isNotEmpty()) {
+            holder.speakersPerSession.visibility = View.VISIBLE
+            val layoutManager = LinearLayoutManager(
+                holder.rvSubItem.context,
+                LinearLayoutManager.VERTICAL,
+                false
+            )
+            layoutManager.initialPrefetchItemCount = agendaModel.speakers.size
+            // Create sub item view adapter
+            val subItemAdapter = SubItemAdapter(agendaModel.speakers)
 
-             holder.rvSubItem.layoutManager = layoutManager
-             holder.rvSubItem.adapter = subItemAdapter
-             holder.rvSubItem.setRecycledViewPool(viewPool)
-
-
-         } else {
-             holder.speakersPerSession.visibility = View.GONE
-         }*/
+            holder.rvSubItem.layoutManager = layoutManager
+            holder.rvSubItem.adapter = subItemAdapter
+            holder.rvSubItem.setRecycledViewPool(viewPool)
+        } else {
+            holder.speakersPerSession.visibility = View.GONE
+        }*/
 
 
 
@@ -91,9 +82,13 @@ class AgendaAdapter(modelFeedArrayList: List<Sessions>) :
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var agendaTitle: TextView = itemView.findViewById<View>(R.id.agendaTitle) as TextView
-        var agendaDescription: TextView =
-            itemView.findViewById<View>(R.id.agendaDescription) as TextView
+        var agendaTimeFrom: TextView = itemView.findViewById<View>(R.id.agendatimefrom) as TextView
+        var agendaTimeTo: TextView = itemView.findViewById<View>(R.id.agendatimeto) as TextView
+        var agendaLoacation: TextView = itemView.findViewById<View>(R.id.agendalocation) as TextView
+        var agendaSpeakers: TextView =
+            itemView.findViewById<View>(R.id.agendaSpeakers) as TextView
+        var agendaName: TextView =
+            itemView.findViewById<View>(R.id.agendaName) as TextView
         var speakersPerSession: View = itemView.findViewById<View>(R.id.speakersPerSession)
         var rvSubItem: RecyclerView = itemView.findViewById(R.id.rv_sub_item)
 
