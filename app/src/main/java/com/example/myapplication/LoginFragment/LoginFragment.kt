@@ -110,7 +110,9 @@ class LoginFragment : Fragment(), LoginInterface {
                 if (it.access_token != "") {
                     saveData(it)
                     saveUserData()
-                    findNavController().navigate(R.id.action_LoginFragment_to_Home)
+                    val bundle = Bundle()
+                    bundle.putParcelable("Account", it.account)
+                    findNavController().navigate(R.id.action_LoginFragment_to_Home, bundle)
                 } else {
                     var error = it.token_type.replace("[", "")
                     error = error.replace("]", "")

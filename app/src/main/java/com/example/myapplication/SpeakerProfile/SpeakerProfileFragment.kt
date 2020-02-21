@@ -1,15 +1,15 @@
 package com.example.myapplication.SpeakerProfile
 
-import android.app.ProgressDialog
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.example.myapplication.LoginFragment.AgendaViewModel
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.myapplication.LoginFragment.EventViewModel
 import com.example.myapplication.Models.EventModels.Speakers
 import com.example.myapplication.R
@@ -36,7 +36,21 @@ class SpeakerProfileFragment : Fragment() {
         val speaker = arguments?.getParcelable<Speakers>("Speaker")!!
         speaker_name.text = speaker.name
         speaker_Bio.text = speaker.bio
-
+        Glide.with(context!!).load(speaker.photo).centerCrop()
+            .placeholder(R.drawable.profile)
+            .error(R.drawable.profile).into(imgProfile)
+        val logOutButton = root.findViewById(R.id.logOutButton) as ImageView
+        val backButton = root.findViewById(R.id.backButton) as ImageView
+        logOutButton.setOnClickListener {
+            /* val preferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+             val editor = preferences.edit()
+             editor.clear()
+             editor.apply()*/
+            activity!!.finish()
+        }
+        backButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
     }
 

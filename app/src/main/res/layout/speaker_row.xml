@@ -14,14 +14,14 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgProfile"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_margin="@dimen/space_20"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_propic2"
             android:visibility="visible"
-            app:civ_border_color="@color/black"
+            app:civ_border_color="@color/white"
             app:civ_border_width="1dp" />
 
         <TextView

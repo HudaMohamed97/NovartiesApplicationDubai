@@ -1,10 +1,9 @@
 package com.example.myapplication.VotingFragment
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.Models.PollModel
 import com.example.myapplication.Models.SingelPollModel
-import com.example.myapplication.Models.submitModel
+import com.example.myapplication.Models.SubmitModel
 import com.example.myapplication.NetworkLayer.Webservice
 import retrofit2.Call
 import retrofit2.Callback
@@ -59,30 +58,30 @@ class PollRepository {
         pollId: Int,
         pollOptionId: Int,
         accessToken: String
-    ): MutableLiveData<submitModel> {
+    ): MutableLiveData<SubmitModel> {
         val body = mapOf(
             "poll_id" to pollId.toString(),
             "poll_options_id" to pollOptionId.toString()
         )
-        val pollData = MutableLiveData<submitModel>()
+        val pollData = MutableLiveData<SubmitModel>()
         Webservice.getInstance().api.submitPolls(body, accessToken)
-            .enqueue(object : Callback<submitModel> {
+            .enqueue(object : Callback<SubmitModel> {
                 override fun onResponse(
-                    call: Call<submitModel>, response: Response<submitModel>
+                    call: Call<SubmitModel>, response: Response<SubmitModel>
                 ) {
                     if (response.isSuccessful) {
                         response.raw()
                         pollData.value = response.body()
                     } else {
                         if (response.code() == 400) {
-                            pollData.value = submitModel("error", "error")
+                            pollData.value = SubmitModel("error", "error")
                         } else {
                             pollData.value = response.body()
                         }
                     }
                 }
 
-                override fun onFailure(call: Call<submitModel>, t: Throwable) {
+                override fun onFailure(call: Call<SubmitModel>, t: Throwable) {
                     pollData.value = null
                 }
             })

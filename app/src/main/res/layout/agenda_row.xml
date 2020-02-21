@@ -21,9 +21,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/space_20"
             android:layout_marginTop="@dimen/space_20"
             android:layout_marginRight="@dimen/space_20"
-            android:layout_marginLeft="@dimen/space_20"
             android:layout_marginBottom="@dimen/space_10"
             android:gravity="center"
             android:text="DR: SpakerName"
@@ -46,20 +46,20 @@
 
     <LinearLayout
         android:id="@+id/descriptoion"
-        android:minHeight="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/header"
         android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/header"
+        android:minHeight="100dp"
         android:visibility="visible">
 
         <TextView
             android:id="@+id/agendaDescription"
             android:layout_width="match_parent"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="DR: SpakerName"
+            android:layout_gravity="center"
             android:layout_margin="@dimen/space_20"
+            android:text="DR: SpakerName"
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold" />
@@ -82,8 +82,6 @@
             android:layout_marginBottom="@dimen/space_20"
             android:gravity="center"
             tools:listitem="@layout/speaker_sub_row" />
-
-
     </LinearLayout>
 
 </RelativeLayout>

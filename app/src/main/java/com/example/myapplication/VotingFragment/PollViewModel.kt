@@ -4,13 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.Models.PollModel
 import com.example.myapplication.Models.SingelPollModel
-import com.example.myapplication.Models.submitModel
+import com.example.myapplication.Models.SubmitModel
 
 class PollViewModel : ViewModel() {
     private var repositoryHelper: PollRepository = PollRepository()
     private lateinit var mutableLiveData: MutableLiveData<PollModel>
     private lateinit var mutableLiveDataPoll: MutableLiveData<SingelPollModel>
-    private lateinit var submitedLiveData: MutableLiveData<submitModel>
+    private lateinit var submitedLiveData: MutableLiveData<SubmitModel>
 
 
     fun getPolls(accessToken: String) {
@@ -36,7 +36,7 @@ class PollViewModel : ViewModel() {
 
     }
 
-    fun getSubmittedStatues(): MutableLiveData<submitModel> {
+    fun getSubmittedStatues(): MutableLiveData<SubmitModel> {
         return submitedLiveData
     }
 

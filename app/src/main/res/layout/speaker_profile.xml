@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_color2">
@@ -8,50 +9,49 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/space_10"
         android:layout_marginBottom="@dimen/space_20"
-        app:layout_constraintStart_toStartOf="parent"
-        >
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_20"
-        android:gravity="center"
-        android:text="HOME"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_20"
+            android:gravity="center"
+            android:text="HOME"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
 
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/logOutButton"
-        android:layout_width="@dimen/space_28"
-        android:layout_height="@dimen/space_28"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="LogOut"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/logout_icon" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logOutButton"
+            android:layout_width="@dimen/space_28"
+            android:layout_height="@dimen/space_28"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="LogOut"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/logout_icon" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/backButton"
-        android:layout_width="@dimen/space_28"
-        android:layout_height="@dimen/space_28"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="LogOut"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/back_icon" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/backButton"
+            android:layout_width="@dimen/space_28"
+            android:layout_height="@dimen/space_28"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="LogOut"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/back_icon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,22 +76,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgProfile"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/space_20"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/profile"
-                    android:visibility="visible"
-                    app:civ_border_color="@color/black"
-                    app:civ_border_width="1dp"
+                <LinearLayout
+                    android:id="@+id/imgProfileLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_20"
+                    android:background="@drawable/speaker_profile_rounded"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgProfile"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/space_20"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/profile"
+                        android:visibility="visible"
+                        app:civ_border_color="@color/white"
+                        app:civ_border_width="1dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/speaker_name"
@@ -102,16 +113,16 @@
                     android:text="DR: Huda Mohaemd"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    app:layout_constraintLeft_toRightOf="@+id/imgProfile"
-                    app:layout_constraintTop_toTopOf="@+id/imgProfile" />
+                    app:layout_constraintLeft_toRightOf="@+id/imgProfileLayout"
+                    app:layout_constraintTop_toTopOf="@+id/imgProfileLayout" />
 
                 <View
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="0.5dp"
-                    android:layout_marginLeft="70dp"
-                    android:layout_marginTop="@dimen/space_10"
+                    android:layout_marginTop="@dimen/space_20"
                     android:background="@color/browser_actions_bg_grey"
-                    app:layout_constraintLeft_toRightOf="@+id/imgProfile"
+                    app:layout_constraintLeft_toRightOf="@+id/imgProfileLayout"
+                    app:layout_constraintStart_toEndOf="@+id/imgProfileLayout"
                     app:layout_constraintTop_toBottomOf="@+id/speaker_name" />
 
 
@@ -120,14 +131,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/space_20"
-                    android:text="Huda Mohaemd fjsfmdnfjdmfmnfmdsnfmsndfsdfbsdfbsdfb
-                 jfjhfjhdsfhdsjfhsjdhfjsjsfhsdjhhjdshjdsfhdhfjfhsdfjhsjfhjffjdsfdbfbdfjbds
-                 jfjhfjdshfjhsfjsd
-                 nfkdshfkshfksdhfkshdfkhsdfkmnmcvnmdjm xmsdvsvs sjdv "
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
+                    app:layout_constraintTop_toBottomOf="@+id/imgProfileLayout"
+                    tools:text="Huda Mohaemd fjsfmdnfjdmfmnfmdsnfmsndfsdfbsdfbsdfb
+                 jfjhfjhdsfhdsjfhsjdhfjsjsfhsdjhhjdshjdsfhdhfjfhsdfjhsjfhjffjdsfdbfbdfjbds
+                 jfjhfjdshfjhsfjsd
+                 nfkdshfkshfksdhfkshdfkhsdfkmnmcvnmdjm xmsdvsvs sjdv " />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

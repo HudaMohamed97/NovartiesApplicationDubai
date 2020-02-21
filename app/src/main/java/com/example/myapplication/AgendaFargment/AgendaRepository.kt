@@ -1,6 +1,5 @@
 package com.example.myapplication.AgendaFargment
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.Models.AgendaModelResponse
 import com.example.myapplication.NetworkLayer.Webservice
@@ -20,19 +19,12 @@ class AgendaRepository {
                         response.raw()
                         userData.value = response.body()
                     } else {
-                        Log.i(
-                            "hhhhhh",
-                            "on failuer from sucess" + response.message() + response.body()
-                        )
                         userData.value = response.body()
                     }
                 }
 
                 override fun onFailure(call: Call<AgendaModelResponse>, t: Throwable) {
                     userData.value = null
-                    Log.i("hhhhhh", "on fail to get events")
-                    Log.i("hhhhhh", "on fail" + t.message)
-
                 }
             })
         return userData

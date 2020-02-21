@@ -77,6 +77,9 @@
                 android:id="@+id/action_HomeFragment_to_SpeakersFragment"
                 app:destination="@id/SpeakersFragment" />
             <action
+                android:id="@+id/action_HomeFragment_to_SessionRatingFragment"
+                app:destination="@id/SessionRatingFragment" />
+            <action
                 android:id="@+id/action_HomeFragment_to_PostsFragment"
                 app:destination="@id/PostsFragment" />
             <action
@@ -85,6 +88,9 @@
             <action
                 android:id="@+id/action_HomeFragment_to_RatingFragment"
                 app:destination="@id/RatingFragment" />
+            <action
+                android:id="@+id/action_HomeFragment_to_UpdateFragment"
+                app:destination="@id/UpdateFragment" />
 
         </fragment>
         <fragment
@@ -95,6 +101,13 @@
             <action
                 android:id="@+id/action_Fragment_to_loginFragment"
                 app:destination="@id/loginFragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/UpdateFragment"
+            android:name="com.example.myapplication.EditProfileFragment.UpdateDataFragment"
+            tools:layout="@layout/edit_profile">
+
         </fragment>
         <fragment
             android:id="@+id/SpeakersFragment"
@@ -120,6 +133,16 @@
             <action
                 android:id="@+id/action_clickPoll_toPollDetails"
                 app:destination="@id/VotingFragment" />
+
+        </fragment>
+        <fragment
+            android:id="@+id/SessionRatingFragment"
+            android:name="com.example.myapplication.RatingFrgament.RatingSessionFragment"
+            tools:layout="@layout/saeesio_rating_fragment">
+
+            <action
+                android:id="@+id/action_clickSession_toRatingDetails"
+                app:destination="@id/RatingFragment" />
 
         </fragment>
         <fragment

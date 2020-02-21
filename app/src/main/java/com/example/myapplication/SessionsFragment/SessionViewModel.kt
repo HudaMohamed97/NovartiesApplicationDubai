@@ -3,12 +3,12 @@ package com.example.myapplication.SessionsFragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.Models.SessionsResponse
-import com.example.myapplication.Models.submitModel
+import com.example.myapplication.Models.SubmitModel
 
 class SessionViewModel : ViewModel() {
     private var repositoryHelper: SessionRepository = SessionRepository()
     private lateinit var mutableLiveData: MutableLiveData<SessionsResponse>
-    private lateinit var attendMutableLiveData: MutableLiveData<submitModel>
+    private lateinit var attendMutableLiveData: MutableLiveData<SubmitModel>
 
     fun getSessions(accessToken: String) {
         mutableLiveData = repositoryHelper.getSessions(accessToken)
@@ -27,7 +27,7 @@ class SessionViewModel : ViewModel() {
 
     }
 
-    fun submit(): MutableLiveData<submitModel> {
+    fun submit(): MutableLiveData<SubmitModel> {
         return attendMutableLiveData
     }
 }

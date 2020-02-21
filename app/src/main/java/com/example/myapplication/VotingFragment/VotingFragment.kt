@@ -7,10 +7,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Adapters.VotingOptionsAdapter
@@ -82,6 +85,18 @@ class VotingFragment : Fragment() {
                 callSubmitVote()
             }
 
+        }
+        val logOutButton = root.findViewById(R.id.logOutButton) as ImageView
+        val backButton = root.findViewById(R.id.backButton) as ImageView
+        logOutButton.setOnClickListener {
+            /* val preferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+             val editor = preferences.edit()
+             editor.clear()
+             editor.apply()*/
+            activity!!.finish()
+        }
+        backButton.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 

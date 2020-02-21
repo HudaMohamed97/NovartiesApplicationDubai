@@ -10,7 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/space_10"
         android:text="Sub item title"
-        android:gravity="center"
+        android:gravity="left"
+        android:textColor="@color/white"
+        android:layout_marginStart="@dimen/space_5"
         android:textSize="18sp"
         android:textStyle="bold" />
 

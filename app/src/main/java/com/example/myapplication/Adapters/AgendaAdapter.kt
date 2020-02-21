@@ -43,14 +43,6 @@ class AgendaAdapter(modelFeedArrayList: List<Sessions>) :
         val list = ArrayList<SpeakerSession>()
         list.add(SpeakerSession(0, "name", "name", "", "", "", true))
         list.add(SpeakerSession(0, "huda", "name", "", "", "", true))
-        list.add(SpeakerSession(0, "dodo", "name", "", "", "", true))
-        list.add(SpeakerSession(0, "dodo", "name", "", "", "", true))
-        list.add(SpeakerSession(0, "dodo", "name", "", "", "", true))
-        list.add(SpeakerSession(0, "dodo", "name", "", "", "", true))
-        list.add(SpeakerSession(0, "dodo", "name", "", "", "", true))
-        list.add(SpeakerSession(0, "dodo", "name", "", "", "", true))
-        list.add(SpeakerSession(0, "dodo", "name", "", "", "", true))
-        list.add(SpeakerSession(0, "lolo", "name", "", "", "", true))
 
         holder.speakersPerSession.visibility = View.VISIBLE
         val layoutManager = LinearLayoutManager(

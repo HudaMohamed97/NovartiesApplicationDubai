@@ -2,9 +2,8 @@ package com.example.myapplication.SessionsFragment
 
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.Models.SessionsResponse
-import com.example.myapplication.Models.submitModel
+import com.example.myapplication.Models.SubmitModel
 import com.example.myapplication.NetworkLayer.Webservice
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,16 +37,16 @@ class SessionRepository {
         state: Int,
         sessionId: Int,
         accessToken: String
-    ): MutableLiveData<submitModel> {
-        val Data = MutableLiveData<submitModel>()
+    ): MutableLiveData<SubmitModel> {
+        val Data = MutableLiveData<SubmitModel>()
         val body = mapOf(
             "attended" to state.toString()
         )
         Webservice.getInstance().api.submitAttendance(body, sessionId, accessToken)
-            .enqueue(object : Callback<submitModel> {
+            .enqueue(object : Callback<SubmitModel> {
                 override fun onResponse(
-                    call: Call<submitModel>,
-                    response: Response<submitModel>
+                    call: Call<SubmitModel>,
+                    response: Response<SubmitModel>
                 ) {
                     if (response.isSuccessful) {
                         Data.value = response.body()
@@ -56,7 +55,7 @@ class SessionRepository {
                     }
                 }
 
-                override fun onFailure(call: Call<submitModel>, t: Throwable) {
+                override fun onFailure(call: Call<SubmitModel>, t: Throwable) {
                     Data.value = null
                 }
             })

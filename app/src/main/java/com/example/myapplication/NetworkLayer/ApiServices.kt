@@ -1,7 +1,6 @@
 package com.example.myapplication.NetworkLayer
 
 import com.example.myapplication.Models.*
-import com.example.myapplication.Models.EventModels.EventsResponse
 import com.example.myapplication.Models.EventModels.SingleEventResponse
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -16,10 +15,10 @@ interface ApiServices {
     fun register(@Body registerRequestModel: RegisterRequestModel): Call<ResponseModelData>
 
     @POST("account/update")
-    fun updateAccount(@Body registerRequestModel: RegisterRequestModel): Call<ResponseModelData>
+    fun updateAccount(@Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<updateDataModel>
 
     @POST("events/{event}/attendance")
-    fun submitAttendance(@Body body: Map<String, String>, @Path("event") eventId: Int, @Header("Authorization") authHeader: String): Call<submitModel>
+    fun submitAttendance(@Body body: Map<String, String>, @Path("event") eventId: Int, @Header("Authorization") authHeader: String): Call<SubmitModel>
 
     //this to get All Events
 
@@ -39,7 +38,10 @@ interface ApiServices {
     fun getSingePolls(@Path("poll") pollId: Int, @Header("Authorization") authHeader: String): Call<SingelPollModel>
 
     @POST("polls")
-    fun submitPolls(@Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<submitModel>
+    fun submitPolls(@Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<SubmitModel>
+
+    @POST("sessions/{session}/rating")
+    fun submitSessionsRate(@Path("session") session: Int, @Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<SubmitModel>
 
     @GET("speakers")
     fun getSpeakers(@Header("Authorization") authHeader: String): Call<SpeakersResponseModel>

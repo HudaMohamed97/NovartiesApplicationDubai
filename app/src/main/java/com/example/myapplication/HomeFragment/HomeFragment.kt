@@ -16,10 +16,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
+import com.example.myapplication.Models.Account
+import com.example.myapplication.Models.EventModels.Speakers
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.home_fragment.backButton
+import kotlinx.android.synthetic.main.home_fragment.imgProfile
 import kotlinx.android.synthetic.main.home_fragment.logOutButton
 import kotlinx.android.synthetic.main.login_fragment.*
+import kotlinx.android.synthetic.main.speaker_profile.*
 import java.util.*
 
 
@@ -27,6 +32,7 @@ class HomeFragment : Fragment() {
     private lateinit var root: View
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var loginPreferences: SharedPreferences
+    private lateinit var account: Account
 
 
     override fun onCreateView(
@@ -43,6 +49,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setClickListeners()
         loginPreferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+        account = arguments?.getParcelable<Account>("Account")!!
+        user_name.text = account.name
+        Glide.with(context!!).load(account.photo).centerCrop()
+            .placeholder(R.drawable.profile)
+            .error(R.drawable.profile).into(imgProfile)
     }
 
     private fun setClickListeners() {
@@ -70,17 +81,22 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_HomeFragment_to_SpeakersFragment)
         }
         ratingCard.setOnClickListener {
-            findNavController().navigate(R.id.action_HomeFragment_to_RatingFragment)
+            findNavController().navigate(R.id.action_HomeFragment_to_SessionRatingFragment)
         }
         sessionsCard.setOnClickListener {
             findNavController().navigate(R.id.action_HomeFragment_to_SessionFragment)
         }
+        profile_card.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putParcelable("ACCOUNT", account)
+            findNavController().navigate(R.id.action_HomeFragment_to_UpdateFragment, bundle)
+        }
 
         logOutButton.setOnClickListener {
-            val preferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
-            val editor = preferences.edit()
-            editor.clear()
-            editor.apply()
+            /* val preferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+             val editor = preferences.edit()
+             editor.clear()
+             editor.apply()*/
             activity!!.finish()
         }
 
