@@ -7,9 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -56,6 +54,7 @@ class AgendaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         loginPreferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
         initRecyclerView()
+        initializeSpinner()
         callGetAgendaData()
         val logOutButton = root?.findViewById(R.id.logOutButton) as ImageView
         val backButton = root?.findViewById(R.id.backButton) as ImageView
@@ -77,22 +76,54 @@ class AgendaFragment : Fragment() {
         agendaProgressBar.visibility = View.VISIBLE
         val accessToken = loginPreferences.getString("accessToken", "")
         if (accessToken != null) {
-            agendaViewModel.getAgendaData(accessToken)
+            agendaViewModel.getAgendaData(1, accessToken)
         }
         agendaViewModel.getData().observe(this, Observer {
             agendaProgressBar.visibility = View.GONE
             if (it != null) {
                 list.clear()
-                for (data in it.data) {
-                    for (session in data.sessions) {
-                        list.add(session)
-                    }
+                for (session in it.data.sessions) {
+                    list.add(session)
                 }
+
                 agendaAdapter.notifyDataSetChanged()
             } else {
                 Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun initializeSpinner() {
+        val list = arrayListOf<Int>()
+        list.add(1)
+        list.add(2)
+        list.add(3)
+        val arrayAdapter =
+            context?.let {
+                ArrayAdapter(
+                    it,
+                    R.layout.spinner_item,
+                    list
+                )
+            }
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parentView: AdapterView<*>,
+                selectedItemView: View,
+                position: Int,
+                id: Long
+            ) {
+                val selectedDy = list[position]
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>) {
+                // your code here
+            }
+        }
+        arrayAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        if (arrayAdapter != null) {
+            spinner.adapter = arrayAdapter
+        }
     }
 
     private fun initRecyclerView() {

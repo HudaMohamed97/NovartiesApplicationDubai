@@ -16,8 +16,8 @@ class AgendaViewModel : ViewModel() {
         return mutableLiveData
     }
 
-    fun getAgendaData(accessToken: String) {
-        mutableLiveData = agendaRepository.getAgenda(accessToken)
+    fun getAgendaData(day: Int, accessToken: String) {
+        mutableLiveData = agendaRepository.getAgenda(day, accessToken)
     }
 
 

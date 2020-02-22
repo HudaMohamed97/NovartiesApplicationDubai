@@ -46,8 +46,8 @@ interface ApiServices {
     @GET("speakers")
     fun getSpeakers(@Header("Authorization") authHeader: String): Call<SpeakersResponseModel>
 
-    @GET("agenda")
-    fun getAgenda(@Header("Authorization") authHeader: String): Call<AgendaModelResponse>
+    @GET("agenda/{day}")
+    fun getAgenda(@Path("day") eventId: Int, @Header("Authorization") authHeader: String): Call<AgendaModelResponse>
 
     @GET("articles/{article}")
     fun getSingleArticle(@Path("article") eventId: Int): Call<ResponseBody>

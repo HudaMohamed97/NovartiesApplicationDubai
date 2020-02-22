@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 
 data class AgendaModelResponse(
 
-    @SerializedName("data") val data: List<AgendaData>,
-    @SerializedName("links") val links: Links,
-    @SerializedName("meta") val meta: Meta
+    @SerializedName("data") val data: AgendaData
+    /*@SerializedName("links") val links: Links,
+    @SerializedName("meta") val meta: Meta*/
 )

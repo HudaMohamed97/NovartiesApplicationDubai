@@ -69,17 +69,16 @@ class RatingSessionFragment : Fragment() {
         ratingProgressBar.visibility = View.VISIBLE
         val accessToken = loginPreferences.getString("accessToken", "")
         if (accessToken != null) {
-            agendaViewModel.getAgendaData(accessToken)
+            agendaViewModel.getAgendaData(1, accessToken)
         }
         agendaViewModel.getData().observe(this, Observer {
             ratingProgressBar.visibility = View.GONE
             if (it != null) {
                 list.clear()
-                for (data in it.data) {
-                    for (session in data.sessions) {
-                        list.add(session)
-                    }
+                for (session in it.data.sessions) {
+                    list.add(session)
                 }
+
                 sessionRatingAdapter.notifyDataSetChanged()
             } else {
                 Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()

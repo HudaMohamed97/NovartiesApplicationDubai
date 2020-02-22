@@ -8,9 +8,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class AgendaRepository {
-    fun getAgenda(accessToken: String): MutableLiveData<AgendaModelResponse> {
+    fun getAgenda(day: Int, accessToken: String): MutableLiveData<AgendaModelResponse> {
         val userData = MutableLiveData<AgendaModelResponse>()
-        Webservice.getInstance().api.getAgenda(accessToken)
+        Webservice.getInstance().api.getAgenda(day,accessToken)
             .enqueue(object : Callback<AgendaModelResponse> {
                 override fun onResponse(
                     call: Call<AgendaModelResponse>, response: Response<AgendaModelResponse>
