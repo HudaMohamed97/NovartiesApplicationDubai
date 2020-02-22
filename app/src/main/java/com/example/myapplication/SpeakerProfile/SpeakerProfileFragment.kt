@@ -1,6 +1,8 @@
 package com.example.myapplication.SpeakerProfile
 
 import android.os.Bundle
+import android.text.Html
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,17 +37,19 @@ class SpeakerProfileFragment : Fragment() {
         setClickListeners()
         val speaker = arguments?.getParcelable<Speakers>("Speaker")!!
         speaker_name.text = speaker.name
-        speaker_Bio.text = speaker.bio
+        speaker_Bio.movementMethod = ScrollingMovementMethod()
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            speaker_Bio.text = Html.fromHtml(speaker.bio, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            speaker_Bio.text = Html.fromHtml(speaker.bio)
+        }
+
         Glide.with(context!!).load(speaker.photo).centerCrop()
             .placeholder(R.drawable.profile)
             .error(R.drawable.profile).into(imgProfile)
         val logOutButton = root.findViewById(R.id.logOutButton) as ImageView
         val backButton = root.findViewById(R.id.backButton) as ImageView
         logOutButton.setOnClickListener {
-            /* val preferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
-             val editor = preferences.edit()
-             editor.clear()
-             editor.apply()*/
             activity!!.finish()
         }
         backButton.setOnClickListener {

@@ -62,9 +62,10 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/credentials_card"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:background="@color/dark_color1"
+            android:minHeight="400dp"
             app:cardCornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +75,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:minHeight="400dp">
 
                 <LinearLayout
                     android:id="@+id/imgProfileLayout"
