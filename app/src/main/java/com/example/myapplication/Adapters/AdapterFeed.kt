@@ -50,7 +50,6 @@ class AdapterFeed(modelFeedArrayList: ArrayList<PostData>) :
                 .placeholder(R.drawable.profile)
                 .error(R.drawable.profile).into(holder.imgProfile)
         }
-
         if (modelFeed.photo == null) {
             holder.imgviewPostpic.visibility = View.GONE
         } else {

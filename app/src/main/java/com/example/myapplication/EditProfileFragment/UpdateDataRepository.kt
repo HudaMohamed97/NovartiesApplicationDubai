@@ -24,11 +24,23 @@ class UpdateDataRepository {
 
         val email = RequestBody.create(MediaType.parse("multipart/form-data"), email)
         val name = RequestBody.create(MediaType.parse("multipart/form-data"), name)
-        val myfile = File(file)
-        val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), myfile)
-        val image = MultipartBody.Part.createFormData("photo", myfile?.name, requestFile)
 
-        Webservice.getInstance().api.updateAccount(email, name, image, accessToken)
+
+        var fileToUpload: MultipartBody.Part? = null
+        try {
+            val file = File(file)
+            if (file.exists()) {
+                val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+                fileToUpload = MultipartBody.Part.createFormData("photo", file?.name, requestFile)
+            } else {
+                val attachmentEmpty = RequestBody.create(MediaType.parse("text/plain"), "")
+                fileToUpload = MultipartBody.Part.createFormData("photo", "", attachmentEmpty)
+            }
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+        }
+
+        Webservice.getInstance().api.updateAccount(email, name, fileToUpload!!, accessToken)
             .enqueue(object : Callback<updateDataModel> {
                 override fun onResponse(
                     call: Call<updateDataModel>,

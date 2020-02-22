@@ -99,27 +99,6 @@ class UpdateDataFragment : Fragment() {
         return column_index?.let { cursor.getString(it) }!!
     }
 
-    /*private fun requestPermission() {
-
-        if (ActivityCompat.shouldShowRequestPermissionRationale(
-                activity!!,
-                WRITE_EXTERNAL_STORAGE
-            )
-        ) {
-            Toast.makeText(
-                activity!!,
-                "Write External Storage permission allows us to do store images. Please allow this permission in App Settings.",
-                Toast.LENGTH_LONG
-            ).show()
-        } else {
-            requestPermissions(
-                activity!!,
-                arrayOf(WRITE_EXTERNAL_STORAGE),
-                PERMISSION_REQUEST_CODE
-            )
-        }
-    }*/
-
     private fun isStoragePermissionGranted(): Boolean {
         if (SDK_INT >= Build.VERSION_CODES.M) {
             return if (checkSelfPermission(

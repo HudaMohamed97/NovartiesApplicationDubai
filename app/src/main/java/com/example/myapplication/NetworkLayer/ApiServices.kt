@@ -32,7 +32,11 @@ interface ApiServices {
     fun getSessions(@Header("Authorization") authHeader: String): Call<SessionsResponse>
 
     @GET("posts")
-    fun getPosts(@Query("page") page: Int,@Header("Authorization") authHeader: String): Call<PostsModelResponse>
+    fun getPosts(@Query("page") page: Int, @Header("Authorization") authHeader: String): Call<PostsModelResponse>
+
+    @Multipart
+    @POST("posts")
+    fun addPost(@Part("content") email: RequestBody, @Part image: MultipartBody.Part, @Header("Authorization") authHeader: String): Call<SubmitModel>
 
     @GET("setting")
     fun getLocation(@Header("Authorization") authHeader: String): Call<LocationResponse>
