@@ -55,7 +55,7 @@ class AgendaFragment : Fragment() {
         loginPreferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
         initRecyclerView()
         initializeSpinner()
-        callGetAgendaData()
+        callGetAgendaData(1)
         val logOutButton = root?.findViewById(R.id.logOutButton) as ImageView
         val backButton = root?.findViewById(R.id.backButton) as ImageView
 
@@ -72,21 +72,25 @@ class AgendaFragment : Fragment() {
 
     }
 
-    private fun callGetAgendaData() {
+    private fun callGetAgendaData(day: Int) {
         agendaProgressBar.visibility = View.VISIBLE
         val accessToken = loginPreferences.getString("accessToken", "")
         if (accessToken != null) {
-            agendaViewModel.getAgendaData(1, accessToken)
+            agendaViewModel.getAgendaData(day, accessToken)
         }
         agendaViewModel.getData().observe(this, Observer {
             agendaProgressBar.visibility = View.GONE
             if (it != null) {
-                list.clear()
-                for (session in it.data.sessions) {
-                    list.add(session)
+                if (it.data.id != -1) {
+                    list.clear()
+                    for (session in it.data.sessions) {
+                        list.add(session)
+                    }
+                    agendaAdapter.notifyDataSetChanged()
+                } else {
+                    Toast.makeText(activity, "NO agenda For This DAY", Toast.LENGTH_SHORT).show()
                 }
 
-                agendaAdapter.notifyDataSetChanged()
             } else {
                 Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
             }
@@ -113,7 +117,8 @@ class AgendaFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                val selectedDy = list[position]
+                val selectedDay = list[position]
+                callGetAgendaData(selectedDay)
             }
 
             override fun onNothingSelected(parentView: AdapterView<*>) {

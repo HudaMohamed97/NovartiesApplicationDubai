@@ -77,13 +77,13 @@
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="149dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="20dp"
+            android:background="@android:drawable/btn_dropdown"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/editbox"
             android:spinnerMode="dropdown"
             android:theme="@style/ThemeOverlay.AppCompat.Light" />
 

@@ -6,9 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -26,6 +24,7 @@ class RatingSessionFragment : Fragment() {
     private lateinit var agendaViewModel: AgendaViewModel
     private val list = arrayListOf<Sessions>()
     private lateinit var recyclerView: RecyclerView
+    private lateinit var ratingSpinner: Spinner
     private lateinit var sessionRatingAdapter: SessionsRatingAdapter
     private lateinit var loginPreferences: SharedPreferences
 
@@ -51,35 +50,70 @@ class RatingSessionFragment : Fragment() {
         val logOutButton = root?.findViewById(R.id.logOutButton) as ImageView
         val backButton = root?.findViewById(R.id.backButton) as ImageView
         logOutButton.setOnClickListener {
-            /* val preferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
-             val editor = preferences.edit()
-             editor.clear()
-             editor.apply()*/
             activity!!.finish()
         }
         backButton.setOnClickListener {
             findNavController().navigateUp()
         }
         initRecyclerView()
-        callGetAgendaData()
-
+        initializeSpinner()
+        callGetAgendaData(1)
     }
 
-    private fun callGetAgendaData() {
+    private fun initializeSpinner() {
+        val list = arrayListOf<Int>()
+        list.add(1)
+        list.add(2)
+        list.add(3)
+        val arrayAdapter =
+            context?.let {
+                ArrayAdapter(
+                    it,
+                    R.layout.spinner_item,
+                    list
+                )
+            }
+        ratingSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parentView: AdapterView<*>,
+                selectedItemView: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (position >= 0) {
+                    val selectedDay = list[position]
+                    callGetAgendaData(selectedDay)
+                }
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>) {
+                // your code here
+            }
+        }
+        arrayAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        if (arrayAdapter != null) {
+            ratingSpinner.adapter = arrayAdapter
+        }
+    }
+
+    private fun callGetAgendaData(day: Int) {
         ratingProgressBar.visibility = View.VISIBLE
         val accessToken = loginPreferences.getString("accessToken", "")
         if (accessToken != null) {
-            agendaViewModel.getAgendaData(1, accessToken)
+            agendaViewModel.getAgendaData(day, accessToken)
         }
         agendaViewModel.getData().observe(this, Observer {
             ratingProgressBar.visibility = View.GONE
             if (it != null) {
-                list.clear()
-                for (session in it.data.sessions) {
-                    list.add(session)
+                if (it.data.id != -1) {
+                    list.clear()
+                    for (session in it.data.sessions) {
+                        list.add(session)
+                    }
+                    sessionRatingAdapter.notifyDataSetChanged()
+                } else {
+                    Toast.makeText(activity, "NO agenda For This DAY", Toast.LENGTH_SHORT).show()
                 }
-
-                sessionRatingAdapter.notifyDataSetChanged()
             } else {
                 Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
             }
@@ -88,6 +122,7 @@ class RatingSessionFragment : Fragment() {
 
     private fun initRecyclerView() {
         recyclerView = root?.findViewById(R.id.ratingRescycler)!!
+        ratingSpinner = root?.findViewById(R.id.ratingspinner)!!
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         sessionRatingAdapter = SessionsRatingAdapter(list)
         recyclerView.layoutManager = layoutManager
