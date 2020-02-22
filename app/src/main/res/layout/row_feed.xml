@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:background="@color/white">
+    android:layout_marginBottom="20dp"
+    android:background="@color/dark_color1">
 
     <RelativeLayout
         android:id="@+id/rellay1"
@@ -14,20 +15,21 @@
         android:layout_marginTop="15dp"
         android:layout_marginRight="15dp">
 
-        <ImageView
-            android:id="@+id/imgView_proPic"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgProfile"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_propic2" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_propic2"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="1dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/imgView_proPic"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/imgProfile"
             android:orientation="vertical">
 
             <TextView
@@ -36,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:text="Karun Shrestha"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="17sp" />
 
             <TextView
@@ -44,9 +46,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:text="11 hrs"
-                android:textColor="@color/not_black"
-                android:textSize="13sp" />
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                tools:text="11 hrs" />
 
         </LinearLayout>
 
@@ -58,22 +60,25 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/rellay1"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="15dp"
-        android:text="This is Status"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:layout_marginBottom="@dimen/space_20"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        tools:text="This is Status" />
 
     <ImageView
         android:id="@+id/imgView_postPic"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_below="@+id/tv_status"
+        android:layout_marginStart="@dimen/space_10"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="@dimen/space_10"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         android:src="@drawable/images"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <RelativeLayout
         android:id="@+id/rellay2"
@@ -82,7 +87,8 @@
         android:layout_below="@+id/imgView_postPic"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp">
+        android:layout_marginRight="15dp"
+        android:visibility="gone">
 
 
         <LinearLayout
@@ -98,7 +104,7 @@
                 android:id="@+id/tv_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:text="18"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
@@ -109,7 +115,7 @@
             android:id="@+id/tv_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:text="5 comments"
             android:textColor="@color/black"
             android:textSize="13sp" />
@@ -127,7 +133,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_below="@+id/imgView_line">
+        android:layout_below="@+id/imgView_line"
+        android:visibility="gone">
 
         <RelativeLayout
             android:id="@+id/likeView"

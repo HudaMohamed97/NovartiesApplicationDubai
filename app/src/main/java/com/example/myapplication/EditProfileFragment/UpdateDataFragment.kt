@@ -1,5 +1,7 @@
 package com.example.myapplication.EditProfileFragment
 
+import android.Manifest
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -23,7 +25,16 @@ import com.example.catapplication.utilies.Validation
 import com.example.myapplication.Models.Account
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.edit_profile.*
+import java.io.File
 import java.io.FileNotFoundException
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.core.app.ActivityCompat.requestPermissions
+import android.os.Build.VERSION.SDK_INT
+import android.util.Log
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
 
 
 class UpdateDataFragment : Fragment() {
@@ -38,8 +49,10 @@ class UpdateDataFragment : Fragment() {
     private lateinit var rePasswordText: String
     private lateinit var nameText: String
     private lateinit var account: Account
+    private var fileUri: String = ""
     private var matched = false
     private lateinit var loginPreferences: SharedPreferences
+    private val PERMISSION_REQUEST_CODE = 1
 
 
     override fun onCreateView(
@@ -68,7 +81,7 @@ class UpdateDataFragment : Fragment() {
         if (requestCode == 1)
             if (resultCode == Activity.RESULT_OK) {
                 val selectedImage = data?.data
-                val filePath = selectedImage?.let { getPath(it) }
+                fileUri = selectedImage?.let { getPath(it) }.toString()
                 imgProfile.setImageURI(selectedImage)
             }
 
@@ -86,14 +99,72 @@ class UpdateDataFragment : Fragment() {
         return column_index?.let { cursor.getString(it) }!!
     }
 
+    /*private fun requestPermission() {
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(
+                activity!!,
+                WRITE_EXTERNAL_STORAGE
+            )
+        ) {
+            Toast.makeText(
+                activity!!,
+                "Write External Storage permission allows us to do store images. Please allow this permission in App Settings.",
+                Toast.LENGTH_LONG
+            ).show()
+        } else {
+            requestPermissions(
+                activity!!,
+                arrayOf(WRITE_EXTERNAL_STORAGE),
+                PERMISSION_REQUEST_CODE
+            )
+        }
+    }*/
+
+    private fun isStoragePermissionGranted(): Boolean {
+        if (SDK_INT >= Build.VERSION_CODES.M) {
+            return if (checkSelfPermission(
+                    activity!!,
+                    READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                true
+            } else {
+                requestPermissions(
+                    activity!!,
+                    arrayOf(READ_EXTERNAL_STORAGE),
+                    1
+                )
+                false
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            return true
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(activity, "success", Toast.LENGTH_SHORT).show()
+
+
+            //resume tasks needing this permission
+        } else {
+            Toast.makeText(activity, "not access", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
     private fun setListeners() {
         imgProfile.setOnClickListener {
+            isStoragePermissionGranted()
             val photoPickerIntent = Intent(ACTION_PICK)
             photoPickerIntent.type = "image/*"
             this.startActivityForResult(photoPickerIntent, 1)
         }
-
-
 
         updateData.setOnClickListener {
             checkErrorEnabled()
@@ -117,7 +188,10 @@ class UpdateDataFragment : Fragment() {
         editDataProgressBar.visibility = View.VISIBLE
         val accessToken = loginPreferences.getString("accessToken", "")
         if (accessToken != null) {
-            updateDataModel.updateData(emailText, nameText, accessToken)
+            if (fileUri == "") {
+                fileUri = account.photo
+            }
+            updateDataModel.updateData(fileUri, emailText, nameText, accessToken)
         }
         updateDataModel.getData().observe(this, Observer {
             editDataProgressBar.visibility = View.GONE

@@ -94,7 +94,7 @@
                 android:id="@+id/pollTitle"
                 android:layout_margin="@dimen/space_20"
                 android:gravity="center"
-                android:text="Description ncjcndbvvmsdnsndmnmnbdsmnsdgmvmc,v,v,mmv,mcx,vmv,mxvmxbsdmgbdsnnndgmngmngmdgmngdn nd nsd h dvn vbdsdmsdnvsdbvndsvd"
+                tools:text="Description ncjcndbvvmsdnsndmnmnbdsmnsdgmvmc,v,v,mmv,mcx,vmv,mxvmxbsdmgbdsnnndgmngmngmdgmngdn nd nsd h dvn vbdsdmsdnvsdbvndsvd"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 

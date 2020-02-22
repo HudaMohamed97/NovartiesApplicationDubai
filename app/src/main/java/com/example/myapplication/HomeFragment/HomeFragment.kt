@@ -12,19 +12,13 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import com.example.myapplication.R
-import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.myapplication.Models.Account
-import com.example.myapplication.Models.EventModels.Speakers
+import com.example.myapplication.R
 import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.home_fragment.backButton
-import kotlinx.android.synthetic.main.home_fragment.imgProfile
-import kotlinx.android.synthetic.main.home_fragment.logOutButton
-import kotlinx.android.synthetic.main.login_fragment.*
-import kotlinx.android.synthetic.main.speaker_profile.*
 import java.util.*
 
 
@@ -71,6 +65,7 @@ class HomeFragment : Fragment() {
         }
 
         myPostsCard.setOnClickListener {
+            findNavController().navigate(R.id.action_HomeFragment_to_PostsFragment)
         }
         votingCard.setOnClickListener {
             findNavController().navigate(R.id.action_HomeFragment_to_PollFragment)

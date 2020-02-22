@@ -2,6 +2,8 @@ package com.example.myapplication.NetworkLayer
 
 import com.example.myapplication.Models.*
 import com.example.myapplication.Models.EventModels.SingleEventResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -14,8 +16,12 @@ interface ApiServices {
     @POST("auth/register")
     fun register(@Body registerRequestModel: RegisterRequestModel): Call<ResponseModelData>
 
+    @Multipart
     @POST("account/update")
-    fun updateAccount(@Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<updateDataModel>
+    fun updateAccount(
+        @Part("email") email: RequestBody, @Part("name") name: RequestBody, @Part image: MultipartBody.Part,
+        @Header("Authorization") authHeader: String
+    ): Call<updateDataModel>
 
     @POST("events/{event}/attendance")
     fun submitAttendance(@Body body: Map<String, String>, @Path("event") eventId: Int, @Header("Authorization") authHeader: String): Call<SubmitModel>
@@ -24,6 +30,9 @@ interface ApiServices {
 
     @GET("events")
     fun getSessions(@Header("Authorization") authHeader: String): Call<SessionsResponse>
+
+    @GET("posts")
+    fun getPosts(@Query("page") page: Int,@Header("Authorization") authHeader: String): Call<PostsModelResponse>
 
     @GET("setting")
     fun getLocation(@Header("Authorization") authHeader: String): Call<LocationResponse>
@@ -45,6 +54,9 @@ interface ApiServices {
 
     @GET("speakers")
     fun getSpeakers(@Header("Authorization") authHeader: String): Call<SpeakersResponseModel>
+
+    @GET("speakers")
+    fun getSpeakersPaginated(@Query("page") page: Int, @Header("Authorization") authHeader: String): Call<SpeakersResponseModel>
 
     @GET("agenda/{day}")
     fun getAgenda(@Path("day") eventId: Int, @Header("Authorization") authHeader: String): Call<AgendaModelResponse>

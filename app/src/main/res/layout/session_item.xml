@@ -58,8 +58,10 @@
 
                 <TextView
                     android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="@dimen/space_5"
                     android:background="@drawable/rounded_background_dimmed"
                     android:gravity="center"
                     android:text="YES">
@@ -68,9 +70,9 @@
 
                 <TextView
                     android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="@dimen/space_5"
                     android:background="@drawable/rounded_background_dimmed"
                     android:gravity="center"
@@ -88,18 +90,19 @@
                 <RadioButton
                     android:id="@+id/radioButton1"
                     android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="@dimen/space_5"
                     android:layout_marginStart="@dimen/space_5"
                     android:layout_marginTop="@dimen/space_5"
+                    android:layout_marginBottom="@dimen/space_5"
                     android:background="@drawable/rounded_background_green"
                     android:text="Yes  " />
 
                 <RadioButton
                     android:id="@+id/radioButton2"
                     android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="@dimen/space_5"
                     android:layout_marginTop="10dp"

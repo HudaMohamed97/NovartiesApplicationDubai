@@ -27,6 +27,7 @@ class RatingSessionFragment : Fragment() {
     private lateinit var ratingSpinner: Spinner
     private lateinit var sessionRatingAdapter: SessionsRatingAdapter
     private lateinit var loginPreferences: SharedPreferences
+    private var fromBack = false
 
 
     override fun onCreateView(
@@ -36,8 +37,10 @@ class RatingSessionFragment : Fragment() {
     ): View? {
         agendaViewModel = ViewModelProviders.of(this).get(AgendaViewModel::class.java)
         return if (root != null) {
+            fromBack = true
             root
         } else {
+            fromBack = false
             root = inflater.inflate(R.layout.saeesio_rating_fragment, container, false)
             root
         }
@@ -57,7 +60,9 @@ class RatingSessionFragment : Fragment() {
         }
         initRecyclerView()
         initializeSpinner()
-        callGetAgendaData(1)
+        if (!fromBack) {
+            callGetAgendaData(1)
+        }
     }
 
     private fun initializeSpinner() {

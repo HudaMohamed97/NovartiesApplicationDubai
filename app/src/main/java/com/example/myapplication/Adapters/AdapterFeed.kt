@@ -1,27 +1,32 @@
 package com.example.myapplication.Adapters
 
-import android.util.Log
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapplication.Models.ModelFeed
+import com.example.myapplication.Models.PostData
 import com.example.myapplication.R
+import kotlinx.android.synthetic.main.home_fragment.*
 import java.util.*
 
 
-class AdapterFeed(modelFeedArrayList: ArrayList<ModelFeed>) :
+class AdapterFeed(modelFeedArrayList: ArrayList<PostData>) :
     RecyclerView.Adapter<AdapterFeed.MyViewHolder>() {
 
     lateinit var onCommentClickListener: OnCommentClickListener
+    private var context: Context? = null
+
 
     override fun getItemCount(): Int {
         return modelFeedArrayList.size
     }
 
-    var modelFeedArrayList = ArrayList<ModelFeed>()
+    var modelFeedArrayList = ArrayList<PostData>()
 
 
     init {
@@ -31,61 +36,45 @@ class AdapterFeed(modelFeedArrayList: ArrayList<ModelFeed>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_feed, parent, false)
+        context = parent.context
         return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val modelFeed = modelFeedArrayList[position]
 
-        holder.tvName.text = modelFeed.name
-        holder.tvTime.text = modelFeed.time
-        holder.tv_likes.text = (modelFeed.likes).toString()
-        Log.i("hhh", "likes" + modelFeed.likes)
-        holder.tvComments.text = modelFeed.comments.toString() + " comments"
-        holder.tvStatus.text = modelFeed.status
-        if (modelFeed.postpic == 0) {
+        holder.tvName.text = modelFeed.owner.name
+        holder.tvStatus.text = modelFeed.content
+        if (modelFeed.owner.photo != null) {
+            Glide.with(context!!).load(modelFeed.owner.photo).centerCrop()
+                .placeholder(R.drawable.profile)
+                .error(R.drawable.profile).into(holder.imgProfile)
+        }
+
+        if (modelFeed.photo == null) {
             holder.imgviewPostpic.visibility = View.GONE
         } else {
             holder.imgviewPostpic.visibility = View.VISIBLE
-            holder.imgviewPostpic.setImageResource(modelFeed.postpic)
+            Glide.with(context!!).load(modelFeed.photo).centerCrop()
+                .placeholder(R.drawable.profile)
+                .error(R.drawable.profile).into(holder.imgviewPostpic)
 
-        }
-        holder.commentView.setOnClickListener {
-            if (onCommentClickListener != null && position != RecyclerView.NO_POSITION)
-                onCommentClickListener.onCommentClicked(modelFeedArrayList[position], position)
-        }
-        holder.likeView.setOnClickListener {
-
-            if (onCommentClickListener != null && position != RecyclerView.NO_POSITION)
-                onCommentClickListener.onLikeClicked(modelFeedArrayList[position], position)
-            holder.tvComments.text = modelFeed.comments.toString() + " comments"
         }
 
     }
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var tvName: TextView
-        var commentView: View
-        var likeView: View
         var tvTime: TextView
-        var tv_likes: TextView
-        var tvComments: TextView
         var tvStatus: TextView
-        var imgView_proPic: ImageView =
-            itemView.findViewById<View>(R.id.imgView_proPic) as ImageView
-        var imgviewPostpic: ImageView =
-            itemView.findViewById<View>(R.id.imgView_postPic) as ImageView
+        var imgviewPostpic = itemView.findViewById<ImageView>(R.id.imgView_postPic)
+        var imgProfile = itemView.findViewById<ImageView>(R.id.imgProfile)
 
         init {
-
             tvName = itemView.findViewById<View>(R.id.tv_name) as TextView
             tvTime = itemView.findViewById<View>(R.id.tv_time) as TextView
-            tv_likes = itemView.findViewById<View>(R.id.tv_like) as TextView
-            tvComments = itemView.findViewById<View>(R.id.tv_comment) as TextView
             tvStatus = itemView.findViewById<View>(R.id.tv_status) as TextView
-            commentView = itemView.findViewById<View>(R.id.CommentView) as View
-            likeView = itemView.findViewById<View>(R.id.likeView) as View
         }
     }
 

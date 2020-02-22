@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.Models.updateDataModel
 import okhttp3.ResponseBody
+import java.io.File
 
 class UpdateDataViewModel : ViewModel() {
     private var repositoryHelper: UpdateDataRepository = UpdateDataRepository()
@@ -11,8 +12,8 @@ class UpdateDataViewModel : ViewModel() {
     private lateinit var passwordMutableLiveData: MutableLiveData<ResponseBody>
 
 
-    fun updateData(email: String, name: String, accessToken: String) {
-        mutableLiveData = repositoryHelper.updateData(email, name, accessToken)
+    fun updateData(file: String, email: String, name: String, accessToken: String) {
+        mutableLiveData = repositoryHelper.updateData(file, email, name, accessToken)
 
     }
 
