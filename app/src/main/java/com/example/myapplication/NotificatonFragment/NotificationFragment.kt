@@ -1,7 +1,5 @@
 package com.example.myapplication.NotificatonFragment
 
-
-import android.app.Notification
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
