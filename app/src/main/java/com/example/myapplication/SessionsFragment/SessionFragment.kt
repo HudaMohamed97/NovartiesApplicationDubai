@@ -2,12 +2,10 @@ package com.example.myapplication.SessionsFragment
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -19,9 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Adapters.SessionAdapter
 import com.example.myapplication.Models.SessionsData
 import com.example.myapplication.R
-import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.sessions_list.*
-import kotlinx.android.synthetic.main.sessions_list.backButton
 
 
 class SessionFragment : Fragment() {
@@ -95,21 +91,21 @@ class SessionFragment : Fragment() {
             override fun onItemClicked(position: Int, statues: Int) {
                 sessionId = list[position].id
                 statuesFlag = statues
+                callSubmitAttendance()
             }
 
         })
     }
 
-
     private fun setClickListeners() {
         recyclerView = root?.findViewById(R.id.sessionRecycler)!!
-        btn_submit.setOnClickListener {
+        /*btn_submit.setOnClickListener {
             if (sessionId == -1) {
                 Toast.makeText(activity, "Please Select Yes Or No", Toast.LENGTH_SHORT).show()
             } else {
                 callSubmitAttendance()
             }
-        }
+        }*/
 
         val logOutButton = root?.findViewById(R.id.logOutButton) as ImageView
         val backButton = root?.findViewById(R.id.backButton) as ImageView

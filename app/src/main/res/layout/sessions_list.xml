@@ -61,7 +61,7 @@
         android:layout_width="match_parent"
         android:id="@+id/mainlayout"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="80dp"
         android:orientation="vertical">
 
 
@@ -76,7 +76,7 @@
             android:gravity="center"
             android:text="Submit"
             android:textColor="@color/white"
-            android:visibility="visible"
+            android:visibility="gone"
             app:cornerRadius="@dimen/space_20"
             app:layout_constraintBottom_toTopOf="@+id/mainlayout"
             app:layout_constraintEnd_toEndOf="parent"

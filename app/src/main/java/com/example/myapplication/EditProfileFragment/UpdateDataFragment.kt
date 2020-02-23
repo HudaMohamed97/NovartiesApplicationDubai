@@ -138,6 +138,12 @@ class UpdateDataFragment : Fragment() {
 
 
     private fun setListeners() {
+        logOutButton.setOnClickListener {
+            activity!!.finish()
+        }
+        backButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
         imgProfile.setOnClickListener {
             isStoragePermissionGranted()
             val photoPickerIntent = Intent(ACTION_PICK)

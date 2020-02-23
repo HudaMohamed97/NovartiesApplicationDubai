@@ -64,6 +64,12 @@ class PostsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loginPreferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+        val type = loginPreferences.getInt("userType", -1)
+        if (type == 1) {
+            addPost.visibility = View.VISIBLE
+        } else {
+            addPost.visibility = View.GONE
+        }
         setClickListeners()
         initRecyclerView()
         callPosts(1, false, false)

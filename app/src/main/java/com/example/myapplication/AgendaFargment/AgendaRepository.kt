@@ -21,7 +21,7 @@ class AgendaRepository {
                         userData.value = response.body()
                     } else {
                         if (response.code() == 404) {
-                            AgendaModelResponse(AgendaData(-1, "", emptyList()))
+                            AgendaModelResponse(AgendaData(-1, "", emptyList()),0)
                         } else {
                             userData.value = response.body()
                         }

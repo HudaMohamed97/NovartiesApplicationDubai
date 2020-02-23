@@ -45,6 +45,7 @@ class AdapterFeed(modelFeedArrayList: ArrayList<PostData>) :
 
         holder.tvName.text = modelFeed.owner.name
         holder.tvStatus.text = modelFeed.content
+        holder.tvTime.text = modelFeed.created_at
         if (modelFeed.owner.photo != null) {
             Glide.with(context!!).load(modelFeed.owner.photo).centerCrop()
                 .placeholder(R.drawable.profile)

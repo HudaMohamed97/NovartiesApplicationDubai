@@ -17,6 +17,7 @@ import com.example.myapplication.Adapters.SessionsRatingAdapter
 import com.example.myapplication.LoginFragment.AgendaViewModel
 import com.example.myapplication.Models.Sessions
 import com.example.myapplication.R
+import kotlinx.android.synthetic.main.agenda_fragment.*
 import kotlinx.android.synthetic.main.saeesio_rating_fragment.*
 
 class RatingSessionFragment : Fragment() {
@@ -28,6 +29,10 @@ class RatingSessionFragment : Fragment() {
     private lateinit var sessionRatingAdapter: SessionsRatingAdapter
     private lateinit var loginPreferences: SharedPreferences
     private var fromBack = false
+    private var numberOfDays = 1
+    var enteredBefore = false
+    var listDays = arrayListOf<Int>()
+    val listofDays = arrayListOf<String>()
 
 
     override fun onCreateView(
@@ -59,34 +64,18 @@ class RatingSessionFragment : Fragment() {
             findNavController().navigateUp()
         }
         initRecyclerView()
-        initializeSpinner()
         if (!fromBack) {
             callGetAgendaData(1)
         }
-    }
-
-    private fun initializeSpinner() {
-        val list = arrayListOf<Int>()
-        list.add(1)
-        list.add(2)
-        list.add(3)
-        val arrayAdapter =
-            context?.let {
-                ArrayAdapter(
-                    it,
-                    R.layout.spinner_item,
-                    list
-                )
-            }
-        ratingSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        ratingspinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parentView: AdapterView<*>,
-                selectedItemView: View?,
+                selectedItemView: View,
                 position: Int,
                 id: Long
             ) {
-                if (position >= 0) {
-                    val selectedDay = list[position]
+                if (position != 0) {
+                    val selectedDay = listDays[position]
                     callGetAgendaData(selectedDay)
                 }
             }
@@ -95,9 +84,32 @@ class RatingSessionFragment : Fragment() {
                 // your code here
             }
         }
+
+    }
+
+    private fun initializeSpinner(numberOfDays: Int) {
+        enteredBefore = true
+        for (i in 0..numberOfDays) {
+            listDays.add(i)
+        }
+        for (day in listDays) {
+            if (day == 0) {
+                listofDays.add("Days ")
+            } else {
+                listofDays.add("Day " + day)
+            }
+        }
+        val arrayAdapter =
+            context?.let {
+                ArrayAdapter(
+                    it,
+                    R.layout.spinner_item,
+                    listofDays
+                )
+            }
         arrayAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         if (arrayAdapter != null) {
-            ratingSpinner.adapter = arrayAdapter
+            ratingspinner.adapter = arrayAdapter
         }
     }
 
@@ -110,9 +122,14 @@ class RatingSessionFragment : Fragment() {
         agendaViewModel.getData().observe(this, Observer {
             ratingProgressBar.visibility = View.GONE
             if (it != null) {
-                if (it.data.id != -1) {
+                if (it.day.id != -1) {
+                    numberOfDays = it.num_of_days
+                    numberOfDays = it.num_of_days
+                    if (!enteredBefore) {
+                        initializeSpinner(numberOfDays)
+                    }
                     list.clear()
-                    for (session in it.data.sessions) {
+                    for (session in it.day.sessions) {
                         list.add(session)
                     }
                     sessionRatingAdapter.notifyDataSetChanged()

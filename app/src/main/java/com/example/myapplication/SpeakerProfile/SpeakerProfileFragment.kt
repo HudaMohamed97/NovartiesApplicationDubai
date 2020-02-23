@@ -42,9 +42,17 @@ class SpeakerProfileFragment : Fragment() {
             speaker_Bio.text = Html.fromHtml(
                 speaker.bio, Html.FROM_HTML_MODE_LEGACY
             )
+            speaker_Bio.append(
+                "\n" + "" +
+                        "       "
+            )
         } else {
             speaker_Bio.text = Html.fromHtml(
                 speaker.bio
+            )
+            speaker_Bio.append(
+                "\n" + "" +
+                        "       "
             )
         }
 

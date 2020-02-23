@@ -33,7 +33,11 @@ class AgendaFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var agendaAdapter: AgendaAdapter
     private lateinit var loginPreferences: SharedPreferences
-
+    private var numberOfDays = 0
+    var enteredBefore = false
+    var selectedBefore = true
+    var listDays = arrayListOf<Int>()
+    val listofDays = arrayListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,8 +58,9 @@ class AgendaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         loginPreferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
         initRecyclerView()
-        initializeSpinner()
         callGetAgendaData(1)
+        //initializeSpinner()
+
         val logOutButton = root?.findViewById(R.id.logOutButton) as ImageView
         val backButton = root?.findViewById(R.id.backButton) as ImageView
 
@@ -69,6 +74,23 @@ class AgendaFragment : Fragment() {
         backButton.setOnClickListener {
             findNavController().navigateUp()
         }
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parentView: AdapterView<*>,
+                selectedItemView: View,
+                position: Int,
+                id: Long
+            ) {
+                if (position != 0) {
+                    val selectedDay = listDays[position]
+                    callGetAgendaData(selectedDay)
+                }
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>) {
+                // your code here
+            }
+        }
 
     }
 
@@ -81,9 +103,13 @@ class AgendaFragment : Fragment() {
         agendaViewModel.getData().observe(this, Observer {
             agendaProgressBar.visibility = View.GONE
             if (it != null) {
-                if (it.data.id != -1) {
+                if (it.day.id != -1) {
                     list.clear()
-                    for (session in it.data.sessions) {
+                    numberOfDays = it.num_of_days
+                    if (!enteredBefore) {
+                        initializeSpinner(numberOfDays)
+                    }
+                    for (session in it.day.sessions) {
                         list.add(session)
                     }
                     agendaAdapter.notifyDataSetChanged()
@@ -97,34 +123,26 @@ class AgendaFragment : Fragment() {
         })
     }
 
-    private fun initializeSpinner() {
-        val list = arrayListOf<Int>()
-        list.add(1)
-        list.add(2)
-        list.add(3)
+    private fun initializeSpinner(numberOfDays: Int) {
+        enteredBefore = true
+        for (i in 0..numberOfDays) {
+            listDays.add(i)
+        }
+        for (day in listDays) {
+            if (day == 0) {
+                listofDays.add("Days ")
+            } else {
+                listofDays.add("Day " + day)
+            }
+        }
         val arrayAdapter =
             context?.let {
                 ArrayAdapter(
                     it,
                     R.layout.spinner_item,
-                    list
+                    listofDays
                 )
             }
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parentView: AdapterView<*>,
-                selectedItemView: View,
-                position: Int,
-                id: Long
-            ) {
-                val selectedDay = list[position]
-                callGetAgendaData(selectedDay)
-            }
-
-            override fun onNothingSelected(parentView: AdapterView<*>) {
-                // your code here
-            }
-        }
         arrayAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         if (arrayAdapter != null) {
             spinner.adapter = arrayAdapter

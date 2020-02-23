@@ -7,5 +7,7 @@ class PostData(
     @SerializedName("content") val content: String,
     @SerializedName("photo") val photo: String,
     @SerializedName("num_comments") val num_comments: Int,
-    @SerializedName("owner") val owner: PostOwner
+    @SerializedName("owner") val owner: PostOwner,
+    @SerializedName("created_at") val created_at: String
+
 )
