@@ -86,12 +86,8 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_HomeFragment_to_UpdateFragment, bundle)
         }
 
-        logOutButton.setOnClickListener {
-            /* val preferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
-             val editor = preferences.edit()
-             editor.clear()
-             editor.apply()*/
-            activity!!.finish()
+        notification.setOnClickListener {
+            findNavController().navigate(R.id.action_HomeFragment_to_NotificationFragment)
         }
 
         mainLayout.setOnClickListener {

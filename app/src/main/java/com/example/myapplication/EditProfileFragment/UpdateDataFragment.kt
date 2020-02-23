@@ -144,6 +144,9 @@ class UpdateDataFragment : Fragment() {
         backButton.setOnClickListener {
             findNavController().navigateUp()
         }
+        mainLayout.setOnClickListener {
+            hideKeyboard()
+        }
         imgProfile.setOnClickListener {
             isStoragePermissionGranted()
             val photoPickerIntent = Intent(ACTION_PICK)
@@ -162,8 +165,20 @@ class UpdateDataFragment : Fragment() {
         changePassword.setOnClickListener {
             checkErrorEnabledPassword()
             hideKeyboard()
-            if (passwordText.isNotEmpty() && matched) {
-                // callUpdatePassword()
+            if (passwordText.isEmpty()) {
+                Toast.makeText(
+                    activity,
+                    "Empty Password",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (passwordText.isNotEmpty() && !matched) {
+                callUpdatePassword()
+            } else if (matched) {
+                Toast.makeText(
+                    activity,
+                    "Old Password and New Password Is Same",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
@@ -195,15 +210,16 @@ class UpdateDataFragment : Fragment() {
         editDataProgressBar.visibility = View.VISIBLE
         val accessToken = loginPreferences.getString("accessToken", "")
         if (accessToken != null) {
-            updateDataModel.updatePassword(passwordText, accessToken)
+            updateDataModel.updatePassword(rePasswordText, passwordText, accessToken)
         }
         updateDataModel.getPasswordData().observe(this, Observer {
             editDataProgressBar.visibility = View.GONE
             if (it != null) {
                 Toast.makeText(activity, "Updated Successfuly", Toast.LENGTH_SHORT).show()
-                // to navigate to login Screen
+                findNavController().navigate(R.id.action_back_to_login)
             } else {
-                Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Network Error Please Try Again Later", Toast.LENGTH_SHORT)
+                    .show()
             }
         })
 
@@ -243,14 +259,9 @@ class UpdateDataFragment : Fragment() {
         }
     }
 
-
     private fun validatePassword() {
         if (!Validation.validate(passwordText)) {
             Toast.makeText(activity, "empty password please fill it", Toast.LENGTH_SHORT).show()
-
-        } else if (!Validation.validate(rePasswordText)) {
-            Toast.makeText(activity, "please reconfirm your Password", Toast.LENGTH_SHORT)
-                .show()
 
         } else if (passwordEt.length() < 6 || rePasswordText.length < 6) {
             Toast.makeText(

@@ -16,6 +16,9 @@ interface ApiServices {
     @POST("auth/register")
     fun register(@Body registerRequestModel: RegisterRequestModel): Call<ResponseModelData>
 
+    @POST("account/update-password")
+    fun updatePassword(@Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<Account>
+
     @Multipart
     @POST("account/update")
     fun updateAccount(
@@ -33,6 +36,9 @@ interface ApiServices {
 
     @GET("posts")
     fun getPosts(@Query("page") page: Int, @Header("Authorization") authHeader: String): Call<PostsModelResponse>
+
+    @GET("notifications")
+    fun getNotification(@Query("page") page: Int, @Header("Authorization") authHeader: String): Call<NotificationModelResponse>
 
     @Multipart
     @POST("posts")

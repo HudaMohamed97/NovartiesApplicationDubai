@@ -89,6 +89,9 @@
                 android:id="@+id/action_HomeFragment_to_RatingFragment"
                 app:destination="@id/RatingFragment" />
             <action
+                android:id="@+id/action_HomeFragment_to_NotificationFragment"
+                app:destination="@id/NotificationFragment" />
+            <action
                 android:id="@+id/action_HomeFragment_to_UpdateFragment"
                 app:destination="@id/UpdateFragment" />
 
@@ -97,6 +100,15 @@
             android:id="@+id/EventFragment"
             android:name="com.example.myapplication.EventFragment.EventFragment"
             tools:layout="@layout/events_fragment">
+
+            <action
+                android:id="@+id/action_Fragment_to_loginFragment"
+                app:destination="@id/loginFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/NotificationFragment"
+            android:name="com.example.myapplication.NotificatonFragment.NotificationFragment"
+            tools:layout="@layout/notification_fragment">
 
             <action
                 android:id="@+id/action_Fragment_to_loginFragment"

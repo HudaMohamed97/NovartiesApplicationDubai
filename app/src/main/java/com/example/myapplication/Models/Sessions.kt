@@ -9,6 +9,7 @@ data class Sessions(
 
     @SerializedName("id") val id: Int,
     @SerializedName("title") val title: String,
+    @SerializedName("desc") val desc: String,
     @SerializedName("location") val location: String,
     @SerializedName("time_from") val time_from: String,
     @SerializedName("time_to") val time_to: String,
@@ -20,12 +21,14 @@ data class Sessions(
         parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readString().toString(),
+        parcel.readString().toString(),
         TODO("speakers")
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(title)
+        parcel.writeString(desc)
         parcel.writeString(location)
         parcel.writeString(time_from)
         parcel.writeString(time_to)
@@ -45,3 +48,4 @@ data class Sessions(
         }
     }
 }
+

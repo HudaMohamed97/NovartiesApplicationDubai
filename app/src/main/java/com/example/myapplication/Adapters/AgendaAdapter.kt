@@ -1,13 +1,11 @@
 package com.example.myapplication.Adapters
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Models.EventModels.SpeakerSession
-import com.example.myapplication.Models.EventModels.Speakers
 import com.example.myapplication.Models.Sessions
 import com.example.myapplication.R
 
@@ -50,7 +48,28 @@ class AgendaAdapter(modelFeedArrayList: List<Sessions>) :
             holder.agendaSpeakers.visibility = View.GONE
 
         }
-
+        if (agendaModel.desc != null) {
+            holder.agendaContent.visibility = View.VISIBLE
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                holder.agendaContent.text = Html.fromHtml(
+                    agendaModel.desc, Html.FROM_HTML_MODE_LEGACY
+                )
+                holder.agendaContent.append(
+                    "\n" + "" +
+                            "       "
+                )
+            } else {
+                holder.agendaContent.text = Html.fromHtml(
+                    agendaModel.desc
+                )
+                holder.agendaContent.append(
+                    "\n" + "" +
+                            "       "
+                )
+            }
+        } else {
+            holder.agendaContent.visibility = View.GONE
+        }
 
         /*if (agendaModel.speakers.isNotEmpty()) {
             holder.speakersPerSession.visibility = View.VISIBLE
@@ -85,6 +104,7 @@ class AgendaAdapter(modelFeedArrayList: List<Sessions>) :
         var agendaTimeFrom: TextView = itemView.findViewById<View>(R.id.agendatimefrom) as TextView
         var agendaTimeTo: TextView = itemView.findViewById<View>(R.id.agendatimeto) as TextView
         var agendaLoacation: TextView = itemView.findViewById<View>(R.id.agendalocation) as TextView
+        var agendaContent: TextView = itemView.findViewById<View>(R.id.agendaContent) as TextView
         var agendaSpeakers: TextView =
             itemView.findViewById<View>(R.id.agendaSpeakers) as TextView
         var agendaName: TextView =
