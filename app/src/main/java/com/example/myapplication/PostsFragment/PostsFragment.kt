@@ -87,6 +87,7 @@ class PostsFragment : Fragment() {
                 PostsProgressBar.visibility = View.GONE
             }
             if (fromRefresh) {
+                currentPageNum = 1
                 modelFeedArrayList.clear()
             }
             if (it != null) {
@@ -116,6 +117,7 @@ class PostsFragment : Fragment() {
         postViewModel.getDataAddPost().observe(this, Observer {
             PostsProgressBar.visibility = View.GONE
             if (it != null) {
+                post_layout.setText("")
                 Toast.makeText(activity, "Post Added Successfully", Toast.LENGTH_SHORT).show()
                 postImageSelected.visibility = View.GONE
                 /*modelFeedArrayList.add(

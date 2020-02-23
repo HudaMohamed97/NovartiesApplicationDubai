@@ -39,9 +39,13 @@ class SpeakerProfileFragment : Fragment() {
         speaker_name.text = speaker.name
         speaker_Bio.movementMethod = ScrollingMovementMethod()
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            speaker_Bio.text = Html.fromHtml(speaker.bio, Html.FROM_HTML_MODE_LEGACY)
+            speaker_Bio.text = Html.fromHtml(
+                speaker.bio, Html.FROM_HTML_MODE_LEGACY
+            )
         } else {
-            speaker_Bio.text = Html.fromHtml(speaker.bio)
+            speaker_Bio.text = Html.fromHtml(
+                speaker.bio
+            )
         }
 
         Glide.with(context!!).load(speaker.photo).centerCrop()

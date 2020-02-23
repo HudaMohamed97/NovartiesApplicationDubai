@@ -63,9 +63,12 @@
             android:id="@+id/credentials_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="@dimen/space_10"
             android:background="@color/dark_color1"
-            android:minHeight="400dp"
+            android:minHeight="500dp"
             app:cardCornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +79,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:minHeight="400dp">
+                android:minHeight="500dp">
 
                 <LinearLayout
                     android:id="@+id/imgProfileLayout"
@@ -84,6 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/space_20"
                     android:background="@drawable/speaker_profile_rounded"
+                    app:layout_constraintBottom_toTopOf="@+id/text"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -123,24 +127,33 @@
                     android:layout_height="0.5dp"
                     android:layout_marginTop="@dimen/space_20"
                     android:background="@color/browser_actions_bg_grey"
+                    app:layout_constraintBottom_toTopOf="@+id/text"
                     app:layout_constraintLeft_toRightOf="@+id/imgProfileLayout"
                     app:layout_constraintStart_toEndOf="@+id/imgProfileLayout"
                     app:layout_constraintTop_toBottomOf="@+id/speaker_name" />
 
-
-                <TextView
-                    android:id="@+id/speaker_Bio"
+                <LinearLayout
+                    android:id="@+id/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/space_20"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imgProfileLayout"
-                    tools:text="Huda Mohaemd fjsfmdnfjdmfmnfmdsnfmsndfsdfbsdfbsdfb
+                    app:layout_constraintTop_toBottomOf="@+id/imgProfileLayout">
+
+                    <TextView
+                        android:id="@+id/speaker_Bio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imgProfileLayout"
+                        tools:text="Huda Mohaemd fjsfmdnfjdmfmnfmdsnfmsndfsdfbsdfbsdfb
                  jfjhfjhdsfhdsjfhsjdhfjsjsfhsdjhhjdshjdsfhdhfjfhsdfjhsjfhjffjdsfdbfbdfjbds
                  jfjhfjdshfjhsfjsd
                  nfkdshfkshfksdhfkshdfkhsdfkmnmcvnmdjm xmsdvsvs sjdv " />
+                </LinearLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
