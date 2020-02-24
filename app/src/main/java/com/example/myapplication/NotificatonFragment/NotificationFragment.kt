@@ -81,6 +81,9 @@ class NotificationFragment : Fragment() {
                 for (data in it.data) {
                     list.add(data)
                 }
+                if (list.size == 0) {
+                    Toast.makeText(activity, "There is No Notification", Toast.LENGTH_SHORT).show()
+                }
                 notificationAdapter.notifyDataSetChanged()
                 mHasReachedBottomOnce = false
                 currentPageNum++

@@ -18,7 +18,6 @@ import com.example.myapplication.Adapters.QuestionDetailsAdapter
 import com.example.myapplication.Models.EventModels.QuestionModelOption
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.question_details_fragment.*
-import kotlinx.android.synthetic.main.voting_fragment.*
 
 class QuestionDetailsFragment : Fragment() {
     private lateinit var root: View
