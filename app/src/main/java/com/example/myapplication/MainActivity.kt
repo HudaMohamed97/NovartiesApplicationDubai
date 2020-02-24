@@ -27,10 +27,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         loginPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
         val saveLogin = loginPreferences.getBoolean("saveLogin", false)
-
+        Log.i("hhhhhh","hi done")
         PushNotifications.start(applicationContext, "e3261a40-f1c1-4a9d-b568-4da52ee960ec")
-        PushNotifications.addDeviceInterest("hello")
-
+        PushNotifications.addDeviceInterest("debug-hello")
+        Log.i("hhhhhh","hi done")
         val navHostFragment = nav_host_fragment as NavHostFragment
         val graphInflater = navHostFragment.navController.navInflater
         var navGraph = graphInflater.inflate(R.navigation.navigation)
