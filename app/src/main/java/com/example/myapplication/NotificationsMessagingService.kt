@@ -32,10 +32,10 @@ class NotificationsMessagingService : MessagingService() {
         val builder = NotificationCompat.Builder(
             this, "1"
         )
-            .setContentTitle("Navigation")
+            .setContentTitle("Notification")
             .setContentText("Deep link to Android")
             .setContentIntent(deeplink)
-            .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+            .setSmallIcon(R.drawable.logo)
             .setAutoCancel(true)
         notificationManager.notify(0, builder.build())
     }

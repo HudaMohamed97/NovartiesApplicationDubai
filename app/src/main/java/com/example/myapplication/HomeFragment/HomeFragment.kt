@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setClickListeners()
         loginPreferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
-        account = arguments?.getParcelable<Account>("Account")!!
+        account = arguments?.getParcelable("Account")!!
         user_name.text = account.name
         Glide.with(context!!).load(account.photo).centerCrop()
             .placeholder(R.drawable.profile)
@@ -93,6 +93,12 @@ class HomeFragment : Fragment() {
         mainLayout.setOnClickListener {
             hideKeyboard()
         }
+
+        question_button.setOnClickListener {
+            findNavController().navigate(R.id.action_HomeFragment_to_QuestionFragment)
+        }
+
+
     }
 
     private fun callLocationData() {

@@ -8,6 +8,7 @@ import android.util.EventLogTags
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
@@ -55,6 +56,7 @@ class RatingFragment : Fragment() {
 
         val comment = comment_layout.text.toString()
         submitRateButton.setOnClickListener {
+            hideKeyboard()
             rate = ratingBar.rating.toInt()
             if (rate == -1 || rate == 0) {
                 Toast.makeText(activity, "Please Rate Session", Toast.LENGTH_SHORT).show()
@@ -72,6 +74,7 @@ class RatingFragment : Fragment() {
             activity!!.finish()
         }
         backButton.setOnClickListener {
+            hideKeyboard()
             findNavController().navigateUp()
         }
     }
@@ -99,6 +102,15 @@ class RatingFragment : Fragment() {
                 Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun hideKeyboard() {
+        val view = activity?.currentFocus
+        if (view != null) {
+            val imm =
+                context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+            imm!!.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 
 }

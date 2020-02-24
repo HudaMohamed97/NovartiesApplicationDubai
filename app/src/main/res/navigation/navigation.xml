@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_LoginFragment_to_ScannerFragment"
             app:destination="@id/ScannerFragment" />
+        <action
+            android:id="@+id/action_LoginFragment_to_ForgetPassword"
+            app:destination="@id/ResetFragment" />
 
         <action
             android:id="@+id/action_LoginFragment_to_RegisterFragment"
@@ -47,6 +50,12 @@
         <action
             android:id="@+id/action_Fragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ResetFragment"
+        android:name="com.example.myapplication.ForgetPassword.ForgetPasswordFragment"
+        tools:layout="@layout/forget_password">
+
     </fragment>
 
 
@@ -94,6 +103,9 @@
             <action
                 android:id="@+id/action_HomeFragment_to_UpdateFragment"
                 app:destination="@id/UpdateFragment" />
+            <action
+                android:id="@+id/action_HomeFragment_to_QuestionFragment"
+                app:destination="@id/QuestionFragment" />
 
         </fragment>
         <fragment
@@ -111,8 +123,40 @@
             tools:layout="@layout/notification_fragment">
 
             <action
-                android:id="@+id/action_Fragment_to_loginFragment"
-                app:destination="@id/loginFragment" />
+                android:id="@+id/action_Notification_to_EventFragment"
+                app:destination="@id/EventFragment" />
+            <action
+                android:id="@+id/action_Notification_to_PollFragment"
+                app:destination="@id/PollFragment" />
+            <action
+                android:id="@+id/action_Notification_to_AgendaFragment"
+                app:destination="@id/AgendaFragment" />
+            <action
+                android:id="@+id/action_Notification_to_SessionFragment"
+                app:destination="@id/SessionFragment" />
+            <action
+                android:id="@+id/action_Notification_to_SpeakersFragment"
+                app:destination="@id/SpeakersFragment" />
+            <action
+                android:id="@+id/action_Notification_to_SessionRatingFragment"
+                app:destination="@id/SessionRatingFragment" />
+            <action
+                android:id="@+id/action_Notification_to_PostsFragment"
+                app:destination="@id/PostsFragment" />
+
+            <action
+                android:id="@+id/action_Notification_to_RatingFragment"
+                app:destination="@id/RatingFragment" />
+            <action
+                android:id="@+id/action_Notification_to_NotificationFragment"
+                app:destination="@id/NotificationFragment" />
+            <action
+                android:id="@+id/action_Notification_to_UpdateFragment"
+                app:destination="@id/UpdateFragment" />
+            <action
+                android:id="@+id/action_Notification_to_QuestionFragment"
+                app:destination="@id/QuestionFragment" />
+
         </fragment>
 
         <fragment
@@ -159,6 +203,23 @@
             <action
                 android:id="@+id/action_clickSession_toRatingDetails"
                 app:destination="@id/RatingFragment" />
+
+        </fragment>
+        <fragment
+            android:id="@+id/QuestionFragment"
+            android:name="com.example.myapplication.QuestionsFragment.QuestionsFragment"
+            tools:layout="@layout/qustion_fragment">
+
+            <action
+                android:id="@+id/action_clickSession_toQuestionDetails"
+                app:destination="@id/QuestionDeatilsFragment" />
+
+        </fragment>
+
+        <fragment
+            android:id="@+id/QuestionDeatilsFragment"
+            android:name="com.example.myapplication.QuestionsFragment.QuestionDetailsFragment"
+            tools:layout="@layout/question_details_fragment">
 
         </fragment>
         <fragment

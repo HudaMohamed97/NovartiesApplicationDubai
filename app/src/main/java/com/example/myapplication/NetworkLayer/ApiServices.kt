@@ -13,6 +13,9 @@ interface ApiServices {
     @POST("auth/login")
     fun login(@Body loginRequestModel: LoginRequestModel): Call<ResponseModelData>
 
+    @POST("auth/reset-password")
+    fun reset(@Body body: Map<String, String>): Call<SubmitModel>
+
     @POST("auth/register")
     fun register(@Body registerRequestModel: RegisterRequestModel): Call<ResponseModelData>
 
@@ -40,6 +43,13 @@ interface ApiServices {
     @GET("notifications")
     fun getNotification(@Query("page") page: Int, @Header("Authorization") authHeader: String): Call<NotificationModelResponse>
 
+    @GET("practices")
+    fun getQuestions(@Header("Authorization") authHeader: String): Call<QuestionsModelResponse>
+
+    @GET("practices/{practice}")
+    fun getSingeQuestion(@Path("practice") practiceId: Int, @Header("Authorization") authHeader: String): Call<SingelQuestionModel>
+
+
     @Multipart
     @POST("posts")
     fun addPost(@Part("content") email: RequestBody, @Part image: MultipartBody.Part, @Header("Authorization") authHeader: String): Call<SubmitModel>
@@ -58,6 +68,9 @@ interface ApiServices {
 
     @POST("polls")
     fun submitPolls(@Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<SubmitModel>
+
+    @POST("practices")
+    fun submitAnswer(@Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<SubmitModel>
 
     @POST("sessions/{session}/rating")
     fun submitSessionsRate(@Path("session") session: Int, @Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<SubmitModel>

@@ -98,7 +98,15 @@ class NotificationFragment : Fragment() {
         recyclerView.adapter = notificationAdapter
         notificationAdapter.setOnItemListener(object : NotificationAdapter.OnItemClickListener {
             override fun onItemClicked(position: Int) {
-                //findNavController().navigate(R.id.action_clickSpeaker_toSpeakerProfile, bundle)
+                when {
+                    list[position].type == "post" -> findNavController().navigate(R.id.action_Notification_to_PostsFragment)
+                    list[position].type == "poll" -> findNavController().navigate(R.id.action_Notification_to_PollFragment)
+                    list[position].type == "speaker" -> findNavController().navigate(R.id.action_Notification_to_SpeakersFragment)
+                    list[position].type == "question" -> findNavController().navigate(R.id.action_Notification_to_QuestionFragment)
+                    list[position].type == "agenda" -> findNavController().navigate(R.id.action_Notification_to_AgendaFragment)
+                    list[position].type == "event" -> findNavController().navigate(R.id.action_Notification_to_SessionFragment)
+                    else -> findNavController().navigateUp()
+                }
             }
         })
 

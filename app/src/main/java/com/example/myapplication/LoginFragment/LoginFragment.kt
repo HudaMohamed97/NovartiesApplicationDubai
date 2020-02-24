@@ -49,6 +49,11 @@ class LoginFragment : Fragment(), LoginInterface {
     }
 
     override fun setClickListeners() {
+
+        forgetPassword.setOnClickListener{
+            findNavController().navigate(R.id.action_LoginFragment_to_ForgetPassword)
+
+        }
         showPassword.setOnClickListener {
             var cursor = passwordEt.selectionStart
             if (clicked) {
