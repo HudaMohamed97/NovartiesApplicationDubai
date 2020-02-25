@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.myapplication.Adapters.CustomBottomSheet
 import com.example.myapplication.Models.Account
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.home_fragment.*
@@ -27,6 +28,7 @@ class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var loginPreferences: SharedPreferences
     private lateinit var account: Account
+    private lateinit var customBottomSheet: LocationBottomSheet
 
 
     override fun onCreateView(
@@ -78,7 +80,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_HomeFragment_to_SessionRatingFragment)
         }
         sessionsCard.setOnClickListener {
-            findNavController().navigate(R.id.action_HomeFragment_to_SessionFragment)
+            findNavController().navigate(R.id.action_HomeFragment_to_QuestionFragment)
         }
         profile_card.setOnClickListener {
             val bundle = Bundle()
@@ -95,7 +97,7 @@ class HomeFragment : Fragment() {
         }
 
         question_button.setOnClickListener {
-            findNavController().navigate(R.id.action_HomeFragment_to_QuestionFragment)
+            findNavController().navigate(R.id.action_HomeFragment_to_SessionFragment)
         }
 
 
@@ -108,16 +110,13 @@ class HomeFragment : Fragment() {
         }
         homeViewModel.getData().observe(this, Observer {
             if (it != null) {
-                var lat = it.data.lat
-                var long = it.data.lng
-                val uri = String.format(
-                    Locale.ENGLISH,
-                    "http://maps.google.com/maps?q=loc:%f,%f",
-                    lat,
-                    long
-                )
-                val intent = Intent(ACTION_VIEW, Uri.parse(uri))
-                startActivity(intent)
+                customBottomSheet = LocationBottomSheet(it)
+                fragmentManager?.let { it ->
+                    customBottomSheet.show(
+                        it,
+                        "Location"
+                    )
+                }
             } else {
                 Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
             }

@@ -175,7 +175,6 @@ class LoginFragment : Fragment(), LoginInterface {
         val token = "Bearer " + responseModelData.access_token
         loginPrefsEditor.putString("accessToken", token)
         loginPrefsEditor.putInt("userType", responseModelData.account.type)
-
         loginPrefsEditor.commit()
     }
 }

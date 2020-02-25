@@ -59,6 +59,9 @@ class RegisterFragment : Fragment() {
     }
 
     private fun setListeners() {
+        register_back.setOnClickListener {
+            findNavController().navigateUp()
+        }
         register_login.setOnClickListener {
             checkErrorEnabled()
             hideKeyboard()
@@ -83,7 +86,6 @@ class RegisterFragment : Fragment() {
             if (it != null) {
                 if (it.access_token != "") {
                     Toast.makeText(activity, "Register Successfully", Toast.LENGTH_SHORT).show()
-                    findNavController().navigateUp()
                 } else {
                     var error = it.token_type.replace("[", "")
                     error = error.replace("]", "")

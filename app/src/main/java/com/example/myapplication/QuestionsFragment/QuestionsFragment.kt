@@ -90,9 +90,19 @@ class QuestionsFragment : Fragment() {
         questionsRecycler.adapter = questionsAdapter
         questionsAdapter.setOnItemListener(object : QuestionsAdapter.OnItemClickListener {
             override fun onItemClicked(position: Int) {
-                val bundle = Bundle()
-                bundle.putInt("question_id", list[position].id)
-                findNavController().navigate(R.id.action_clickSession_toQuestionDetails,bundle)
+                if (position == 0) {
+                    val bundle = Bundle()
+                    bundle.putInt("question_id", list[position].id)
+                    findNavController().navigate(R.id.action_clickSession_toQuestionDetails, bundle)
+                } else if (position == 1) {
+                    val bundle = Bundle()
+                    bundle.putInt("question_id", list[position].id)
+                    findNavController().navigate(
+                        R.id.action_clickSession_toSecondQuestionDetails,
+                        bundle
+                    )
+
+                }
             }
         })
 

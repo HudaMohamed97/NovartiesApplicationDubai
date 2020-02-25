@@ -213,6 +213,9 @@
             <action
                 android:id="@+id/action_clickSession_toQuestionDetails"
                 app:destination="@id/QuestionDeatilsFragment" />
+            <action
+                android:id="@+id/action_clickSession_toSecondQuestionDetails"
+                app:destination="@id/SecondQuestionDetailsFragment" />
 
         </fragment>
 
@@ -220,6 +223,12 @@
             android:id="@+id/QuestionDeatilsFragment"
             android:name="com.example.myapplication.QuestionsFragment.QuestionDetailsFragment"
             tools:layout="@layout/question_details_fragment">
+
+        </fragment>
+        <fragment
+            android:id="@+id/SecondQuestionDetailsFragment"
+            android:name="com.example.myapplication.QuestionsFragment.SecondQuestionsDetails"
+            tools:layout="@layout/second_question_details_fragment">
 
         </fragment>
         <fragment

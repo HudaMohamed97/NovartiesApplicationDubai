@@ -89,4 +89,38 @@ class QuestionRepository {
         return answerData
     }
 
+    fun submitRateAnswer(
+        questionId: Int,
+        answerOptionId: Int,
+        accessToken: String
+    ): MutableLiveData<SubmitModel> {
+
+        val answerData = MutableLiveData<SubmitModel>()
+        val body = mapOf(
+            "practice_option_id" to questionId.toString(),
+            "rate" to answerOptionId.toString()
+        )
+        Webservice.getInstance().api.submitRateAnswer(body, accessToken)
+            .enqueue(object : Callback<SubmitModel> {
+                override fun onResponse(
+                    call: Call<SubmitModel>, response: Response<SubmitModel>
+                ) {
+                    if (response.isSuccessful) {
+                        answerData.value = response.body()
+                    } else {
+                        if (response.code() == 400) {
+                            answerData.value = SubmitModel("error", "error")
+                        } else {
+                            answerData.value = response.body()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<SubmitModel>, t: Throwable) {
+                    answerData.value = null
+                }
+            })
+        return answerData
+    }
+
 }

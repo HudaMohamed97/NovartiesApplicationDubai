@@ -11,6 +11,7 @@ class QuestionsViewModel : ViewModel() {
     private var repositoryHelper: QuestionRepository = QuestionRepository()
     private lateinit var mutableLiveData: MutableLiveData<QuestionsModelResponse>
     private lateinit var submitMutableLiveData: MutableLiveData<SubmitModel>
+    private lateinit var submitRateLiveData: MutableLiveData<SubmitModel>
     private lateinit var singelQuestionLiveData: MutableLiveData<SingelQuestionModel>
 
 
@@ -30,6 +31,15 @@ class QuestionsViewModel : ViewModel() {
 
     fun getSubmitData(): MutableLiveData<SubmitModel> {
         return submitMutableLiveData
+    }
+
+    fun submitRateOptionQuestions(questionId: Int, rate: Int, accessToken: String) {
+        submitRateLiveData = repositoryHelper.submitRateAnswer(questionId, rate, accessToken)
+
+    }
+
+    fun getSubmitDataRate(): MutableLiveData<SubmitModel> {
+        return submitRateLiveData
     }
 
     fun getSingelQuestions(questionId: Int, accessToken: String) {

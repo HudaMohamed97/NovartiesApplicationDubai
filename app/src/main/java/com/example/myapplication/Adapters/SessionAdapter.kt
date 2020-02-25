@@ -1,8 +1,12 @@
 package com.example.myapplication.Adapters
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +20,8 @@ class SessionAdapter(modelFeedArrayList: ArrayList<SessionsData>) :
     RecyclerView.Adapter<SessionAdapter.MyViewHolder>() {
 
     private lateinit var onItemClickListener: OnItemClickListener
+    private var context: Context? = null
+
 
     override fun getItemCount(): Int {
         return sessionArrayList.size
@@ -31,6 +37,7 @@ class SessionAdapter(modelFeedArrayList: ArrayList<SessionsData>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
         val view = LayoutInflater.from(parent.context).inflate(R.layout.session_item, parent, false)
+        context = parent.context
         return MyViewHolder(view)
     }
 
@@ -38,6 +45,20 @@ class SessionAdapter(modelFeedArrayList: ArrayList<SessionsData>) :
         val sessionModel = sessionArrayList[position]
         holder.sessionDate.text = sessionModel.date
         holder.sessionName.text = sessionModel.city
+        holder.sessionAddress.text = sessionModel.address
+        holder.sessionLocation.setOnClickListener {
+            val lat = sessionModel.lat
+            val lng = sessionModel.lng
+            val uri = String.format(
+                Locale.ENGLISH,
+                "http://maps.google.com/maps?q=loc:%f,%f",
+                lat,
+                lng
+            )
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+            context?.startActivity(intent)
+        }
+
 
         if (sessionModel.active) {
             holder.radioGroup.visibility = View.VISIBLE
@@ -51,12 +72,12 @@ class SessionAdapter(modelFeedArrayList: ArrayList<SessionsData>) :
 
         holder.radioAttend.setOnClickListener {
             if (onItemClickListener != null && position != RecyclerView.NO_POSITION) {
-                onItemClickListener.onItemClicked(position,1)
+                onItemClickListener.onItemClicked(position, 1)
             }
         }
         holder.radioNotAttend.setOnClickListener {
             if (onItemClickListener != null && position != RecyclerView.NO_POSITION) {
-                onItemClickListener.onItemClicked(position,0)
+                onItemClickListener.onItemClicked(position, 0)
             }
         }
 
@@ -65,6 +86,9 @@ class SessionAdapter(modelFeedArrayList: ArrayList<SessionsData>) :
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var sessionName: TextView = itemView.findViewById<View>(R.id.sessionName) as TextView
+        var sessionAddress: TextView = itemView.findViewById<View>(R.id.sessionAddress) as TextView
+        var sessionLocation: TextView =
+            itemView.findViewById<Button>(R.id.locationSession) as Button
         var radioGroup = itemView.findViewById<View>(R.id.radioGroup) as RadioGroup
         var dimmedLayout = itemView.findViewById<View>(R.id.dimmed_layout) as View
         var sessionDate: TextView = itemView.findViewById<View>(R.id.sessionDate) as TextView

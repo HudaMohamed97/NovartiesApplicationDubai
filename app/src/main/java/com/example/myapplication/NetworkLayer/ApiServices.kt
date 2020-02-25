@@ -72,6 +72,9 @@ interface ApiServices {
     @POST("practices")
     fun submitAnswer(@Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<SubmitModel>
 
+    @POST("practices/options/rating")
+    fun submitRateAnswer(@Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<SubmitModel>
+
     @POST("sessions/{session}/rating")
     fun submitSessionsRate(@Path("session") session: Int, @Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<SubmitModel>
 

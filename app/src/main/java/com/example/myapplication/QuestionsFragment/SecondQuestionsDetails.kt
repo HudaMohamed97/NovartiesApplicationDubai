@@ -1,5 +1,6 @@
 package com.example.myapplication.QuestionsFragment
 
+
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -14,22 +15,24 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Adapters.QuestionDetailsAdapter
+import com.example.myapplication.Adapters.SecondQuestionDetailsAdapter
+import com.example.myapplication.HomeFragment.LocationBottomSheet
+import com.example.myapplication.HomeFragment.RatingBottomSheet
 import com.example.myapplication.Models.EventModels.QuestionModelOption
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.question_details_fragment.*
 import kotlinx.android.synthetic.main.question_details_fragment.QuestionDetailsProgressBar
-import kotlinx.android.synthetic.main.question_details_fragment.submitAnswer
+import kotlinx.android.synthetic.main.second_question_details_fragment.*
 
-class QuestionDetailsFragment : Fragment() {
+class SecondQuestionsDetails : Fragment() {
     private lateinit var root: View
-    private lateinit var questionViewModel: QuestionsViewModel
     private var questionId: Int = 0
-    private var optionId: Int = -1
     private lateinit var recyclerView: RecyclerView
+    private lateinit var questionViewModel: QuestionsViewModel
     private val list = arrayListOf<QuestionModelOption>()
-    private lateinit var quetionAdapter: QuestionDetailsAdapter
+    private lateinit var quetionAdapter: SecondQuestionDetailsAdapter
     private lateinit var loginPreferences: SharedPreferences
+    private lateinit var customBottomSheet: RatingBottomSheet
 
 
     override fun onCreateView(
@@ -37,7 +40,7 @@ class QuestionDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        root = inflater.inflate(R.layout.question_details_fragment, container, false)
+        root = inflater.inflate(R.layout.second_question_details_fragment, container, false)
         questionViewModel = ViewModelProviders.of(this).get(QuestionsViewModel::class.java)
         return root
     }
@@ -61,7 +64,7 @@ class QuestionDetailsFragment : Fragment() {
             QuestionDetailsProgressBar.visibility = View.GONE
             if (it != null) {
                 list.clear()
-                questionTitle.text = it.data.title
+                secondQuestionTitle.text = it.data.title
                 for (data in it.data.options) {
                     list.add(data)
                 }
@@ -72,20 +75,10 @@ class QuestionDetailsFragment : Fragment() {
             }
         })
 
-
     }
 
     private fun setClickListeners() {
-        recyclerView = root.findViewById(R.id.answersRecycler)!!
-
-        submitAnswer.setOnClickListener {
-            if (optionId == -1) {
-                Toast.makeText(activity, "Please Select Answer", Toast.LENGTH_SHORT).show()
-            } else {
-                callSubmitAnswer()
-            }
-
-        }
+        recyclerView = root.findViewById(R.id.secondAnswersRecycler)!!
         val logOutButton = root.findViewById(R.id.logOutButton) as ImageView
         val backButton = root.findViewById(R.id.backButton) as ImageView
         logOutButton.setOnClickListener {
@@ -96,38 +89,22 @@ class QuestionDetailsFragment : Fragment() {
         }
     }
 
-    private fun callSubmitAnswer() {
-        QuestionDetailsProgressBar.visibility = View.VISIBLE
-        val accessToken = loginPreferences.getString("accessToken", "")
-        if (accessToken != null) {
-            questionViewModel.submitQuestions(questionId, optionId, accessToken)
-        }
-        questionViewModel.getSubmitData().observe(this, Observer {
-            QuestionDetailsProgressBar.visibility = View.GONE
-            if (it != null) {
-                if (it.title == "error" && it.type == "error")
-                    Toast.makeText(
-                        activity,
-                        "You Already Submit this Vote Before",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                else {
-                    Toast.makeText(activity, "Submitted Successfully", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
 
     private fun initRecyclerView() {
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        quetionAdapter = QuestionDetailsAdapter(list)
+        quetionAdapter = SecondQuestionDetailsAdapter(list)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = quetionAdapter
-        quetionAdapter.setOnItemListener(object : QuestionDetailsAdapter.OnItemClickListener {
+        quetionAdapter.setOnItemListener(object : SecondQuestionDetailsAdapter.OnItemClickListener {
             override fun onItemClicked(position: Int) {
-                optionId = list[position].id
+
+                customBottomSheet = RatingBottomSheet(list[position].id)
+                fragmentManager?.let { it ->
+                    customBottomSheet.show(
+                        it,
+                        "Location"
+                    )
+                }
             }
         })
     }
