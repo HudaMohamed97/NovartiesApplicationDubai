@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         val saveLogin = loginPreferences.getBoolean("saveLogin", false)
         Log.i("hhhhhh", "hi done")
 
-        PushNotifications.start(applicationContext, "ec79edd0-abc2-4207-bce1-0467f484f59c")
+        PushNotifications.start(applicationContext, "452845e8-2506-4150-803d-b1bf738dbde0")
         PushNotifications.addDeviceInterest("debug-notification")
 
         /* PushNotifications.start(applicationContext, "e3261a40-f1c1-4a9d-b568-4da52ee960ec")

@@ -11,14 +11,13 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.Models.ModelFeed
 import com.example.myapplication.Models.PostData
 import com.example.myapplication.R
-import kotlinx.android.synthetic.main.home_fragment.*
 import java.util.*
 
 
 class AdapterFeed(modelFeedArrayList: ArrayList<PostData>) :
     RecyclerView.Adapter<AdapterFeed.MyViewHolder>() {
 
-    lateinit var onCommentClickListener: OnCommentClickListener
+    lateinit var onItemClickListener: OnCommentClickListener
     private var context: Context? = null
 
 
@@ -60,6 +59,11 @@ class AdapterFeed(modelFeedArrayList: ArrayList<PostData>) :
                 .error(R.drawable.profile).into(holder.imgviewPostpic)
 
         }
+        holder.itemView.setOnClickListener {
+            if (onItemClickListener != null && position != RecyclerView.NO_POSITION) {
+                onItemClickListener.onPostClicked(position)
+            }
+        }
 
     }
 
@@ -79,13 +83,14 @@ class AdapterFeed(modelFeedArrayList: ArrayList<PostData>) :
     }
 
     interface OnCommentClickListener {
+        fun onPostClicked(position: Int)
         fun onCommentClicked(userModel: ModelFeed, position: Int)
         fun onLikeClicked(userModel: ModelFeed, position: Int)
 
     }
 
     fun setOnCommentListener(onCommentClickListener: OnCommentClickListener) {
-        this.onCommentClickListener = onCommentClickListener
+        this.onItemClickListener = onCommentClickListener
     }
 
 }

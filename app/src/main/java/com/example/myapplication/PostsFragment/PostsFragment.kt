@@ -44,6 +44,7 @@ class PostsFragment : Fragment() {
     private lateinit var adapterFeed: AdapterFeed
     private lateinit var recyclerView: RecyclerView
     private lateinit var loginPreferences: SharedPreferences
+    private var type: Int = -1
     var mHasReachedBottomOnce = false
     private var fileUri: String = ""
     private lateinit var selectedImage: Uri
@@ -64,7 +65,7 @@ class PostsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loginPreferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
-        val type = loginPreferences.getInt("userType", -1)
+        type = loginPreferences.getInt("userType", -1)
         if (type == 1) {
             addPost.visibility = View.VISIBLE
         } else {
@@ -142,6 +143,26 @@ class PostsFragment : Fragment() {
         })
     }
 
+    private fun deletePost(postId: Int) {
+        PostsProgressBar.visibility = View.VISIBLE
+        val accessToken = loginPreferences.getString("accessToken", "")
+        if (accessToken != null) {
+            postViewModel.deletPost(postId, accessToken)
+        }
+        postViewModel.getDataDeletePost().observe(this, Observer {
+            PostsProgressBar.visibility = View.GONE
+            if (it != null) {
+                post_layout.setText("")
+                Toast.makeText(activity, "Post Deleted Successfully", Toast.LENGTH_SHORT).show()
+                postImageSelected.visibility = View.GONE
+                callPosts(1, false, true)
+            } else {
+                postImageSelected.visibility = View.GONE
+                Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
     private fun isStoragePermissionGranted(): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return if (ContextCompat.checkSelfPermission(
@@ -186,6 +207,19 @@ class PostsFragment : Fragment() {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapterFeed
         adapterFeed.setOnCommentListener(object : OnCommentClickListener {
+            override fun onPostClicked(position: Int) {
+                val postId = modelFeedArrayList[position].id
+                if (type == 1) {
+                    deletePost(postId)
+                } else {
+                    Toast.makeText(activity, "not access to delete this post", Toast.LENGTH_SHORT)
+                        .show()
+
+                }
+
+
+            }
+
             override fun onLikeClicked(userModel: ModelFeed, position: Int) {
                 /* val likes = userModel.likes
                  modelFeedArrayList[position].likes = likes + 1

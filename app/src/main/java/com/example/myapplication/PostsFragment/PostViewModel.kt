@@ -10,6 +10,7 @@ class PostViewModel : ViewModel() {
     private var repositoryHelper: PostsRepository = PostsRepository()
     private lateinit var mutableLiveData: MutableLiveData<PostsModelResponse>
     private lateinit var addMutableLiveData: MutableLiveData<SubmitModel>
+    private lateinit var deleteMutableLiveData: MutableLiveData<SubmitModel>
 
 
     fun getPosts(pageId: Int, accessToken: String) {
@@ -31,6 +32,19 @@ class PostViewModel : ViewModel() {
 
     fun getDataAddPost(): MutableLiveData<SubmitModel> {
         return addMutableLiveData
+    }
+
+    fun deletPost(
+        postId: Int,
+        accessToken: String
+
+    ) {
+        deleteMutableLiveData = repositoryHelper.deletePost(postId, accessToken)
+
+    }
+
+    fun getDataDeletePost(): MutableLiveData<SubmitModel> {
+        return deleteMutableLiveData
     }
 
 

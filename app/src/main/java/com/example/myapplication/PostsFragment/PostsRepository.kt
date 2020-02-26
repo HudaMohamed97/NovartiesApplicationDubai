@@ -48,7 +48,7 @@ class PostsRepository {
             val file = File(imageFile)
             if (file.exists()) {
                 val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
-                 fileToUpload = MultipartBody.Part.createFormData("photo", file?.name, requestFile)
+                fileToUpload = MultipartBody.Part.createFormData("photo", file?.name, requestFile)
             } else {
                 val attachmentEmpty = RequestBody.create(MediaType.parse("text/plain"), "")
                 fileToUpload = MultipartBody.Part.createFormData("photo", "", attachmentEmpty)
@@ -57,6 +57,30 @@ class PostsRepository {
             e.printStackTrace()
         }
         Webservice.getInstance().api.addPost(content, fileToUpload!!, accessToken)
+            .enqueue(object : Callback<SubmitModel> {
+                override fun onResponse(
+                    call: Call<SubmitModel>, response: Response<SubmitModel>
+                ) {
+                    if (response.isSuccessful) {
+                        userData.value = response.body()
+                    } else {
+                        userData.value = response.body()
+                    }
+                }
+
+                override fun onFailure(call: Call<SubmitModel>, t: Throwable) {
+                    userData.value = null
+                }
+            })
+        return userData
+    }
+
+    fun deletePost(
+        postId: Int,
+        accessToken: String
+    ): MutableLiveData<SubmitModel> {
+        val userData = MutableLiveData<SubmitModel>()
+        Webservice.getInstance().api.deletePost(postId, accessToken)
             .enqueue(object : Callback<SubmitModel> {
                 override fun onResponse(
                     call: Call<SubmitModel>, response: Response<SubmitModel>
