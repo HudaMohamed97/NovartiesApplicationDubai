@@ -8,6 +8,7 @@ import com.example.myapplication.Models.SubmitModel
 class EventRatingViewModel : ViewModel() {
     private var repositoryHelper: RatingEventRepository = RatingEventRepository()
     private lateinit var submitMutableLiveData: MutableLiveData<SubmitModel>
+    private lateinit var submitMultipleLiveData: MutableLiveData<SubmitModel>
     private lateinit var mutableLiveData: MutableLiveData<AgendaRatingReponseModeldata>
 
 
@@ -21,6 +22,18 @@ class EventRatingViewModel : ViewModel() {
 
     fun getDataSubmitRate(): MutableLiveData<SubmitModel> {
         return submitMutableLiveData
+    }
+
+    fun submitMutipleRate(
+        rate: ArrayList<Int>, sessionId: Int, accessToken: String
+    ) {
+        submitMultipleLiveData =
+            repositoryHelper.submitMutipleRatingSession(rate, sessionId, accessToken)
+
+    }
+
+    fun getDataMutipleSubmitRate(): MutableLiveData<SubmitModel> {
+        return submitMultipleLiveData
     }
 
 

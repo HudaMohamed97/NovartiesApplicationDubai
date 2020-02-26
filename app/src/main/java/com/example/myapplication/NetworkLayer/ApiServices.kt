@@ -82,7 +82,19 @@ interface ApiServices {
     fun submitSessionsRate(@Path("session") session: Int, @Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<SubmitModel>
 
     @POST("agenda-rating/{rate_question}")
-    fun submitEventRate(@Path("rate_question") session: Int, @Body body: Map<String, String>, @Header("Authorization") authHeader: String): Call<SubmitModel>
+    fun submitEventRate(
+        @Path("rate_question") session: Int, @Body body: Map<String, String>, @Header(
+            "Authorization"
+        ) authHeader: String
+    ): Call<SubmitModel>
+
+    @POST("agenda-rating/{rate_question}")
+    @FormUrlEncoded
+    fun submitMutipleEventRate(
+        @Path("rate_question") session: Int, @Field("options_ids[]") items: List<Int>, @Header(
+            "Authorization"
+        ) authHeader: String
+    ): Call<SubmitModel>
 
     @GET("speakers")
     fun getSpeakers(@Header("Authorization") authHeader: String): Call<SpeakersResponseModel>

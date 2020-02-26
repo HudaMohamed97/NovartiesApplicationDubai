@@ -1,4 +1,4 @@
-package com.example.myapplication.HomeFragment
+package com.example.myapplication.RatingFrgament
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -11,25 +11,23 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Adapters.EventRatingAdapter
-import com.example.myapplication.Adapters.QuestionRatingAdapter
-import com.example.myapplication.LoginFragment.EventViewModel
+import com.example.myapplication.Adapters.MultipleChoiceAdapterEvent
+import com.example.myapplication.Models.OptionModel
 import com.example.myapplication.R
-import com.example.myapplication.RatingFrgament.EventRatingViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.event_rating_sheet.*
-import kotlinx.android.synthetic.main.rating_bottom_sheet.*
-import kotlinx.android.synthetic.main.rating_bottom_sheet.submit_rate_option
+import kotlinx.android.synthetic.main.mutiple_choice_rating_event.*
 
-class EventRatingBottomSheet(private var optionId: Int) : BottomSheetDialogFragment() {
+class MltipleChoiceEventRating(private val optionId: Int, private val option: List<OptionModel>) :
+    BottomSheetDialogFragment() {
     private lateinit var root: View
     private lateinit var eventRatingViewModel: EventRatingViewModel
     private var questionId: Int = 0
     private var rateId: Int = -1
     private lateinit var recyclerView: RecyclerView
-    private val list = arrayListOf<Int>()
-    private lateinit var eventAdapter: EventRatingAdapter
+    private val list = arrayListOf<OptionModel>()
+    private lateinit var eventAdapter: MultipleChoiceAdapterEvent
     private lateinit var loginPreferences: SharedPreferences
+    private var selectedList = arrayListOf<Int>()
 
 
     override fun onCreateView(
@@ -37,7 +35,7 @@ class EventRatingBottomSheet(private var optionId: Int) : BottomSheetDialogFragm
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        root = inflater.inflate(R.layout.event_rating_sheet, container, false)
+        root = inflater.inflate(R.layout.mutiple_choice_rating_event, container, false)
         eventRatingViewModel = ViewModelProviders.of(this).get(EventRatingViewModel::class.java)
         return root
     }
@@ -52,10 +50,10 @@ class EventRatingBottomSheet(private var optionId: Int) : BottomSheetDialogFragm
     }
 
     private fun setClickListeners() {
-        recyclerView = root.findViewById(R.id.eventRatingRecycler)!!
+        recyclerView = root.findViewById(R.id.multi_eventRatingRecycler)!!
 
-        submit_rate_option.setOnClickListener {
-            if (rateId == -1) {
+        multi_submit_rate_option.setOnClickListener {
+            if (selectedList.size == 0) {
                 Toast.makeText(activity, "Please Select Answer", Toast.LENGTH_SHORT).show()
             } else {
                 callSubmitAnswer()
@@ -65,44 +63,39 @@ class EventRatingBottomSheet(private var optionId: Int) : BottomSheetDialogFragm
     }
 
     private fun callSubmitAnswer() {
-        eventRatingProgressBar.visibility = View.VISIBLE
+        multi_eventRatingProgressBar.visibility = View.VISIBLE
         val accessToken = loginPreferences.getString("accessToken", "")
-
+        questionId = optionId
         if (accessToken != null) {
-            questionId = optionId
-            eventRatingViewModel.submitRate(questionId, rateId, accessToken)
+            // questionId = optionId
+            eventRatingViewModel.submitMutipleRate(selectedList, questionId, accessToken)
         }
-        eventRatingViewModel.getDataSubmitRate().observe(this, Observer {
-            eventRatingProgressBar.visibility = View.GONE
+        eventRatingViewModel.getDataMutipleSubmitRate().observe(this, Observer {
+            multi_eventRatingProgressBar.visibility = View.GONE
             if (it != null) {
                 if (it.title == "error" && it.type == "error")
                     Toast.makeText(
                         activity,
-                        "You Already Submit this Vote Before",
+                        "You Already Submit this Vote Before, Thanks",
                         Toast.LENGTH_SHORT
                     ).show()
                 else {
                     Toast.makeText(activity, "Submitted Successfully", Toast.LENGTH_SHORT).show()
-                    dismiss()
                 }
             } else {
                 Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
-                dismiss()
             }
         })
     }
 
     private fun initRecyclerView() {
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        for (i in 0..10) {
-            list.add(i)
-        }
-        eventAdapter = EventRatingAdapter(list)
+        eventAdapter = MultipleChoiceAdapterEvent(option)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = eventAdapter
-        eventAdapter.setOnItemListener(object : EventRatingAdapter.OnItemClickListener {
-            override fun onItemClicked(position: Int) {
-                rateId = list[position]
+        eventAdapter.setOnItemListener(object : MultipleChoiceAdapterEvent.OnItemClickListener {
+            override fun onItemClicked(list: ArrayList<Int>) {
+                selectedList = list
             }
         })
     }

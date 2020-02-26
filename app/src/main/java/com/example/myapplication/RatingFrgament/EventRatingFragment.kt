@@ -14,15 +14,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Adapters.QuestionsAdapter
-import com.example.myapplication.Models.QuestionModel
 import com.example.myapplication.R
-import com.example.myapplication.RatingFrgament.EventRatingViewModel
 import kotlinx.android.synthetic.main.notification_fragment.logOutButton
-import kotlinx.android.synthetic.main.qustion_fragment.*
 import androidx.lifecycle.Observer
 import com.example.myapplication.Adapters.EventAdapterRating
-import com.example.myapplication.HomeFragment.DeleteBottomSheet
 import com.example.myapplication.HomeFragment.EventRatingBottomSheet
 import com.example.myapplication.Models.AgendaRatingData
 
@@ -33,6 +28,7 @@ class EventRatingFragment : Fragment() {
     private val list = arrayListOf<AgendaRatingData>()
     private lateinit var recyclerView: RecyclerView
     private lateinit var eventRatingBottomSheet: EventRatingBottomSheet
+    private lateinit var mltipleChoiceEventRating: MltipleChoiceEventRating
     private lateinit var ratingProgressBar: ProgressBar
     private lateinit var questionsAdapter: EventAdapterRating
     private lateinit var loginPreferences: SharedPreferences
@@ -92,12 +88,23 @@ class EventRatingFragment : Fragment() {
         recyclerView.adapter = questionsAdapter
         questionsAdapter.setOnItemListener(object : EventAdapterRating.OnItemClickListener {
             override fun onItemClicked(position: Int) {
-                eventRatingBottomSheet = EventRatingBottomSheet(list[position].id)
-                fragmentManager?.let { it ->
-                    eventRatingBottomSheet.show(
-                        it,
-                        "eventRatingBottomSheet"
-                    )
+                if (list[position].type == 1) {
+                    eventRatingBottomSheet = EventRatingBottomSheet(list[position].id)
+                    fragmentManager?.let { it ->
+                        eventRatingBottomSheet.show(
+                            it,
+                            "eventRatingBottomSheet"
+                        )
+                    }
+                } else if (list[position].type == 2) {
+                    mltipleChoiceEventRating =
+                        MltipleChoiceEventRating(list[position].id, list[position].options)
+                    fragmentManager?.let { it ->
+                        mltipleChoiceEventRating.show(
+                            it,
+                            "eventRatingBottomSheet"
+                        )
+                    }
                 }
 
             }

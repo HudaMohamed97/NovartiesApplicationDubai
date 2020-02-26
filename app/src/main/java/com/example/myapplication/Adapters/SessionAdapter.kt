@@ -47,8 +47,8 @@ class SessionAdapter(modelFeedArrayList: ArrayList<SessionsData>) :
         holder.sessionName.text = sessionModel.city
         holder.sessionAddress.text = sessionModel.address
         holder.sessionLocation.setOnClickListener {
-            val lat = sessionModel.lat
-            val lng = sessionModel.lng
+            val lat = sessionModel.lat.toDouble()
+            val lng = sessionModel.lng.toDouble()
             val uri = String.format(
                 Locale.ENGLISH,
                 "http://maps.google.com/maps?q=loc:%f,%f",
