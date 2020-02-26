@@ -59,7 +59,7 @@ class AdapterFeed(modelFeedArrayList: ArrayList<PostData>) :
                 .error(R.drawable.profile).into(holder.imgviewPostpic)
 
         }
-        holder.itemView.setOnClickListener {
+        holder.root.setOnClickListener {
             if (onItemClickListener != null && position != RecyclerView.NO_POSITION) {
                 onItemClickListener.onPostClicked(position)
             }
@@ -74,6 +74,7 @@ class AdapterFeed(modelFeedArrayList: ArrayList<PostData>) :
         var tvStatus: TextView
         var imgviewPostpic = itemView.findViewById<ImageView>(R.id.imgView_postPic)
         var imgProfile = itemView.findViewById<ImageView>(R.id.imgProfile)
+        var root = itemView.findViewById<View>(R.id.root)
 
         init {
             tvName = itemView.findViewById<View>(R.id.tv_name) as TextView

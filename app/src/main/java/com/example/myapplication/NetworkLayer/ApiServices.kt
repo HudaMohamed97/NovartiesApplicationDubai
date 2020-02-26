@@ -40,8 +40,8 @@ interface ApiServices {
     @GET("posts")
     fun getPosts(@Query("page") page: Int, @Header("Authorization") authHeader: String): Call<PostsModelResponse>
 
-    @POST("posts/{post}")
-    fun deletePost(@Path("post") practiceId: Int, @Header("Authorization") authHeader: String): Call<SubmitModel>
+    @DELETE("posts/{post}")
+    fun deletePost(@Path("post") postId: Int, @Header("Authorization") authHeader: String): Call<SubmitModel>
 
     @GET("notifications")
     fun getNotification(@Query("page") page: Int, @Header("Authorization") authHeader: String): Call<NotificationModelResponse>

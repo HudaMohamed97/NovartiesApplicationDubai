@@ -28,6 +28,8 @@ import com.example.myapplication.Adapters.AdapterFeed
 import com.example.myapplication.Adapters.AdapterFeed.OnCommentClickListener
 import com.example.myapplication.Adapters.CustomBottomSheet
 import com.example.myapplication.Adapters.CustomBottomSheet.OnCommentAddedListener
+import com.example.myapplication.HomeFragment.DeleteBottomSheet
+import com.example.myapplication.HomeFragment.LocationBottomSheet
 import com.example.myapplication.Models.ModelFeed
 import com.example.myapplication.Models.PostData
 import com.example.myapplication.Models.PostOwner
@@ -41,6 +43,7 @@ class PostsFragment : Fragment() {
     private lateinit var postViewModel: PostViewModel
     private val modelFeedArrayList = arrayListOf<PostData>()
     private lateinit var customBottomSheet: CustomBottomSheet
+    private lateinit var deleteBottomSheet: DeleteBottomSheet
     private lateinit var adapterFeed: AdapterFeed
     private lateinit var recyclerView: RecyclerView
     private lateinit var loginPreferences: SharedPreferences
@@ -127,14 +130,6 @@ class PostsFragment : Fragment() {
                 post_layout.setText("")
                 Toast.makeText(activity, "Post Added Successfully", Toast.LENGTH_SHORT).show()
                 postImageSelected.visibility = View.GONE
-                /*modelFeedArrayList.add(
-                    0, PostData(
-                        0, post_layout.text.toString(), selectedImage.toString(), 0,
-                        PostOwner()
-                    )
-                )
-                adapterFeed.notifyItemInserted(0)
-                recyclerView.smoothScrollToPosition(0)*/
                 callPosts(1, false, true)
             } else {
                 postImageSelected.visibility = View.GONE
@@ -143,25 +138,6 @@ class PostsFragment : Fragment() {
         })
     }
 
-    private fun deletePost(postId: Int) {
-        PostsProgressBar.visibility = View.VISIBLE
-        val accessToken = loginPreferences.getString("accessToken", "")
-        if (accessToken != null) {
-            postViewModel.deletPost(postId, accessToken)
-        }
-        postViewModel.getDataDeletePost().observe(this, Observer {
-            PostsProgressBar.visibility = View.GONE
-            if (it != null) {
-                post_layout.setText("")
-                Toast.makeText(activity, "Post Deleted Successfully", Toast.LENGTH_SHORT).show()
-                postImageSelected.visibility = View.GONE
-                callPosts(1, false, true)
-            } else {
-                postImageSelected.visibility = View.GONE
-                Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
 
     private fun isStoragePermissionGranted(): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -210,11 +186,20 @@ class PostsFragment : Fragment() {
             override fun onPostClicked(position: Int) {
                 val postId = modelFeedArrayList[position].id
                 if (type == 1) {
-                    deletePost(postId)
+                    deleteBottomSheet = DeleteBottomSheet(postId)
+                    fragmentManager?.let { it ->
+                        deleteBottomSheet.show(
+                            it,
+                            "DeleteBottomSheet"
+                        )
+                    }
+                    deleteBottomSheet.setOnPostDeletedListhener(object :
+                        DeleteBottomSheet.OnPostDeletdListener {
+                        override fun onPostDeleted() {
+                            callPosts(1, false, true)
+                        }
+                    })
                 } else {
-                    Toast.makeText(activity, "not access to delete this post", Toast.LENGTH_SHORT)
-                        .show()
-
                 }
 
 

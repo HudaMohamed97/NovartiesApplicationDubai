@@ -1,0 +1,60 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/dark_color2"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/swip_shortcut"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/swip_shortcut"
+        android:tint="@color/white" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/Company_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_10"
+            android:gravity="center"
+            android:text="Delete This Post"
+            android:textColor="@color/white"
+            android:textSize="@dimen/space_18"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Delete_Post"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/red"
+            android:text="   Delete    "
+            android:textColor="@color/white"
+            app:cornerRadius="@dimen/space_10" />
+
+        <ProgressBar
+            android:id="@+id/DeletePostProgressPar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/white"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
