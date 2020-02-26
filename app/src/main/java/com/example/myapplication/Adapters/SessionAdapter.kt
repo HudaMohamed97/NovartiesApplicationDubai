@@ -61,9 +61,11 @@ class SessionAdapter(modelFeedArrayList: ArrayList<SessionsData>) :
 
 
         if (sessionModel.active) {
+            holder.sessionLocation.visibility = View.VISIBLE
             holder.radioGroup.visibility = View.VISIBLE
             holder.dimmedLayout.visibility = View.GONE
         } else {
+            holder.sessionLocation.visibility = View.GONE
             holder.radioGroup.visibility = View.GONE
             holder.dimmedLayout.visibility = View.VISIBLE
         }
@@ -87,8 +89,7 @@ class SessionAdapter(modelFeedArrayList: ArrayList<SessionsData>) :
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var sessionName: TextView = itemView.findViewById<View>(R.id.sessionName) as TextView
         var sessionAddress: TextView = itemView.findViewById<View>(R.id.sessionAddress) as TextView
-        var sessionLocation: TextView =
-            itemView.findViewById<Button>(R.id.locationSession) as Button
+        var sessionLocation = itemView.findViewById<Button>(R.id.locationSession) as Button
         var radioGroup = itemView.findViewById<View>(R.id.radioGroup) as RadioGroup
         var dimmedLayout = itemView.findViewById<View>(R.id.dimmed_layout) as View
         var sessionDate: TextView = itemView.findViewById<View>(R.id.sessionDate) as TextView

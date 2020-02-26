@@ -85,6 +85,11 @@
             <action
                 android:id="@+id/action_HomeFragment_to_SpeakersFragment"
                 app:destination="@id/SpeakersFragment" />
+
+            <action
+                android:id="@+id/action_Home_To_EventRating"
+                app:destination="@id/EventRatingFragment" />
+
             <action
                 android:id="@+id/action_HomeFragment_to_SessionRatingFragment"
                 app:destination="@id/SessionRatingFragment" />
@@ -167,6 +172,12 @@
             <action
                 android:id="@+id/action_back_to_login"
                 app:destination="@id/loginFragment" />
+
+        </fragment>
+        <fragment
+            android:id="@+id/EventRatingFragment"
+            android:name="com.example.myapplication.RatingFrgament.EventRatingFragment"
+            tools:layout="@layout/event_rating">
 
         </fragment>
         <fragment

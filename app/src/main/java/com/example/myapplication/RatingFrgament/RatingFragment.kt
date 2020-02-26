@@ -3,13 +3,10 @@ package com.example.myapplication.RatingFrgament
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.Editable
-import android.util.EventLogTags
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -19,7 +16,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.myapplication.Models.Sessions
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.rating_fragment.*
-import kotlinx.android.synthetic.main.voting_fragment.*
 
 class RatingFragment : Fragment() {
     private var sessionId: Int = -1

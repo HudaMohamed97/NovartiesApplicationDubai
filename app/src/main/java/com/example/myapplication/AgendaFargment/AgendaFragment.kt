@@ -65,10 +65,6 @@ class AgendaFragment : Fragment() {
         val backButton = root?.findViewById(R.id.backButton) as ImageView
 
         logOutButton.setOnClickListener {
-            /* val preferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
-             val editor = preferences.edit()
-             editor.clear()
-             editor.apply()*/
             activity!!.finish()
         }
         backButton.setOnClickListener {

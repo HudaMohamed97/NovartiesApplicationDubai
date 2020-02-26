@@ -77,7 +77,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_HomeFragment_to_SpeakersFragment)
         }
         ratingCard.setOnClickListener {
-            findNavController().navigate(R.id.action_HomeFragment_to_SessionRatingFragment)
+            findNavController().navigate(R.id.action_Home_To_EventRating)
         }
         sessionsCard.setOnClickListener {
             findNavController().navigate(R.id.action_HomeFragment_to_QuestionFragment)
