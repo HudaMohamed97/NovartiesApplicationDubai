@@ -88,6 +88,7 @@ class RatingBottomSheet(private var optionId: Int) : BottomSheetDialogFragment()
 
     private fun initRecyclerView() {
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        list.add(0)
         list.add(1)
         list.add(2)
         list.add(3)
