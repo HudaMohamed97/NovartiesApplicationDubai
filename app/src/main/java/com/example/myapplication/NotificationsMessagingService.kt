@@ -11,22 +11,23 @@ import androidx.navigation.NavDeepLinkBuilder
 
 import com.google.firebase.messaging.RemoteMessage
 import com.pusher.pushnotifications.fcm.MessagingService
-import android.R.attr.data
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
 
 
 class NotificationsMessagingService : MessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
-        Log.i("recievedData", "Recieved" + remoteMessage.data["android.title"])
-        Log.i("hhhh", "Recieved")
+        if (remoteMessage.data != null) {
+            val title = remoteMessage.data["title"]
+            val message = remoteMessage.data["text"]
+            val username = remoteMessage.data["username"]
+        }
 
-        val notificationBundle = remoteMessage.notification?.title
-        val notificationbody = remoteMessage.notification?.body
+        val notificationTitle = remoteMessage.notification?.title
+        val notificationBody = remoteMessage.notification?.body
 
-        Log.i("recievedData", "Recieved" + remoteMessage.notification?.title)
-        Log.i("recievedData", "Recieved" + remoteMessage.notification?.body)
+        Log.i("hhhh", "Recieved" + remoteMessage.notification?.title)
+        Log.i("hhhh", "Recieved" + remoteMessage.notification?.body)
 
 
         val deeplink = NavDeepLinkBuilder(this)
@@ -46,10 +47,10 @@ class NotificationsMessagingService : MessagingService() {
         val builder = NotificationCompat.Builder(
             this, "1"
         )
-            .setContentTitle("Notification")
-            .setContentText("Deep link to Android")
-            .setContentIntent(deeplink)
+            .setContentTitle(notificationTitle)
+            .setContentText(notificationBody)
             .setSmallIcon(R.mipmap.icon_app)
+            .setTimeoutAfter(3000)
             .setAutoCancel(true)
         notificationManager.notify(0, builder.build())
     }

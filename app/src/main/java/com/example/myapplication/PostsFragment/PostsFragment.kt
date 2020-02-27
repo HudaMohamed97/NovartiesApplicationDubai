@@ -105,6 +105,10 @@ class PostsFragment : Fragment() {
                 for (data in it.data) {
                     modelFeedArrayList.add(data)
                 }
+                if (modelFeedArrayList.size == 0) {
+                    Toast.makeText(activity, "No Posts Added Yet.", Toast.LENGTH_SHORT).show()
+
+                }
                 adapterFeed.notifyDataSetChanged()
                 mHasReachedBottomOnce = false
                 currentPageNum++

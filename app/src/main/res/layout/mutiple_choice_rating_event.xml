@@ -35,7 +35,7 @@
         android:layout_marginBottom="@dimen/space_5"
         android:background="@color/black"
         android:backgroundTint="@color/black"
-        android:text="   Submit Rate    "
+        android:text="   Submit Answer    "
         android:textColor="@color/white"
         app:cornerRadius="@dimen/space_10" />
 

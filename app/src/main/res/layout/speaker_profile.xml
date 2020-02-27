@@ -147,7 +147,7 @@
                         android:layout_marginTop="@dimen/space_5"
                         android:layout_marginEnd="@dimen/space_20"
                         android:layout_marginBottom="@dimen/space_20"
-                        android:maxLines="100"
+                        android:maxLines="500"
                         android:scrollbars="vertical"
                         android:textColor="@color/white"
                         android:textStyle="bold"
