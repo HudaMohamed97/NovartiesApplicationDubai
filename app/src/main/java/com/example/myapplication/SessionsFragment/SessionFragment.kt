@@ -131,7 +131,7 @@ class SessionFragment : Fragment() {
         sessionViewModel.submit().observe(this, Observer {
             SessionsProgressBar.visibility = View.GONE
             if (it != null) {
-                Toast.makeText(activity, "Submitted Successfully" + statuesFlag, Toast.LENGTH_SHORT)
+                Toast.makeText(activity, "Submitted Successfully", Toast.LENGTH_SHORT)
                     .show()
 
             } else {

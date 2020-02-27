@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Models.SessionsData
 import com.example.myapplication.R
@@ -47,16 +48,21 @@ class SessionAdapter(modelFeedArrayList: ArrayList<SessionsData>) :
         holder.sessionName.text = sessionModel.city
         holder.sessionAddress.text = sessionModel.address
         holder.sessionLocation.setOnClickListener {
-            val lat = sessionModel.lat.toDouble()
-            val lng = sessionModel.lng.toDouble()
-            val uri = String.format(
-                Locale.ENGLISH,
-                "http://maps.google.com/maps?q=loc:%f,%f",
-                lat,
-                lng
-            )
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
-            context?.startActivity(intent)
+            if (sessionModel.lat != null && sessionModel.lng != null) {
+                val lat = sessionModel.lat.toDouble()
+                val lng = sessionModel.lng.toDouble()
+                val uri = String.format(
+                    Locale.ENGLISH,
+                    "http://maps.google.com/maps?q=loc:%f,%f",
+                    lat,
+                    lng
+                )
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+                context?.startActivity(intent)
+            } else {
+                Toast.makeText(context, "No Location Found", Toast.LENGTH_SHORT).show()
+
+            }
         }
 
 

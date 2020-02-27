@@ -46,7 +46,6 @@ class MltipleChoiceEventRating(private val optionId: Int, private val option: Li
         loginPreferences = activity!!.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
         setClickListeners()
         initRecyclerView()
-
     }
 
     private fun setClickListeners() {
