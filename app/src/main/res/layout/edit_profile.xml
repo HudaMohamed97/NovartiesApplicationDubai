@@ -69,7 +69,6 @@
             android:layout_marginRight="30dp"
             android:layout_marginBottom="30dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/chckRemember"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
