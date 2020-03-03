@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.myapplication.LoginFragment.LoginFragment"
+        android:name="com.imagin.myapplication.LoginFragment.LoginFragment"
         tools:layout="@layout/login_fragment">
 
         <action
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/ScannerFragment"
-        android:name="com.example.myapplication.ScannerFragment.BarcodeFragment"
+        android:name="com.imagin.myapplication.ScannerFragment.BarcodeFragment"
         tools:layout="@layout/fragment_barcode">
 
         <action
@@ -44,7 +44,7 @@
 
     <fragment
         android:id="@+id/Fragment"
-        android:name="com.example.myapplication.RegisterFragment.RegisterFragment"
+        android:name="com.imagin.myapplication.RegisterFragment.RegisterFragment"
         tools:layout="@layout/register_fragment">
 
         <action
@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/ResetFragment"
-        android:name="com.example.myapplication.ForgetPassword.ForgetPasswordFragment"
+        android:name="com.imagin.myapplication.ForgetPassword.ForgetPasswordFragment"
         tools:layout="@layout/forget_password">
 
     </fragment>
@@ -65,7 +65,7 @@
 
         <fragment
             android:id="@+id/HomeFragment"
-            android:name="com.example.myapplication.HomeFragment.HomeFragment"
+            android:name="com.imagin.myapplication.HomeFragment.HomeFragment"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true"
             tools:layout="@layout/home_fragment">
@@ -115,7 +115,7 @@
         </fragment>
         <fragment
             android:id="@+id/EventFragment"
-            android:name="com.example.myapplication.EventFragment.EventFragment"
+            android:name="com.imagin.myapplication.EventFragment.EventFragment"
             tools:layout="@layout/events_fragment">
 
             <action
@@ -124,7 +124,7 @@
         </fragment>
         <fragment
             android:id="@+id/NotificationFragment"
-            android:name="com.example.myapplication.NotificatonFragment.NotificationFragment"
+            android:name="com.imagin.myapplication.NotificatonFragment.NotificationFragment"
             tools:layout="@layout/notification_fragment">
 
             <action
@@ -166,7 +166,7 @@
 
         <fragment
             android:id="@+id/UpdateFragment"
-            android:name="com.example.myapplication.EditProfileFragment.UpdateDataFragment"
+            android:name="com.imagin.myapplication.EditProfileFragment.UpdateDataFragment"
             tools:layout="@layout/edit_profile">
 
             <action
@@ -176,13 +176,13 @@
         </fragment>
         <fragment
             android:id="@+id/EventRatingFragment"
-            android:name="com.example.myapplication.RatingFrgament.EventRatingFragment"
+            android:name="com.imagin.myapplication.RatingFrgament.EventRatingFragment"
             tools:layout="@layout/event_rating">
 
         </fragment>
         <fragment
             android:id="@+id/SpeakersFragment"
-            android:name="com.example.myapplication.Speakers.SpeakersFragment"
+            android:name="com.imagin.myapplication.Speakers.SpeakersFragment"
             tools:layout="@layout/speakers_fragment">
 
             <action
@@ -192,13 +192,13 @@
 
         <fragment
             android:id="@+id/VotingFragment"
-            android:name="com.example.myapplication.VotingFragment.VotingFragment"
+            android:name="com.imagin.myapplication.VotingFragment.VotingFragment"
             tools:layout="@layout/voting_fragment">
 
         </fragment>
         <fragment
             android:id="@+id/PollFragment"
-            android:name="com.example.myapplication.VotingFragment.PollFragment"
+            android:name="com.imagin.myapplication.VotingFragment.PollFragment"
             tools:layout="@layout/polls_fragment">
 
             <action
@@ -208,7 +208,7 @@
         </fragment>
         <fragment
             android:id="@+id/SessionRatingFragment"
-            android:name="com.example.myapplication.RatingFrgament.RatingSessionFragment"
+            android:name="com.imagin.myapplication.RatingFrgament.RatingSessionFragment"
             tools:layout="@layout/saeesio_rating_fragment">
 
             <action
@@ -218,7 +218,7 @@
         </fragment>
         <fragment
             android:id="@+id/QuestionFragment"
-            android:name="com.example.myapplication.QuestionsFragment.QuestionsFragment"
+            android:name="com.imagin.myapplication.QuestionsFragment.QuestionsFragment"
             tools:layout="@layout/qustion_fragment">
 
             <action
@@ -232,26 +232,26 @@
 
         <fragment
             android:id="@+id/QuestionDeatilsFragment"
-            android:name="com.example.myapplication.QuestionsFragment.QuestionDetailsFragment"
+            android:name="com.imagin.myapplication.QuestionsFragment.QuestionDetailsFragment"
             tools:layout="@layout/question_details_fragment">
 
         </fragment>
         <fragment
             android:id="@+id/SecondQuestionDetailsFragment"
-            android:name="com.example.myapplication.QuestionsFragment.SecondQuestionsDetails"
+            android:name="com.imagin.myapplication.QuestionsFragment.SecondQuestionsDetails"
             tools:layout="@layout/second_question_details_fragment">
 
         </fragment>
         <fragment
             android:id="@+id/RatingFragment"
-            android:name="com.example.myapplication.RatingFrgament.RatingFragment"
+            android:name="com.imagin.myapplication.RatingFrgament.RatingFragment"
             tools:layout="@layout/rating_fragment">
 
         </fragment>
 
         <fragment
             android:id="@+id/AgendaFragment"
-            android:name="com.example.myapplication.AgendaFargment.AgendaFragment"
+            android:name="com.imagin.myapplication.AgendaFargment.AgendaFragment"
             tools:layout="@layout/agenda_fragment">
 
             <action
@@ -261,7 +261,7 @@
 
         <fragment
             android:id="@+id/SpeakerProfileFragment"
-            android:name="com.example.myapplication.SpeakerProfile.SpeakerProfileFragment"
+            android:name="com.imagin.myapplication.SpeakerProfile.SpeakerProfileFragment"
             tools:layout="@layout/speaker_profile">
 
             <action
@@ -272,7 +272,7 @@
 
         <fragment
             android:id="@+id/PostsFragment"
-            android:name="com.example.myapplication.PostsFragment.PostsFragment"
+            android:name="com.imagin.myapplication.PostsFragment.PostsFragment"
             tools:layout="@layout/posts_fragment">
 
             <action
@@ -283,7 +283,7 @@
 
         <fragment
             android:id="@+id/ArticlesFragment"
-            android:name="com.example.myapplication.ArticlesFragment.ArticleFragment"
+            android:name="com.imagin.myapplication.ArticlesFragment.ArticleFragment"
             tools:layout="@layout/article_fragment">
 
 
@@ -291,7 +291,7 @@
 
         <fragment
             android:id="@+id/SessionFragment"
-            android:name="com.example.myapplication.SessionsFragment.SessionFragment"
+            android:name="com.imagin.myapplication.SessionsFragment.SessionFragment"
             tools:layout="@layout/sessions_list">
 
 
