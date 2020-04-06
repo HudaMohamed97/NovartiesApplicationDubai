@@ -25,7 +25,6 @@ class CustomBottomSheet(private var model: ModelFeed?, private val position: Int
     private lateinit var commentsAdapter: CommentsAdapter
     private lateinit var recyclerView: RecyclerView
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
